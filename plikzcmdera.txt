@@ -1,0 +1,2 @@
+Zrobiony w cmderze a zmodyfikowany w atomie
+Hello world!
