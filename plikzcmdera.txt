@@ -2,3 +2,4 @@ Zrobiony w cmderze a zmodyfikowany w atomie
 Hello world!
 A to taki dokokszony Hello world!:
 HELLO WoRlD!!!!!1111!
+potrzebne
