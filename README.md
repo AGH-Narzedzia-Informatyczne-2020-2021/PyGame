@@ -19,4 +19,4 @@ Umiemy to | A nie umiemy tego
 Nic | Wszystko
 
 ~~MUSIMY ZACZĄĆ COŚ WRESZCIE ROBIĆ, BO NAS WYWALĄ ZE STUDIÓW~~
-Wszystko jest ok :D <3
+Wszystko jest ok, nie ma czym się niepokoić :D
