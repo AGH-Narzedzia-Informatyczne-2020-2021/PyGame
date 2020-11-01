@@ -6,3 +6,5 @@ Gra będzie zawierała:
 * coś
 * coś jeszcze
 * A także to
+_Nasze motto to_
+>Zawsze programuj tak, jakby człowiek, który będzie zajmował się konserwacją twojego kodu, był agresywnym psychopatą i wiedział, gdzie mieszkasz.
