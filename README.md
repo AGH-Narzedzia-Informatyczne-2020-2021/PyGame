@@ -20,5 +20,10 @@ Umiemy to | A nie umiemy tego
 ----------|------------------
 Nic | Wszystko
 
+ale
+bedziemy umieć | co nas zaskoczy
+----------|------------------
+Wszystko | nic
+
 ~~MUSIMY ZACZĄĆ COŚ WRESZCIE ROBIĆ, BO NAS WYWALĄ ZE STUDIÓW~~
 Wszystko jest ok, nie ma czym się niepokoić :D
