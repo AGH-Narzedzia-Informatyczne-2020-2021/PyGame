@@ -15,5 +15,5 @@ print("Proszę daj nam 100 na Metacriticu")
 ```
 Ogólnie to
 Umiemy to | A nie umiemy tego
------------------------------
+----------|------------------
 Nic | Wszystko
