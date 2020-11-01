@@ -13,3 +13,7 @@ Jak na razie nasza gra wygląda tak:
 ```Python
 print("Proszę daj nam 100 na Metacriticu")
 ```
+Ogólnie to
+Umiemy to | A nie umiemy tego
+-----------------------------
+Nic | Wszystko
