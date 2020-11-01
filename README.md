@@ -7,6 +7,7 @@ Gra będzie zawierała:
 * coś jeszcze
 * A także to
 * iii jeszcze bedzie zawierała to
+
 _Nasze motto to_
 >Zawsze programuj tak, jakby człowiek, który będzie zajmował się konserwacją twojego kodu, był agresywnym psychopatą i wiedział, gdzie mieszkasz.
 
