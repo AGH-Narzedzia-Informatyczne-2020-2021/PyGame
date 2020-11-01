@@ -8,3 +8,8 @@ Gra będzie zawierała:
 * A także to
 _Nasze motto to_
 >Zawsze programuj tak, jakby człowiek, który będzie zajmował się konserwacją twojego kodu, był agresywnym psychopatą i wiedział, gdzie mieszkasz.
+
+Jak na razie nasza gra wygląda tak:
+```Python
+print("Proszę daj nam 100 na Metacriticu")
+```
