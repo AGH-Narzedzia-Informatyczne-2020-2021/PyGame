@@ -26,12 +26,12 @@ WHITE = (255, 255, 255)
 
 #FUNCKJE
 
-def text_objects(text, font):
-    textSurface= font.render(text, True, BLACK)
+def text_objects(text, font, color):
+    textSurface= font.render(text, True, color)
     return textSurface, textSurface.get_rect()
 
 def message_display(text):
-    largeText= pygame.font.SysFont("Times New Roman", 115)
+    largeText= pygame.font.SysFont(text, 115)
     TextSurf, TextRect = text_objects(text, largeText)
     TextRect.center = ((WINDOW_WIDTH/2), (WINDOW_HEIGHT/2))
     SCREEN.blit(TextSurf,TextRect)
@@ -52,9 +52,9 @@ def m_menu():
                     pygame.quit()
                     quit()
         SCREEN.fill(BACKGROUND_COLOR)  # kolor okna gry
-        largeText = pygame.font.SysFont('Arial', 115)
-        TextSurf, TextRect = text_objects("Nasza Gra", largeText)  #zmienić nazwę jak już wymyślimy
-        TextRect.center = ((WINDOW_WIDTH / 2), (WINDOW_HEIGHT / 2))
+        largeText = pygame.font.SysFont('Calibri', 115, bold=1 )
+        TextSurf, TextRect = text_objects("Nasza Gra", largeText, BLACK)  #zmienić nazwę jak już wymyślimy
+        TextRect.center = ((WINDOW_WIDTH / 2), (WINDOW_HEIGHT-600))
         SCREEN.blit(TextSurf, TextRect)
 
         # rysowanie obiektów
@@ -63,10 +63,21 @@ def m_menu():
             pygame.draw.rect(SCREEN, BRIGHT_BLACK, (200, 600, 300, 120))
         else:
             pygame.draw.rect(SCREEN, BLACK, (200, 600, 300, 120))
+
+        smallText = pygame.font.Font('freesansbold.ttf', 40)
+        TextSurf, TextRect = text_objects('Zagraj', smallText, WHITE)
+        TextRect.center = ((200 + (300 / 2)), (600 + (120 / 2)))
+        SCREEN.blit(TextSurf, TextRect)
+
         if 700 + 300 > MOUSE[0] > 700 and 600 + 120 > MOUSE[1] > 600:
             pygame.draw.rect(SCREEN, BRIGHT_BLACK, (700, 600, 300, 120))
         else:
             pygame.draw.rect(SCREEN, BLACK, (700, 600, 300, 120))
+
+        smallText = pygame.font.Font('freesansbold.ttf', 40)
+        TextSurf, TextRect = text_objects('Wyjdź', smallText, WHITE)
+        TextRect.center = ((700 + (300 / 2)), (600 + (120 / 2)))
+        SCREEN.blit(TextSurf, TextRect)
 
         pygame.display.update()
         CLOCK.tick(FPS)
