@@ -4,7 +4,7 @@ from pygame.locals import *
 
 #pygame.sysfont.initsysfonts()
 pygame.init()
-FPS= 60
+FPS= 15
 
 # szerokość i wysokość okna gry
 WINDOW_WIDTH = 1200
@@ -16,15 +16,13 @@ pygame.display.set_caption('Nasza gra')
 CLOCK = pygame.time.Clock()
 
 
-#KOLORY
+# KOLORY
 BACKGROUND_COLOR = (204, 255, 153)
 BLACK = (0, 0, 0)
 BRIGHT_BLACK = (138, 138, 138)
 WHITE = (255, 255, 255)
 
-
-
-#FUNCKJE
+# FUNCKJE
 
 def text_objects(text, font, color):
     textSurface= font.render(text, True, color)
@@ -37,7 +35,25 @@ def message_display(text):
     SCREEN.blit(TextSurf,TextRect)
     pygame.display.update()
 
-#funkcja głównego menu
+def button(msg, x, y, width, height, icolor, acolor, action=None):
+    MOUSE = pygame.mouse.get_pos()
+    CLICK= pygame.mouse.get_pressed()
+    if x + width > MOUSE[0] > x and y + height > MOUSE[1] > y:
+        pygame.draw.rect(SCREEN, acolor, (x, y, width, height))
+        if CLICK[0]== 1 and action != None:
+            if action == 'play':
+                game_loop()
+            elif action == 'quit':
+                pygame.quit()
+                quit()
+    else:
+        pygame.draw.rect(SCREEN, icolor, (x, y, width, height))
+    smallText = pygame.font.Font('freesansbold.ttf', 40)
+    TextSurf, TextRect = text_objects(msg, smallText, WHITE)
+    TextRect.center = ((x + (width / 2)), (y + (height / 2)))
+    SCREEN.blit(TextSurf, TextRect)
+    pygame.display.update()
+
 def m_menu():
 
     M_MENU= True
@@ -59,25 +75,10 @@ def m_menu():
 
         # rysowanie obiektów
         MOUSE = pygame.mouse.get_pos()
-        if 200 + 300 > MOUSE[0] > 200 and 600 + 120 > MOUSE[1] > 600:
-            pygame.draw.rect(SCREEN, BRIGHT_BLACK, (200, 600, 300, 120))
-        else:
-            pygame.draw.rect(SCREEN, BLACK, (200, 600, 300, 120))
 
-        smallText = pygame.font.Font('freesansbold.ttf', 40)
-        TextSurf, TextRect = text_objects('Zagraj', smallText, WHITE)
-        TextRect.center = ((200 + (300 / 2)), (600 + (120 / 2)))
-        SCREEN.blit(TextSurf, TextRect)
+        button('Zagraj', 200, 600, 300, 120, BLACK, BRIGHT_BLACK, 'play')
+        button('Wyjdź', 700, 600, 300, 120, BLACK, BRIGHT_BLACK, 'quit')
 
-        if 700 + 300 > MOUSE[0] > 700 and 600 + 120 > MOUSE[1] > 600:
-            pygame.draw.rect(SCREEN, BRIGHT_BLACK, (700, 600, 300, 120))
-        else:
-            pygame.draw.rect(SCREEN, BLACK, (700, 600, 300, 120))
-
-        smallText = pygame.font.Font('freesansbold.ttf', 40)
-        TextSurf, TextRect = text_objects('Wyjdź', smallText, WHITE)
-        TextRect.center = ((700 + (300 / 2)), (600 + (120 / 2)))
-        SCREEN.blit(TextSurf, TextRect)
 
         pygame.display.update()
         CLOCK.tick(FPS)
@@ -102,8 +103,6 @@ def game_loop():
         #aktualizuje wszystkie parametry ekranu na bieżąco
         pygame.display.update()
 
-        # zaktualizuj okno i wyświetl
-        pygame.display.update()
 
 m_menu()
 game_loop()
