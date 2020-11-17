@@ -7,14 +7,15 @@ pygame.init()
 FPS= 15
 
 # szerokość i wysokość okna gry
-WINDOW_WIDTH = 1200
-WINDOW_HEIGHT = 900
+WINDOW_WIDTH = 900
+WINDOW_HEIGHT = 600
 
 # OKNO GRY
 SCREEN = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
-pygame.display.set_caption('Nasza gra')
+pygame.display.set_caption('Nasza gra') # nazwa okna
 CLOCK = pygame.time.Clock()
-
+#icon = pygame.image.load('nazwa')  # zmiana ikonki
+#pygame.display.set_icon(icon)
 
 # KOLORY
 BACKGROUND_COLOR = (204, 255, 153)
@@ -60,10 +61,10 @@ def m_menu():
 
     while M_MENU:
         for event in pygame.event.get():
-            if event.type == QUIT:
+            if event.type == QUIT:  # wyjście za pomocą X na górze
                 pygame.quit()
                 quit()
-            elif event.type == pygame.KEYDOWN:
+            elif event.type == pygame.KEYDOWN:  # wyjście za pomocą ESC
                 if event.key == K_ESCAPE:
                     pygame.quit()
                     quit()
