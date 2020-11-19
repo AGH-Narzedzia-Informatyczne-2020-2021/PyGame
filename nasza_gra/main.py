@@ -19,7 +19,7 @@ map_dont_ask_png = os.path.join(grafiki, 'grafiki\map_dont_ask.png')
 # OKNO GRY
 SCREEN = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 pygame.display.set_caption('Nasza gra') # nazwa okna
-#CLOCK = pygame.time.Clock()
+CLOCK = pygame.time.Clock()
 #icon = pygame.image.load('nazwa')  # zmiana ikonki
 #pygame.display.set_icon(icon)
 
@@ -43,16 +43,14 @@ def message_display(text):
     pygame.display.update()
 
 
-def whether_exit():
-    for event in pygame.event.get():    # wyjście
-        if event.type == QUIT:
+def whether_exit(event):     # tu nie ma petli for, tylko warunki
+    if event.type == QUIT:
+        pygame.quit()
+        quit()
+    elif event.type == pygame.KEYDOWN:
+         if event.key == K_ESCAPE:   # wyjście escapem
             pygame.quit()
             quit()
-        elif event.type == pygame.KEYDOWN:
-            if event.key == K_ESCAPE:   # wyjście escapem
-                pygame.quit()
-                quit()
-
 
 def button(msg, x, y, width, height, icolor, acolor, action=None):
     MOUSE = pygame.mouse.get_pos()
@@ -77,7 +75,8 @@ def button(msg, x, y, width, height, icolor, acolor, action=None):
 def m_menu():
     M_MENU= True
     while M_MENU:
-        whether_exit()
+        for event in pygame.event.get():
+            whether_exit(event)
         SCREEN.fill(BACKGROUND_COLOR)  # kolor okna gry
         largeText = pygame.font.SysFont('Calibri', 115, bold=1 )
         TextSurf, TextRect = text_objects("Nasza Gra", largeText, BLACK)  #zmienić nazwę jak już wymyślimy
@@ -92,19 +91,22 @@ def m_menu():
 
 
         pygame.display.update()
-        #CLOCK.tick(FPS)
+        CLOCK.tick(FPS)
 
 # gracz
 gracz_ikona = pygame.image.load(player_test_png)
+playerX = WINDOW_WIDTH/2
+playerY = WINDOW_HEIGHT/2
 def gracz_wyswietl():
-    SCREEN.blit(gracz_ikona, (WINDOW_WIDTH/2, WINDOW_HEIGHT/2))
+    global playerX, playerY
+    SCREEN.blit(gracz_ikona, (playerX, playerY))
 
 # mapa
 mapa = pygame.image.load(map_dont_ask_png)
-mapaX = -1000
-mapaY = -2000
-mapaX_krok = 0
-mapaY_krok = 0
+mapaX = 100
+mapaY = 100
+mapaX_step = 0
+mapaY_step = 0
 
 def mapa_wyswietl():
     global mapaX, mapaY
@@ -113,71 +115,34 @@ def mapa_wyswietl():
 
 # poruszanie "sie"
 def ruch_mapy():
-    global mapaX, mapaY, mapaX_krok, mapaY_krok
+    global mapaX, mapaY, mapaX_step, mapaY_step
     for event in pygame.event.get():
-        '''if event.type == pygame.KEYDOWN:
-            print("key stroked")
-            if event.key == pygame.K_UP:
-                mapaY_krok = 100
-                print("www")
-            elif  event.key == pygame.K_DOWN:
-                mapaY_krok = -100
-                print("sss")
-            elif  event.key == pygame.K_LEFT:
-                mapaX_krok = 100
-                print("aa")
-            elif  event.key == pygame.K_RIGHT:
-                mapaX_krok = -100
-            
-        if event.type == pygame.KEYUP:
-            if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
-                mapaY_krok = 0
-                print("wswsws w gore dol")
-            elif event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
-                mapaX_krok = 0
-                print("adadad w lewo prawo")'''
-            
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_LEFT:
-                mapaX_krok = 5
-                print("klikam w lewo")
-            if event.key == pygame.K_RIGHT:
-                mapaX_krok = -5
-                print("klikam w prawo")
-            
-        if event.type == pygame.KEYUP:
-            if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
-                mapaX_krok = 0
-                print("zwalniam przycisk")
+            if event.key == pygame.K_UP:
+                mapaY_step = 10
+            elif event.key == pygame.K_DOWN:
+                mapaY_step = -10
+            elif event.key == pygame.K_LEFT:
+                mapaX_step = 10
+            elif event.key == pygame.K_RIGHT:
+                mapaX_step = -10
+
+        mapaX += mapaX_step
+        mapaY += mapaY_step
+        mapaX_step = 0
+        mapaY_step = 0
+
+        whether_exit(event)
 
 # PĘTLA GŁówna PROGRAMU
 def game_loop():
-    running = True
-    while running:
-        #CLOCK.tick(60)
-        #print("jakis tekst")
-        global mapaX, mapaY, mapaX_krok, mapaY_krok
-        whether_exit()
-        SCREEN.fill( (255, 0, 0) )
-        #ruch_mapy()
+    while True:
+        CLOCK.tick(FPS)
+        SCREEN.fill( (123, 123, 123) )
 
-        #mapaX += mapaX_krok
-        #mapaY += mapaY_krok
         mapa_wyswietl()
         gracz_wyswietl()
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
-            
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_LEFT:
-                    print("klikam w lewo")
-                if event.key == pygame.K_RIGHT:
-                    print("klikam w prawo")
-                
-            if event.type == pygame.KEYUP:
-                if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
-                    print("zwalniam przycisk")
+        ruch_mapy()
 
         pygame.display.update()     #aktualizuje wszystkie parametry ekranu na bieżąco
 
