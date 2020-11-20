@@ -5,7 +5,7 @@ import os
 
 #pygame.sysfont.initsysfonts()
 pygame.init()
-FPS= 15
+FPS= 60
 
 # szerokość i wysokość okna gry
 WINDOW_WIDTH = 1000
