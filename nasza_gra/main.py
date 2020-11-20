@@ -15,7 +15,7 @@ WINDOW_HEIGHT = 800
 grafiki = os.path.dirname(__file__)
 player_test_png = os.path.join(grafiki, 'grafiki\player_test.png')
 map_dont_ask_png = os.path.join(grafiki, 'grafiki\map_dont_ask.png')
-m_font= os.path.join(grafiki, 'grafiki\'PixelEmulator-xq08.ttf')
+m_font= os.path.join(grafiki, 'grafiki\PixelEmulator-xq08.ttf')
 
 # OKNO GRY
 SCREEN = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
