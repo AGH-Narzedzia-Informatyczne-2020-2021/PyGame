@@ -56,7 +56,7 @@ def whether_exit(event):     # tu nie ma petli for, tylko warunki
             pygame.quit()
             quit()
 
-def button(msg, x, y, width, height, icolor, acolor, action=None):
+def button(msg, x, y, width, height, icolor, acolor, action=None): #wymiary okna gry zostały zmienione zmienić lokalizaję przycisków 
     MOUSE = pygame.mouse.get_pos()
     CLICK= pygame.mouse.get_pressed()
     if x + width > MOUSE[0] > x and y + height > MOUSE[1] > y:
