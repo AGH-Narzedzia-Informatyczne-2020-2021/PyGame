@@ -128,23 +128,29 @@ def ruch_mapy():
             elif event.key == pygame.K_RIGHT:
                 mapaX_step = -10
 
-        mapaX += mapaX_step
-        mapaY += mapaY_step
-        mapaX_step = 0
-        mapaY_step = 0
+        #mapaX += mapaX_step
+        #mapaY += mapaY_step
+
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
+                mapaX_step = 0
+            elif event.key == pygame.K_UP or event.key == pygame.K_DOWN:
+                mapaY_step = 0
 
         whether_exit(event)
 
 # PĘTLA GŁówna PROGRAMU
 def game_loop():
     while True:
+        global mapaX, mapaY, mapaX_step, mapaY_step
         CLOCK.tick(FPS)
         SCREEN.fill( (123, 123, 123) )
 
         mapa_wyswietl()
         gracz_wyswietl()
         ruch_mapy()
-
+        mapaX += mapaX_step
+        mapaY += mapaY_step
         pygame.display.update()     #aktualizuje wszystkie parametry ekranu na bieżąco
 
 m_menu()
