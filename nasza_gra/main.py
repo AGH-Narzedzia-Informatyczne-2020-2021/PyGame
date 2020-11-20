@@ -5,6 +5,7 @@ import os
 
 #pygame.sysfont.initsysfonts()
 pygame.init()
+#pygame.mixer.init()
 FPS= 60
 
 # szerokość i wysokość okna gry
@@ -16,6 +17,8 @@ grafiki = os.path.dirname(__file__)
 player_test_png = os.path.join(grafiki, 'grafiki\player_test.png')
 map_dont_ask_png = os.path.join(grafiki, 'grafiki\map_dont_ask.png')
 m_font= os.path.join(grafiki, 'grafiki\PixelEmulator-xq08.ttf')
+BACKGROUND_COLOR = pygame.image.load(os.path.join(grafiki, 'grafiki\\bground.png'))
+
 
 # OKNO GRY
 SCREEN = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
@@ -25,7 +28,7 @@ CLOCK = pygame.time.Clock()
 #pygame.display.set_icon(icon)
 
 # KOLORY
-BACKGROUND_COLOR = (204, 255, 153)
+#BACKGROUND_COLOR = (204, 255, 153)
 BLACK = (0, 0, 0)
 BRIGHT_BLACK = (138, 138, 138)
 WHITE = (255, 255, 255)
@@ -36,7 +39,7 @@ def text_objects(text, font, color):
     textSurface= font.render(text, True, color)
     return textSurface, textSurface.get_rect()
 
-def message_display(text):
+def message_display(text): #wyświetlanie wiadomości w grze
     largeText= pygame.font.SysFont(text, 115)
     TextSurf, TextRect = text_objects(text, largeText)
     TextRect.center = ((WINDOW_WIDTH/2), (WINDOW_HEIGHT/2))
@@ -78,11 +81,14 @@ def m_menu():
     while M_MENU:
         for event in pygame.event.get():
             whether_exit(event)
-        SCREEN.fill(BACKGROUND_COLOR)  # kolor okna gry
+        SCREEN.blit(BACKGROUND_COLOR, [0,0] )  # kolor okna gry
         largeText = pygame.font.Font(m_font, 115)
         TextSurf, TextRect = text_objects("Nasza Gra", largeText, BLACK)  #zmienić nazwę jak już wymyślimy
         TextRect.center = ((WINDOW_WIDTH / 2), (WINDOW_HEIGHT-600))
         SCREEN.blit(TextSurf, TextRect)
+        #pygame.mixer.music.load(os.path.join('intro.wav'))  # intro
+        #pygame.mixer.music.set_volume(0.20)
+        #pygame.mixer.music.play(-1)
 
         # rysowanie obiektów
         MOUSE = pygame.mouse.get_pos()
@@ -144,7 +150,7 @@ def game_loop():
     while True:
         global mapaX, mapaY, mapaX_step, mapaY_step
         CLOCK.tick(FPS)
-        SCREEN.fill( (123, 123, 123) )
+        SCREEN.fill(WHITE )
 
         mapa_wyswietl()
         gracz_wyswietl()
