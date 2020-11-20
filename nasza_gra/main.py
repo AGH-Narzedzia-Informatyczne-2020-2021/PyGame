@@ -6,17 +6,17 @@ import os
 #pygame.sysfont.initsysfonts()
 pygame.init()
 #pygame.mixer.init()
-FPS= 60
+FPS = 60
 
 # szerokość i wysokość okna gry
-WINDOW_WIDTH = 1000
+WINDOW_WIDTH = 1200
 WINDOW_HEIGHT = 800
 
 # robienie sciezek wzglednych
 grafiki = os.path.dirname(__file__)
 player_test_png = os.path.join(grafiki, 'grafiki\player_test.png')
 map_dont_ask_png = os.path.join(grafiki, 'grafiki\map_dont_ask.png')
-m_font= os.path.join(grafiki, 'grafiki\PixelEmulator-xq08.ttf')
+m_font = os.path.join(grafiki, 'grafiki\PixelEmulator-xq08.ttf')
 BACKGROUND_COLOR = pygame.image.load(os.path.join(grafiki, 'grafiki\\bground.png'))
 
 
@@ -56,7 +56,7 @@ def whether_exit(event):     # tu nie ma petli for, tylko warunki
             pygame.quit()
             quit()
 
-def button(msg, x, y, width, height, icolor, acolor, action=None):
+def button(msg, x, y, width, height, icolor, acolor, action=None):     #zmienione wymiary okna trzeba zmienić lokalizację przycisków
     MOUSE = pygame.mouse.get_pos()
     CLICK= pygame.mouse.get_pressed()
     if x + width > MOUSE[0] > x and y + height > MOUSE[1] > y:
