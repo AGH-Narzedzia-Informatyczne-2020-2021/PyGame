@@ -32,6 +32,7 @@ Wszystko jest ok, nie ma czym się niepokoić
 * 1.tlisowicz: https://gist.github.com/tlisowicz/d3e716bbcaab2dc67f35aae46eda99a9
 * 2.tlisowicz https://gist.github.com/tlisowicz/9205c4da34a81d1138482e9d89a352bf
 * Kat165: https://gist.github.com/Kat165/6d4dfa442bb6ff2e49bc82c26a7f947f
-
+*BartoszCh1: https://gist.github.com/BartoszCh/ad81170248c701c5f62e08c914d2fa5b
+*BartoszCh2: https://gist.github.com/BartoszCh/1afdca5b7c06b7a7f7ab51b4b5e1e9d0
 
 * RETAJD : https://gist.github.com/RETAJD/7e36d67d3d7caaf67d41b63dec55ead6
