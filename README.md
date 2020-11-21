@@ -39,9 +39,13 @@ Wszystko jest ok, nie ma czym się niepokoić
  https://gist.github.com/BartoszCh/ad81170248c701c5f62e08c914d2fa5b
  https://gist.github.com/BartoszCh/1afdca5b7c06b7a7f7ab51b4b5e1e9d0
 
-* RETAJD :
+* RETAJD:
  https://gist.github.com/RETAJD/7e36d67d3d7caaf67d41b63dec55ead6
  https://gist.github.com/RETAJD/1d44b27ab798cf8ca29a41752e174c20
+ 
+ * julobrat:
+ https://gist.github.com/julobrat/ea217bb2b1a980a291b8f217cd3ed103
+ https://gist.github.com/julobrat/ed9be7667e86668a4a22af961d5fc60c
  
  # **Linki do GitHub Pages**
 julobrat: https://github.com/julobrat/julobrat.github.io/blob/main/index.md
