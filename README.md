@@ -31,10 +31,7 @@ Wszystko jest ok, nie ma czym się niepokoić
 # **Linki do Gistów twórców**
 tlisowicz: https://gist.github.com/tlisowicz/d3e716bbcaab2dc67f35aae46eda99a9
 
-Kat165: <script src="https://gist.github.com/Kat165/6d4dfa442bb6ff2e49bc82c26a7f947f.js"></script>
+Kat165: https://gist.github.com/Kat165/6d4dfa442bb6ff2e49bc82c26a7f947f
 
 
 RETAJD : https://gist.github.com/RETAJD/7e36d67d3d7caaf67d41b63dec55ead6
-
-Julobrat: https://gist.github.com/julobrat/ed9be7667e86668a4a22af961d5fc60c
-https://gist.github.com/julobrat/ea217bb2b1a980a291b8f217cd3ed103
