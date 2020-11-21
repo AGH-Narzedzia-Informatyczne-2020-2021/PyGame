@@ -27,3 +27,6 @@ Wszystko | Nic
 
 ~~MUSIMY ZACZĄĆ COŚ WRESZCIE ROBIĆ, BO NAS WYWALĄ ZE STUDIÓW~~
 Wszystko jest ok, nie ma czym się niepokoić
+
+# **Linki do Gistów twórców**
+tlisowicz: https://gist.github.com/tlisowicz/d3e716bbcaab2dc67f35aae46eda99a9
