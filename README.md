@@ -50,3 +50,4 @@ Wszystko jest ok, nie ma czym się niepokoić
  # **Linki do GitHub Pages**
 * julobrat: https://github.com/julobrat/julobrat.github.io/blob/main/index.md
 * tlisowicz: https://github.com/tlisowicz/tlisowicz.github.io/blob/main/index.md
+* BartoszCh: https://github.com/BartoszCh/BartoszCh.github.io/blob/main/index.html
