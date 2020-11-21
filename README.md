@@ -52,3 +52,4 @@ Wszystko jest ok, nie ma czym się niepokoić
 * tlisowicz: https://tlisowicz.github.io/
 * BartoszCh: https://BartoszCh.github.io/
 * Kat165: https://kat165.github.io/
+* RETAJD: https://retajd.github.io
