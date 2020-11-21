@@ -42,3 +42,6 @@ Wszystko jest ok, nie ma czym się niepokoić
 * RETAJD :
  https://gist.github.com/RETAJD/7e36d67d3d7caaf67d41b63dec55ead6
  https://gist.github.com/RETAJD/1d44b27ab798cf8ca29a41752e174c20
+ 
+ # **Linki do GitHub Pages**
+julobrat: https://github.com/julobrat/julobrat.github.io/blob/main/index.md
