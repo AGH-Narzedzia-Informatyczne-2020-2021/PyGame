@@ -48,6 +48,6 @@ Wszystko jest ok, nie ma czym się niepokoić
  https://gist.github.com/julobrat/ed9be7667e86668a4a22af961d5fc60c
  
  # **Linki do GitHub Pages**
-* julobrat: https://julobrat.github.io/
+* julobrat: https://github.com/julobrat/julobrat.github.io/blob/main/index.md
 * tlisowicz: https://tlisowicz.github.io/
 * BartoszCh: https://BartoszCh.github.io/
