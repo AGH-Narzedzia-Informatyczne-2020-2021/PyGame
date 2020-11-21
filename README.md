@@ -31,4 +31,4 @@ Wszystko jest ok, nie ma czym się niepokoić
 # **Linki do Gistów twórców**
 tlisowicz: https://gist.github.com/tlisowicz/d3e716bbcaab2dc67f35aae46eda99a9
 
-Kat165: <script src="https://gist.github.com/Kat165/6d4dfa442bb6ff2e49bc82c26a7f947f.js"></script>
+Kat165: https://gist.github.com/Kat165/6d4dfa442bb6ff2e49bc82c26a7f947f.js
