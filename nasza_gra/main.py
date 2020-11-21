@@ -9,7 +9,7 @@ pygame.init()
 FPS= 60
 
 # szerokość i wysokość okna gry
-WINDOW_WIDTH = 1000
+WINDOW_WIDTH = 1200
 WINDOW_HEIGHT = 800
 
 # robienie sciezek wzglednych
@@ -149,7 +149,7 @@ def game_loop():
     while True:
         global mapaX, mapaY, mapaX_step, mapaY_step
         CLOCK.tick(FPS)
-        SCREEN.fill(WHITE )
+        SCREEN.fill(WHITE)
 
         mapa_wyswietl()
         gracz_wyswietl()
