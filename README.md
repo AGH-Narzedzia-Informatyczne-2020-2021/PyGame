@@ -53,3 +53,4 @@ Wszystko jest ok, nie ma czym się niepokoić
 * BartoszCh: https://BartoszCh.github.io/
 * Kat165: https://kat165.github.io/
 * RETAJD: https://retajd.github.io
+* Sermi09: https://sermi09.github.io/
