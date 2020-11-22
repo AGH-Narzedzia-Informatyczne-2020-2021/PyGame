@@ -47,6 +47,10 @@ Wszystko jest ok, nie ma czym się niepokoić
  https://gist.github.com/julobrat/ea217bb2b1a980a291b8f217cd3ed103
  https://gist.github.com/julobrat/ed9be7667e86668a4a22af961d5fc60c
  
+ * Sermi09:
+ https://gist.github.com/Sermi09/c030948c5b334ed02de77f6a23a11718
+ https://gist.github.com/Sermi09/75ae605bc24daa1294500e2f4fd89c54
+ 
  # **Linki do GitHub Pages**
 * julobrat: https://julobrat.github.io/
 * tlisowicz: https://tlisowicz.github.io/
