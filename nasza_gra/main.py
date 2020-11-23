@@ -132,7 +132,6 @@ mapaY = 100
 mapaX_step = 0
 mapaY_step = 0
 
-
 def mapa_wyswietl():
     global mapaX, mapaY
     SCREEN.blit(mapa, (mapaX, mapaY))
