@@ -135,8 +135,7 @@ mapaY = 100
 mapaX_step = 0
 mapaY_step = 0
 
-<<<<<<< HEAD
-=======
+
 # przeciwnik
 ENEMY_ICON = pygame.image.load(ENEMY_ICON_png)
 ENEMYX = 1000
@@ -152,7 +151,7 @@ def enemy():
         #pygame.mixer.Sound.play(pygame.mixer.Sound(ENEMY_SOUND))
 
 
->>>>>>> 5c980105c01ba69d69c9975204648398dbc16a49
+
 def mapa_wyswietl():
     global mapaX, mapaY
     SCREEN.blit(mapa, (mapaX, mapaY))
