@@ -2,6 +2,7 @@ import pygame
 import pygame.sysfont
 from pygame.locals import *
 import os
+import time
 
 # pygame.sysfont.initsysfonts()
 pygame.init()
@@ -17,7 +18,9 @@ grafiki = os.path.dirname(__file__)
 muzyka = os.path.dirname(__file__)
 MAINTHEME = os.path.join(muzyka, 'muzyka\intro.mp3')
 BMUSIC = os.path.join(muzyka, 'muzyka\\background.mp3')
+ENEMY_SOUND = os.path.join(muzyka, 'muzyka\\m_okay.mp3')
 player_test_png = os.path.join(grafiki, 'grafiki\player_test.png')
+ENEMY_ICON_png = os.path.join(grafiki, 'grafiki\orc.png')
 map_dont_ask_png = os.path.join(grafiki, 'grafiki\map_dont_ask.png')
 m_font = os.path.join(grafiki, 'grafiki\PixelEmulator-xq08.ttf')
 BACKGROUND = pygame.image.load(os.path.join(grafiki, 'grafiki\\backgronud1200x800.png'))
@@ -108,7 +111,7 @@ def m_menu():
         SCREEN.blit(TextSurf, TextRect)
 
         # rysowanie obiektów
-        MOUSE = pygame.mouse.get_pos()
+
 
         button('Zagraj', 200, 550, 300, 120, BLACK, BRIGHT_BLACK, 'play')
         button('Wyjdź', 700, 550, 300, 120, BLACK, BRIGHT_BLACK, 'quit')
@@ -125,13 +128,31 @@ def gracz_wyswietl():
     SCREEN.blit(gracz_ikona, (playerX, playerY))
 
 
-#mapa
+# mapa
 mapa = pygame.image.load(map_dont_ask_png)
 mapaX = 100
 mapaY = 100
 mapaX_step = 0
 mapaY_step = 0
 
+<<<<<<< HEAD
+=======
+# przeciwnik
+ENEMY_ICON = pygame.image.load(ENEMY_ICON_png)
+ENEMYX = 1000
+ENEMYY = 700
+
+
+def enemy():
+    global ENEMYX, ENEMYY
+    ENEMYX += mapaX_step
+    ENEMYY += mapaY_step
+    SCREEN.blit(ENEMY_ICON, (ENEMYX, ENEMYY))
+    #if (playerX <= ENEMYX-300 and playerY<= ENEMYY-300) or (playerX <= ENEMYX+300 and playerY <= ENEMYY+300):
+        #pygame.mixer.Sound.play(pygame.mixer.Sound(ENEMY_SOUND))
+
+
+>>>>>>> 5c980105c01ba69d69c9975204648398dbc16a49
 def mapa_wyswietl():
     global mapaX, mapaY
     SCREEN.blit(mapa, (mapaX, mapaY))
@@ -173,9 +194,9 @@ def game_loop():
 
         CLOCK.tick(FPS)
         SCREEN.fill(WHITE)
-          # tu coś jest nie tak bo, nie gra muzyka
         mapa_wyswietl()
         gracz_wyswietl()
+        enemy()
         ruch_mapy()
         mapaX += mapaX_step
         mapaY += mapaY_step
