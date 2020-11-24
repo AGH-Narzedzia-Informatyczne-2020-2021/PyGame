@@ -172,12 +172,11 @@ mapaY = 100
 mapaX_step = 0
 mapaY_step = 0
 
-<<<<<<< HEAD
-=======
+
+
 def mapa_wyswietl():
     global mapaX, mapaY
     SCREEN.blit(mapa, (mapaX, mapaY))
->>>>>>> 41d38f95945cf84470a4de16eaaaeb6af0f61edb
 
 # przeciwnik
 ENEMY_ICON = pygame.image.load(ENEMY_ICON_png)
@@ -193,7 +192,6 @@ def enemy():
     #if (playerX <= ENEMYX-300 and playerY<= ENEMYY-300) or (playerX <= ENEMYX+300 and playerY <= ENEMYY+300):
         #pygame.mixer.Sound.play(pygame.mixer.Sound(ENEMY_SOUND))
 
-<<<<<<< HEAD
 
 
 def mapa_wyswietl():
@@ -201,8 +199,7 @@ def mapa_wyswietl():
     SCREEN.blit(mapa, (mapaX, mapaY))
 
 
-=======
->>>>>>> 41d38f95945cf84470a4de16eaaaeb6af0f61edb
+
 # poruszanie "sie"
 def ruch_mapy():
     global mapaX, mapaY, mapaX_step, mapaY_step, player_direction, player_frame, player_stand, whether_leave_frame
