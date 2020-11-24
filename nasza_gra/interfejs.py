@@ -1,1 +1,1 @@
-print("interfejs w trakcie tworzenia")
+print("interfejs w trakcie tworzenia ")
