@@ -22,6 +22,11 @@ BMUSIC = os.path.join(muzyka, 'muzyka\\background.mp3')
 ENEMY_SOUND = os.path.join(muzyka, 'muzyka\\m_okay.mp3')
 player_test_png = os.path.join(grafiki, 'grafiki\player_test.png')
 ENEMY_ICON_png = os.path.join(grafiki, 'grafiki\orc.png')
+PBUTTON_L= os.path.join(grafiki, 'grafiki\start_L.png')
+PBUTTON_D= os.path.join(grafiki, 'grafiki\start_D.png')
+QBUTTON_L= os.path.join(grafiki, 'grafiki\quit_L.png')
+QBUTTON_D= os.path.join(grafiki, 'grafiki\quit_D.png')
+
 map_dont_ask_png = os.path.join(grafiki, 'grafiki\PlanMapy.png')
 m_font = os.path.join(grafiki, 'grafiki\PixelEmulator-xq08.ttf')
 BACKGROUND = pygame.image.load(os.path.join(grafiki, 'grafiki\\backgronud1200x800.png'))
@@ -75,13 +80,11 @@ def music_stop():
     pygame.mixer.music.stop()
 
 
-def button(msg, x, y, width, height, icolor, acolor,
-           action=None):  # wymiary okna gry zostały zmienione zmienić lokalizaję przycisków
-
+def button(x, y, icolor, acolor, action=None):
     MOUSE = pygame.mouse.get_pos()
     CLICK = pygame.mouse.get_pressed()
-    if x + width > MOUSE[0] > x and y + height > MOUSE[1] > y:
-        pygame.draw.rect(SCREEN, acolor, (x, y, width, height))
+    if x+300 > MOUSE[0] > x  and y+ 120 > MOUSE[1] > y :
+        SCREEN.blit(pygame.image.load(acolor), [x,y])
         if CLICK[0] == 1 and action != None:
             if action == 'play':
                 game_loop()
@@ -89,12 +92,8 @@ def button(msg, x, y, width, height, icolor, acolor,
                 pygame.quit()
                 quit()
     else:
-        pygame.draw.rect(SCREEN, icolor, (x, y, width, height))
-    smallText = pygame.font.Font('freesansbold.ttf', 40)
-    TextSurf, TextRect = text_objects(msg, smallText, WHITE)
-    TextRect.center = ((x + (width / 2)), (y + (height / 2)))
-    SCREEN.blit(TextSurf, TextRect)
-    pygame.display.update()
+        SCREEN.blit(pygame.image.load(icolor), [x,y])
+
 
 
 def m_menu():
@@ -114,9 +113,9 @@ def m_menu():
         # rysowanie obiektów
 
 
-        button('Zagraj', 200, 550, 300, 120, BLACK, BRIGHT_BLACK, 'play')
-        button('Wyjdź', 700, 550, 300, 120, BLACK, BRIGHT_BLACK, 'quit')
-
+        button( 200, 525, PBUTTON_D, PBUTTON_L,  'play')
+        button( 700, 525, QBUTTON_D, QBUTTON_L,  'quit')
+        pygame.display.update()
 # kierunki
 class directions(Enum):
     up = 1
