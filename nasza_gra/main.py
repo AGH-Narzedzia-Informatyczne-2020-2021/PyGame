@@ -127,13 +127,13 @@ class directions(Enum):
 player_frames_stand = { directions.up: pygame.image.load(os.path.join(grafiki, 'grafiki\player\player0.png')),
                         directions.down: pygame.image.load(os.path.join(grafiki, 'grafiki\player\player3.png')),
                         directions.left: pygame.image.load(os.path.join(grafiki, 'grafiki\player\player6.png')),
-                        directions.right: pygame.image.load(os.path.join(grafiki, 'grafiki\player\player6.png'))    }
+                        directions.right: pygame.image.load(os.path.join(grafiki, 'grafiki\player\player9.png'))    }
 
 
 frames_up = [pygame.image.load(os.path.join(grafiki, 'grafiki\player\player1.png')), pygame.image.load(os.path.join(grafiki, 'grafiki\player\player2.png'))]
 frames_down = [pygame.image.load(os.path.join(grafiki, 'grafiki\player\player4.png')), pygame.image.load(os.path.join(grafiki, 'grafiki\player\player5.png'))]
 frames_left = [pygame.image.load(os.path.join(grafiki, 'grafiki\player\player7.png')), pygame.image.load(os.path.join(grafiki, 'grafiki\player\player8.png'))]
-frames_right = [pygame.image.load(os.path.join(grafiki, 'grafiki\player\player7.png')), pygame.image.load(os.path.join(grafiki, 'grafiki\player\player8.png'))]
+frames_right = [pygame.image.load(os.path.join(grafiki, 'grafiki\player\player10.png')), pygame.image.load(os.path.join(grafiki, 'grafiki\player\player11.png'))]
 
 player_frames_move = {  directions.up: frames_up, directions.down: frames_down, directions.left: frames_left, directions.right: frames_right}
 # gracz
@@ -199,21 +199,35 @@ def ruch_mapy():
             if event.key == pygame.K_UP:
                 mapaY_step = 10
                 player_direction = directions.up
-            elif event.key == pygame.K_DOWN:
+            if event.key == pygame.K_DOWN:
                 mapaY_step = -10
                 player_direction = directions.down
-            elif event.key == pygame.K_LEFT:
+            if event.key == pygame.K_LEFT:
                 mapaX_step = 10
                 player_direction = directions.left
-            elif event.key == pygame.K_RIGHT:
+            if event.key == pygame.K_RIGHT:
                 mapaX_step = -10
                 player_direction = directions.right
         if event.type == pygame.KEYUP:
             player_stand = True
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                 mapaX_step = 0
-            elif event.key == pygame.K_UP or event.key == pygame.K_DOWN:
+            if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
                 mapaY_step = 0
+        keys=pygame.key.get_pressed()
+        if keys[K_UP]:
+            player_stand = False
+            player_direction = directions.up
+        if keys[K_DOWN]:
+            player_stand = False
+            player_direction = directions.down
+        if keys[K_LEFT]:
+            player_stand = False
+            player_direction = directions.left
+        if keys[K_RIGHT]:
+            player_stand = False
+            player_direction = directions.right
+
         whether_exit(event)
     player_frame, whether_leave_frame = set_frame(player_frame, player_stand, whether_leave_frame)
 
