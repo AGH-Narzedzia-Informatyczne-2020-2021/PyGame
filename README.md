@@ -61,3 +61,4 @@ Wszystko jest ok, nie ma czym się niepokoić
 
 # **Linki do forków**
 * https://github.com/tlisowicz/umap
+* https://github.com/Sermi09/Bringing-Old-Photos-Back-to-Life
