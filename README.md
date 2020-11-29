@@ -64,3 +64,4 @@ Wszystko jest ok, nie ma czym się niepokoić
 * https://github.com/Sermi09/Bringing-Old-Photos-Back-to-Life
 * https://github.com/julobrat/MODNet
 * https://github.com/BartoszCh/Tremblay2018_Code
+* https://github.com/Kat165/Bringing-Old-Photos-Back-to-Life
