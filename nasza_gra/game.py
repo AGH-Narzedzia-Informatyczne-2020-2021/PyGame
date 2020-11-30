@@ -177,7 +177,7 @@ def set_frame(player_frame, player_stand, whether_leave_frame):
 
 
 # mapa
-mapa = pygame.image.load(mapa_krawedzie)
+mapa = pygame.image.load(mapa_normalna)
 mapaX = -150
 mapaY = -300
 krawedzieX = -150
@@ -250,29 +250,31 @@ def ruch_mapy():
         if keys[K_UP]:
             player_stand = False
             player_direction = directions.up
+            mapaY_step = 10
         if keys[K_DOWN]:
             player_stand = False
             player_direction = directions.down
+            mapaY_step = -10
         if keys[K_LEFT]:
             player_stand = False
             player_direction = directions.left
+            mapaX_step = 10
         if keys[K_RIGHT]:
             player_stand = False
             player_direction = directions.right
+            mapaX_step = -10
 
         whether_exit(event)
     player_frame, whether_leave_frame = set_frame(player_frame, player_stand, whether_leave_frame)
 
+granica = Image.open(mapa_krawedzie)
+kolor_granicy = granica.convert("RGB")
 
 def granica_mapy():
-    global mapaX, mapaY, mapaX_step, mapaY_step, krawedzieX, krawedzieY, WINDOW_WIDTH, WINDOW_HEIGHT
-    granica = Image.open(mapa_krawedzie)
-    kolor_granicy = granica.convert("RGB")
-    rgb_pixel_value = kolor_granicy.getpixel( (-mapaX + WINDOW_WIDTH/2 + mapaX_step, -mapaY + WINDOW_HEIGHT/2 + mapaY_step) ) # ma być (0, 0, 0)
-    #print(rgb_pixel_value)
+    global mapaX, mapaY, mapaX_step, mapaY_step, krawedzieX, krawedzieY, WINDOW_WIDTH, WINDOW_HEIGHT, kolor_granicy
+    rgb_pixel_value = kolor_granicy.getpixel( (-mapaX + WINDOW_WIDTH/2 - mapaX_step, -mapaY + WINDOW_HEIGHT/2 - mapaY_step) ) # ma być (0, 0, 0)
+    print(rgb_pixel_value)
     if rgb_pixel_value == (0, 0, 0):
-        #print( "mapa to {0}, {1}".format(mapaX, mapaY))
-        #print("KRAWEDŹ!!!")
         mapaX_step = 0
         mapaY_step = 0
     else:
