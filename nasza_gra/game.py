@@ -31,7 +31,7 @@ PBUTTON_D = os.path.join(grafiki, 'grafiki\start_D.png')
 QBUTTON_L = os.path.join(grafiki, 'grafiki\quit_L.png')
 QBUTTON_D = os.path.join(grafiki, 'grafiki\quit_D.png')
 mapa_normalna = os.path.join(grafiki, 'grafiki\mapka.png')
-mapa_krawedzie = os.path.join(grafiki, 'grafiki\mapka1.png')
+mapa_krawedzie = os.path.join(grafiki, 'grafiki\mapka_krawedzie.png')
 m_font = os.path.join(grafiki, 'grafiki\PixelEmulator-xq08.ttf')
 BACKGROUND = pygame.image.load(os.path.join(grafiki, 'grafiki\\backgronud1200x800.png'))
 
