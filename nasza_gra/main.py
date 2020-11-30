@@ -20,14 +20,13 @@ muzyka = os.path.dirname(__file__)
 MAINTHEME = os.path.join(muzyka, 'muzyka\intro.mp3')
 BMUSIC = os.path.join(muzyka, 'muzyka\\background.mp3')
 ENEMY_SOUND = os.path.join(muzyka, 'muzyka\\m_okay.mp3')
-player_test_png = os.path.join(grafiki, 'grafiki\player_test.png')
 ENEMY_ICON_png = os.path.join(grafiki, 'grafiki\orc.png')
 PBUTTON_L= os.path.join(grafiki, 'grafiki\start_L.png')
 PBUTTON_D= os.path.join(grafiki, 'grafiki\start_D.png')
 QBUTTON_L= os.path.join(grafiki, 'grafiki\quit_L.png')
 QBUTTON_D= os.path.join(grafiki, 'grafiki\quit_D.png')
 
-map_dont_ask_png = os.path.join(grafiki, 'grafiki\PlanMapy.png')
+map_dont_ask_png = os.path.join(grafiki, 'grafiki\mapka.png')
 m_font = os.path.join(grafiki, 'grafiki\PixelEmulator-xq08.ttf')
 BACKGROUND = pygame.image.load(os.path.join(grafiki, 'grafiki\\backgronud1200x800.png'))
 
@@ -136,7 +135,7 @@ frames_right = [pygame.image.load(os.path.join(grafiki, 'grafiki\player\player10
 
 player_frames_move = {  directions.up: frames_up, directions.down: frames_down, directions.left: frames_left, directions.right: frames_right}
 # gracz
-player_icon = pygame.image.load(player_test_png)
+player_icon = player_frames_stand[directions.down]
 playerX = WINDOW_WIDTH / 2
 playerY = WINDOW_HEIGHT / 2
 player_frame = 0
@@ -166,8 +165,8 @@ def set_frame(player_frame, player_stand, whether_leave_frame):
 
 # mapa
 mapa = pygame.image.load(map_dont_ask_png)
-mapaX = 100
-mapaY = 100
+mapaX = -200
+mapaY = -300
 mapaX_step = 0
 mapaY_step = 0
 
