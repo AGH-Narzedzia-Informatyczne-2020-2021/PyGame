@@ -3,7 +3,9 @@ import pygame.sysfont
 from pygame.locals import *
 from enum import Enum
 import os
-
+from PIL import Image
+from PIL import *
+import PIL
 
 pygame.init()
 pygame.mixer.init()
@@ -24,7 +26,8 @@ PBUTTON_L = os.path.join(grafiki, 'grafiki\start_L.png')
 PBUTTON_D = os.path.join(grafiki, 'grafiki\start_D.png')
 QBUTTON_L = os.path.join(grafiki, 'grafiki\quit_L.png')
 QBUTTON_D = os.path.join(grafiki, 'grafiki\quit_D.png')
-map_dont_ask_png = os.path.join(grafiki, 'grafiki\PlanMapy.png')
+mapa_normalna = os.path.join(grafiki, 'grafiki\mapka.png')
+mapa_krawedzie = os.path.join(grafiki, 'grafiki\mapka1.png')
 m_font = os.path.join(grafiki, 'grafiki\PixelEmulator-xq08.ttf')
 BACKGROUND = pygame.image.load(os.path.join(grafiki, 'grafiki\\backgronud1200x800.png'))
 
@@ -174,9 +177,11 @@ def set_frame(player_frame, player_stand, whether_leave_frame):
 
 
 # mapa
-mapa = pygame.image.load(map_dont_ask_png)
-mapaX = 100
-mapaY = 100
+mapa = pygame.image.load(mapa_normalna)
+mapaX = -150
+mapaY = -300
+krawedzieX = -150
+krawedzieY = -300
 mapaX_step = 0
 mapaY_step = 0
 
@@ -245,18 +250,40 @@ def ruch_mapy():
         if keys[K_UP]:
             player_stand = False
             player_direction = directions.up
+            mapaY_step = 10
         if keys[K_DOWN]:
             player_stand = False
             player_direction = directions.down
+            mapaY_step = -10
         if keys[K_LEFT]:
             player_stand = False
             player_direction = directions.left
+            mapaX_step = 10
         if keys[K_RIGHT]:
             player_stand = False
             player_direction = directions.right
+            mapaX_step = -10
 
         whether_exit(event)
     player_frame, whether_leave_frame = set_frame(player_frame, player_stand, whether_leave_frame)
+
+granica = Image.open(mapa_krawedzie)
+kolor_granicy = granica.convert("RGB")
+
+def granica_mapy():
+    global mapaX, mapaY, mapaX_step, mapaY_step, krawedzieX, krawedzieY, WINDOW_WIDTH, WINDOW_HEIGHT, kolor_granicy
+    rgb_pixel_value = kolor_granicy.getpixel( (-mapaX + WINDOW_WIDTH/2 - mapaX_step, -mapaY + WINDOW_HEIGHT/2 - mapaY_step) ) # ma być (0, 0, 0)
+    print(rgb_pixel_value)
+    if rgb_pixel_value == (0, 0, 0):
+        mapaX_step = 0
+        mapaY_step = 0
+    else:
+        mapaX += mapaX_step
+        mapaY += mapaY_step
+        krawedzieX += mapaX_step
+        krawedzieY += mapaY_step
+
+
 
 FIGHT = False
 # PĘTLA GŁówna PROGRAMU
@@ -264,7 +291,7 @@ def game_loop():
     music_stop()
     music_play(BMUSIC, -1)
     while True:
-        global mapaX, mapaY, mapaX_step, mapaY_step, FIGHT
+        global mapaX, mapaY, mapaX_step, mapaY_step, FIGHT, krawedzieX, krawedzieY
         CLOCK.tick(FPS)
         if not FIGHT:
             SCREEN.fill(WHITE)
@@ -272,9 +299,7 @@ def game_loop():
             gracz_wyswietl()
             enemy()
             ruch_mapy()
-            mapaX += mapaX_step
-            mapaY += mapaY_step
-
+            granica_mapy()  
             # WALKA
         else:
             fight()
