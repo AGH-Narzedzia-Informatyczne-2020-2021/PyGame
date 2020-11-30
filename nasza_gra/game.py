@@ -27,7 +27,7 @@ PBUTTON_D = os.path.join(grafiki, 'grafiki\start_D.png')
 QBUTTON_L = os.path.join(grafiki, 'grafiki\quit_L.png')
 QBUTTON_D = os.path.join(grafiki, 'grafiki\quit_D.png')
 mapa_normalna = os.path.join(grafiki, 'grafiki\mapka.png')
-mapa_krawedzie = os.path.join(grafiki, 'grafiki\mapka1.png')
+mapa_krawedzie = os.path.join(grafiki, 'grafiki\mapka_krawedzie.png')
 m_font = os.path.join(grafiki, 'grafiki\PixelEmulator-xq08.ttf')
 BACKGROUND = pygame.image.load(os.path.join(grafiki, 'grafiki\\backgronud1200x800.png'))
 
@@ -273,7 +273,6 @@ kolor_granicy = granica.convert("RGB")
 def granica_mapy():
     global mapaX, mapaY, mapaX_step, mapaY_step, krawedzieX, krawedzieY, WINDOW_WIDTH, WINDOW_HEIGHT, kolor_granicy
     rgb_pixel_value = kolor_granicy.getpixel( (-mapaX + WINDOW_WIDTH/2 - mapaX_step, -mapaY + WINDOW_HEIGHT/2 - mapaY_step) ) # ma być (0, 0, 0)
-    print(rgb_pixel_value)
     if rgb_pixel_value == (0, 0, 0):
         mapaX_step = 0
         mapaY_step = 0
