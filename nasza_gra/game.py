@@ -4,9 +4,11 @@ from pygame.locals import *
 from enum import Enum
 import os
 
+
 from PIL import Image
 from PIL import *
 import PIL
+
 
 
 pygame.init()
@@ -32,6 +34,7 @@ mapa_normalna = os.path.join(grafiki, 'grafiki\mapka.png')
 mapa_krawedzie = os.path.join(grafiki, 'grafiki\mapka1.png')
 m_font = os.path.join(grafiki, 'grafiki\PixelEmulator-xq08.ttf')
 BACKGROUND = pygame.image.load(os.path.join(grafiki, 'grafiki\\backgronud1200x800.png'))
+
 
 # OKNO GRY
 SCREEN = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
@@ -95,7 +98,7 @@ def button(x, y, icolor, acolor, action=None):
                 quit()
             elif action == 'fight':
                 global FIGHT
-                FIGHT = True
+                FIGHT=True
     else:
         SCREEN.blit(pygame.image.load(icolor), [x, y])
 
@@ -194,29 +197,32 @@ def mapa_wyswietl():
 
 # przeciwnik
 ENEMY_ICON = pygame.image.load(ENEMY_ICON_png)
-ENEMY_POSITIONS = [[1000, 700], [2000, 100]]
 
+
+ENEMY_POSITIONS = [[1000, 700], [200, 200]]
 
 def enemy():
     for enemy in ENEMY_POSITIONS:
-        enemy[0] += mapaX_step
+        enemy[0]+=mapaX_step
         enemy[1] += mapaY_step
         SCREEN.blit(ENEMY_ICON, (enemy[0], enemy[1]))
         ENEMY_SOUND.set_volume(0.1)
-        if enemy[0] + 150 >= playerX >= enemy[0] - 50 and enemy[1] + 200 >= playerY >= enemy[1] - 50:
+        if enemy[0] + 250 >= playerX >= enemy[0] - 30 and enemy[1] + 300 >= playerY >= enemy[1] - 50:
             button(300, 700, QBUTTON_D, QBUTTON_L, 'fight')
             if not pygame.mixer.get_busy():  # jak nie ma if not to odtwarza kilka dźwięków jednocześnie
                 pygame.mixer.Sound.play(ENEMY_SOUND)
 
-
-time = 0
-
-
+time=0
 def fight():
-    pygame.mixer.music.pause()
-    SCREEN.blit(BACKGROUND, (0, 0))
-    SCREEN.blit(player_icon, (100, 500))
-    SCREEN.blit(ENEMY_ICON, (1000, 600))
+    #while True:
+      #  global time
+       # time+=1
+       # print("COS",time)
+
+        pygame.mixer.music.pause()
+        SCREEN.blit(BACKGROUND, (0, 0))
+        SCREEN.blit(player_icon, (100, 500))
+        SCREEN.blit(ENEMY_ICON, (1000, 600))
 
 
 # poruszanie "sie"
@@ -266,6 +272,7 @@ def ruch_mapy():
     player_frame, whether_leave_frame = set_frame(player_frame, player_stand, whether_leave_frame)
 
 
+
 granica = Image.open(mapa_krawedzie)
 kolor_granicy = granica.convert("RGB")
 
@@ -281,6 +288,9 @@ def granica_mapy():
         mapaY += mapaY_step
         krawedzieX += mapaX_step
         krawedzieY += mapaY_step
+
+
+FIGHT = False
 
 # PĘTLA GŁówna PROGRAMU
 FIGHT = False
@@ -307,3 +317,4 @@ def game_loop():
 
 m_menu()
 game_loop()
+
