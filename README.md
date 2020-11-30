@@ -58,3 +58,10 @@ Wszystko jest ok, nie ma czym się niepokoić
 * Kat165: https://kat165.github.io/
 * RETAJD: https://retajd.github.io
 * Sermi09: https://sermi09.github.io/
+
+# **Linki do forków**
+* https://github.com/tlisowicz/umap
+* https://github.com/Sermi09/Bringing-Old-Photos-Back-to-Life
+* https://github.com/julobrat/MODNet
+* https://github.com/BartoszCh/Tremblay2018_Code
+* https://github.com/Kat165/Bringing-Old-Photos-Back-to-Life
