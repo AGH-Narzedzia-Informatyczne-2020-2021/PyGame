@@ -7,7 +7,7 @@ import os
 
 pygame.init()
 pygame.mixer.init()
-FPS = 30
+FPS = 15
 
 # szerokość i wysokość okna gry
 WINDOW_WIDTH = 1200
@@ -19,7 +19,6 @@ muzyka = os.path.dirname(__file__)
 MAINTHEME = os.path.join(muzyka, 'muzyka\intro.mp3')
 BMUSIC = os.path.join(muzyka, 'muzyka\\background.mp3')
 ENEMY_SOUND = pygame.mixer.Sound('muzyka\\m_okay.mp3')
-player_test_png = os.path.join(grafiki, 'grafiki\player_test.png')
 ENEMY_ICON_png = os.path.join(grafiki, 'grafiki\orc.png')
 PBUTTON_L = os.path.join(grafiki, 'grafiki\start_L.png')
 PBUTTON_D = os.path.join(grafiki, 'grafiki\start_D.png')
@@ -143,7 +142,7 @@ frames_right = [pygame.image.load(os.path.join(grafiki, 'grafiki\player\player10
 player_frames_move = {directions.up: frames_up, directions.down: frames_down, directions.left: frames_left,
                       directions.right: frames_right}
 # gracz
-player_icon = pygame.image.load(player_test_png)
+player_icon = player_frames_stand[directions.down]
 playerX = WINDOW_WIDTH / 2
 playerY = WINDOW_HEIGHT / 2
 player_frame = 0
