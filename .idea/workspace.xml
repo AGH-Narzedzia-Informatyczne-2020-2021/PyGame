@@ -20,8 +20,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1d96ed87-9c48-4080-9c26-1e74dfd90f41" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/PyGame.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PyGame.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nasza_gra/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/nasza_gra/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nasza_gra/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nasza_gra/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nasza_gra/.idea/PyGame.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nasza_gra/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nasza_gra/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nasza_gra/.idea/nasza_gra.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nasza_gra/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nasza_gra/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nasza_gra/game.py" beforeDir="false" afterPath="$PROJECT_DIR$/nasza_gra/game.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +49,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="1kF0oRLM0IEKGIBR2vBgLGpAj73" />
+  <component name="ProjectId" id="1k1N5aEyclMEkWnOMzeM5XyvYLg" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -49,33 +60,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="F:\Repozytoria\PyGame" />
-    </key>
-  </component>
-  <component name="RunManager" selected="Python.main">
-    <configuration name="Menu — kopia" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="PyGame" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Menu — kopia.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python.game">
     <configuration name="Menu" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="PyGame" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -84,11 +69,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/venv" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Menu.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/venv/Menu.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -97,7 +82,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="game" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="PyGame" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -109,7 +94,28 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/nasza_gra/main.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/nasza_gra/game.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="PyGame" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -120,9 +126,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.main" />
+        <item itemvalue="Python.game" />
         <item itemvalue="Python.Menu" />
-        <item itemvalue="Python.Menu — kopia" />
       </list>
     </recent_temporary>
   </component>
@@ -130,10 +135,10 @@
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="1d96ed87-9c48-4080-9c26-1e74dfd90f41" name="Default Changelist" comment="" />
-      <created>1605281206521</created>
+      <created>1604863954268</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1605281206521</updated>
+      <updated>1604863954268</updated>
     </task>
     <servers />
   </component>
@@ -150,61 +155,40 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="92" y="92" width="1736" height="866" key="DiffContextDialog" timestamp="1605282949079">
+    <state x="740" y="280" key="FileChooserDialogImpl" timestamp="1606747906437">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="92" y="92" width="1736" height="866" key="DiffContextDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1605282949079" />
-    <state x="739" y="280" key="FileChooserDialogImpl" timestamp="1605870401609">
+    <state x="740" y="280" key="FileChooserDialogImpl/0.0.1920.1050@0.0.1920.1050" timestamp="1606747906437" />
+    <state width="1899" height="285" key="GridCell.Tab.0.bottom" timestamp="1604865327013">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="739" y="280" key="FileChooserDialogImpl/0.0.1920.1050@0.0.1920.1050" timestamp="1605870401609" />
-    <state width="1899" height="287" key="GridCell.Tab.0.bottom" timestamp="1605871316227">
+    <state width="1899" height="285" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1604865327013" />
+    <state width="1899" height="285" key="GridCell.Tab.0.center" timestamp="1604865327013">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1899" height="287" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1605871316227" />
-    <state width="1899" height="287" key="GridCell.Tab.0.center" timestamp="1605871316227">
+    <state width="1899" height="285" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1604865327013" />
+    <state width="1899" height="285" key="GridCell.Tab.0.left" timestamp="1604865327013">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1899" height="287" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1605871316227" />
-    <state width="1899" height="287" key="GridCell.Tab.0.left" timestamp="1605871316227">
+    <state width="1899" height="285" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1604865327013" />
+    <state width="1899" height="285" key="GridCell.Tab.0.right" timestamp="1604865327013">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1899" height="287" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1605871316227" />
-    <state width="1899" height="287" key="GridCell.Tab.0.right" timestamp="1605871316227">
+    <state width="1899" height="285" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1604865327013" />
+    <state x="461" y="170" key="SettingsEditor" timestamp="1606748154349">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1899" height="287" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1605871316227" />
-    <state width="1899" height="352" key="GridCell.Tab.1.bottom" timestamp="1605630099391">
-      <screen x="0" y="0" width="1920" height="1050" />
-    </state>
-    <state width="1899" height="352" key="GridCell.Tab.1.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1605630099391" />
-    <state width="1899" height="352" key="GridCell.Tab.1.center" timestamp="1605630099391">
-      <screen x="0" y="0" width="1920" height="1050" />
-    </state>
-    <state width="1899" height="352" key="GridCell.Tab.1.center/0.0.1920.1050@0.0.1920.1050" timestamp="1605630099391" />
-    <state width="1899" height="352" key="GridCell.Tab.1.left" timestamp="1605630099391">
-      <screen x="0" y="0" width="1920" height="1050" />
-    </state>
-    <state width="1899" height="352" key="GridCell.Tab.1.left/0.0.1920.1050@0.0.1920.1050" timestamp="1605630099391" />
-    <state width="1899" height="352" key="GridCell.Tab.1.right" timestamp="1605630099391">
-      <screen x="0" y="0" width="1920" height="1050" />
-    </state>
-    <state width="1899" height="352" key="GridCell.Tab.1.right/0.0.1920.1050@0.0.1920.1050" timestamp="1605630099391" />
-    <state x="461" y="170" key="SettingsEditor" timestamp="1605870411336">
-      <screen x="0" y="0" width="1920" height="1050" />
-    </state>
-    <state x="461" y="170" key="SettingsEditor/0.0.1920.1050@0.0.1920.1050" timestamp="1605870411336" />
-    <state x="552" y="258" key="Vcs.Push.Dialog.v2" timestamp="1605292450951">
-      <screen x="0" y="0" width="1920" height="1050" />
-    </state>
-    <state x="552" y="258" key="Vcs.Push.Dialog.v2/0.0.1920.1050@0.0.1920.1050" timestamp="1605292450951" />
-    <state x="777" y="439" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1605292458830">
-      <screen x="0" y="0" width="1920" height="1050" />
-    </state>
-    <state x="777" y="439" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1050@0.0.1920.1050" timestamp="1605292458830" />
-    <state x="0" y="0" width="1648" height="1029" key="dock-window-1" timestamp="1605462993636">
-      <screen x="0" y="0" width="1920" height="1050" />
-    </state>
-    <state x="0" y="0" width="1648" height="1029" key="dock-window-1/0.0.1920.1050@0.0.1920.1050" timestamp="1605462993636" />
+    <state x="461" y="170" key="SettingsEditor/0.0.1920.1050@0.0.1920.1050" timestamp="1606748154349" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/main.py</url>
+          <line>8</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

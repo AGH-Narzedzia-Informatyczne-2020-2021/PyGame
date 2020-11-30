@@ -3,12 +3,7 @@ import pygame.sysfont
 from pygame.locals import *
 from enum import Enum
 import os
-
-
 from PIL import Image
-from PIL import *
-import PIL
-
 
 
 pygame.init()
