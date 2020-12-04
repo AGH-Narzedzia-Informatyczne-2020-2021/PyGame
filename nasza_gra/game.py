@@ -26,6 +26,8 @@ PBUTTON_L = os.path.join(grafiki, 'grafiki\start_L.png')
 PBUTTON_D = os.path.join(grafiki, 'grafiki\start_D.png')
 QBUTTON_L = os.path.join(grafiki, 'grafiki\quit_L.png')
 QBUTTON_D = os.path.join(grafiki, 'grafiki\quit_D.png')
+FBUTTON_L= os.path.join(grafiki, 'grafiki\\fight_L.png')
+FBUTTON_D= os.path.join(grafiki, 'grafiki\\fight_D.png')
 mapa_normalna = os.path.join(grafiki, 'grafiki\mapka.png')
 mapa_krawedzie = os.path.join(grafiki, 'grafiki\mapka_krawedzie.png')
 m_font = os.path.join(grafiki, 'grafiki\PixelEmulator-xq08.ttf')
@@ -193,40 +195,50 @@ def mapa_wyswietl():
 
 # przeciwnik
 ENEMY_ICON = pygame.image.load(ENEMY_ICON_png)
-
-ENEMY_POSITIONS = [[700, 700], [1500, 260]]
+ENEMY_POSITIONS = [[700, 700, 1], [1500, 260, 1]]
+global ENEMY_NUM
 
 
 def enemy():
     for enemy in ENEMY_POSITIONS:
-        enemy[0] += mapaX_step
-        enemy[1] += mapaY_step
-        SCREEN.blit(ENEMY_ICON, (enemy[0], enemy[1]))
-        ENEMY_SOUND.set_volume(0.1)
-        if enemy[0] + 150 >= playerX >= enemy[0] - 30 and enemy[1] + 250 >= playerY >= enemy[1] - 50:
-            button(300, 700, QBUTTON_D, QBUTTON_L, 'fight')
-            if not pygame.mixer.get_busy():  # jak nie ma if not to odtwarza kilka dźwięków jednocześnie
-                pygame.mixer.Sound.play(ENEMY_SOUND)
+        if enemy[2]== 0:
+            continue
+        else:
+            enemy[0] += mapaX_step
+            enemy[1] += mapaY_step
+            SCREEN.blit(ENEMY_ICON, (enemy[0], enemy[1]))
+            ENEMY_SOUND.set_volume(0.1)
+
+            if enemy[0] + 150 >= playerX >= enemy[0] - 30 and enemy[1] + 250 >= playerY >= enemy[1] - 50:
+                button(300, 700, FBUTTON_D, FBUTTON_L, 'fight')
+                if not pygame.mixer.get_busy():  # jak nie ma if not to odtwarza kilka dźwięków jednocześnie
+                    pygame.mixer.Sound.play(ENEMY_SOUND)
 
 
-time = 0
 
-
+global ENEMY_HP
+ENEMY_HP = 100
 def fight():
     global FIGHT
     SCREEN.blit(BACKGROUND, (0, 0))
     SCREEN.blit(player_icon, (100, 500))
     SCREEN.blit(ENEMY_ICON, (900, 400))
     message_display("Click on enemy!")
+
+    #random.seed(10)
+
+    for event in pygame.event.get():
+        whether_exit(event)
     MOUSE = pygame.mouse.get_pos()
     CLICK = pygame.mouse.get_pressed()
-    random.seed(10)
-    ENEMY_HP= 100
-
-    if MOUSE[0] > 800 and 500 > MOUSE[1] > 700:
+    global ENEMY_HP
+    if MOUSE[0] > 800 and 700 > MOUSE[1] > 400:
         if CLICK[0] == 1:
-            ENEMY_HP-=(random.random()%10)
+            ENEMY_HP -= 5
+            print(ENEMY_HP)
             if ENEMY_HP<=0:
+                for enemy in ENEMY_POSITIONS:
+                    enemy[2]= 0
                 FIGHT = False
 
 
