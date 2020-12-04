@@ -4,7 +4,7 @@ from pygame.locals import *
 from enum import Enum
 import os
 from PIL import Image
-
+from random import *
 
 pygame.init()
 pygame.mixer.init()
@@ -18,6 +18,7 @@ WINDOW_HEIGHT = 800
 grafiki = os.path.dirname(__file__)
 muzyka = os.path.dirname(__file__)
 MAINTHEME = os.path.join(muzyka, 'muzyka\intro.mp3')
+Fight = os.path.join(muzyka, 'muzyka\Guardian Song.mp3')
 BMUSIC = os.path.join(muzyka, 'muzyka\\background.mp3')
 ENEMY_SOUND = pygame.mixer.Sound('muzyka\\m_okay.mp3')
 ENEMY_ICON_png = os.path.join(grafiki, 'grafiki\orc.png')
@@ -29,7 +30,6 @@ mapa_normalna = os.path.join(grafiki, 'grafiki\mapka.png')
 mapa_krawedzie = os.path.join(grafiki, 'grafiki\mapka_krawedzie.png')
 m_font = os.path.join(grafiki, 'grafiki\PixelEmulator-xq08.ttf')
 BACKGROUND = pygame.image.load(os.path.join(grafiki, 'grafiki\\backgronud1200x800.png'))
-
 
 # OKNO GRY
 SCREEN = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
@@ -93,7 +93,8 @@ def button(x, y, icolor, acolor, action=None):
                 quit()
             elif action == 'fight':
                 global FIGHT
-                FIGHT=True
+                FIGHT = True
+
     else:
         SCREEN.blit(pygame.image.load(icolor), [x, y])
 
@@ -193,31 +194,40 @@ def mapa_wyswietl():
 # przeciwnik
 ENEMY_ICON = pygame.image.load(ENEMY_ICON_png)
 
+ENEMY_POSITIONS = [[700, 700], [1500, 260]]
 
-ENEMY_POSITIONS = [[1000, 700], [200, 200]]
 
 def enemy():
     for enemy in ENEMY_POSITIONS:
-        enemy[0]+=mapaX_step
+        enemy[0] += mapaX_step
         enemy[1] += mapaY_step
         SCREEN.blit(ENEMY_ICON, (enemy[0], enemy[1]))
         ENEMY_SOUND.set_volume(0.1)
-        if enemy[0] + 250 >= playerX >= enemy[0] - 30 and enemy[1] + 300 >= playerY >= enemy[1] - 50:
+        if enemy[0] + 150 >= playerX >= enemy[0] - 30 and enemy[1] + 250 >= playerY >= enemy[1] - 50:
             button(300, 700, QBUTTON_D, QBUTTON_L, 'fight')
             if not pygame.mixer.get_busy():  # jak nie ma if not to odtwarza kilka dźwięków jednocześnie
                 pygame.mixer.Sound.play(ENEMY_SOUND)
 
-time=0
-def fight():
-    #while True:
-      #  global time
-       # time+=1
-       # print("COS",time)
 
-        pygame.mixer.music.pause()
-        SCREEN.blit(BACKGROUND, (0, 0))
-        SCREEN.blit(player_icon, (100, 500))
-        SCREEN.blit(ENEMY_ICON, (1000, 600))
+time = 0
+
+
+def fight():
+    global FIGHT
+    SCREEN.blit(BACKGROUND, (0, 0))
+    SCREEN.blit(player_icon, (100, 500))
+    SCREEN.blit(ENEMY_ICON, (900, 400))
+    message_display("Click on enemy!")
+    MOUSE = pygame.mouse.get_pos()
+    CLICK = pygame.mouse.get_pressed()
+    random.seed(10)
+    ENEMY_HP= 100
+
+    if MOUSE[0] > 800 and 500 > MOUSE[1] > 700:
+        if CLICK[0] == 1:
+            ENEMY_HP-=(random.random()%10)
+            if ENEMY_HP<=0:
+                FIGHT = False
 
 
 # poruszanie "sie"
@@ -267,14 +277,14 @@ def ruch_mapy():
     player_frame, whether_leave_frame = set_frame(player_frame, player_stand, whether_leave_frame)
 
 
-
 granica = Image.open(mapa_krawedzie)
 kolor_granicy = granica.convert("RGB")
 
+
 def granica_mapy():
     global mapaX, mapaY, mapaX_step, mapaY_step, krawedzieX, krawedzieY, WINDOW_WIDTH, WINDOW_HEIGHT, kolor_granicy
-    rgb_pixel_value = kolor_granicy.getpixel( (-mapaX + WINDOW_WIDTH/2 - mapaX_step, -mapaY + WINDOW_HEIGHT/2 - mapaY_step) ) # ma być (0, 0, 0)
-    print(rgb_pixel_value)
+    rgb_pixel_value = kolor_granicy.getpixel(
+        (-mapaX + WINDOW_WIDTH / 2 - mapaX_step, -mapaY + WINDOW_HEIGHT / 2 - mapaY_step))  # ma być (0, 0, 0)
     if rgb_pixel_value == (0, 0, 0):
         mapaX_step = 0
         mapaY_step = 0
@@ -285,10 +295,9 @@ def granica_mapy():
         krawedzieY += mapaY_step
 
 
-FIGHT = False
-
 # PĘTLA GŁówna PROGRAMU
 FIGHT = False
+
 
 def game_loop():
     music_stop()
@@ -302,9 +311,10 @@ def game_loop():
             gracz_wyswietl()
             enemy()
             ruch_mapy()
-            granica_mapy()  
+            granica_mapy()
             # WALKA
         else:
+            music_stop()
             fight()
 
         pygame.display.update()  # aktualizuje wszystkie parametry ekranu na bieżąco
@@ -312,4 +322,3 @@ def game_loop():
 
 m_menu()
 game_loop()
-
