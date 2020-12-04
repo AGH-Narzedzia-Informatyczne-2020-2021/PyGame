@@ -198,7 +198,6 @@ ENEMY_ICON = pygame.image.load(ENEMY_ICON_png)
 ENEMY_POSITIONS = [[700, 700, 1], [1500, 260, 1]]
 global ENEMY_NUM
 
-
 def enemy():
     for enemy in ENEMY_POSITIONS:
         if enemy[2]== 0:
@@ -210,6 +209,8 @@ def enemy():
             ENEMY_SOUND.set_volume(0.1)
 
             if enemy[0] + 150 >= playerX >= enemy[0] - 30 and enemy[1] + 250 >= playerY >= enemy[1] - 50:
+                global ENEMY_NUM # tuuuuu
+                ENEMY_NUM = enemy
                 button(300, 700, FBUTTON_D, FBUTTON_L, 'fight')
                 if not pygame.mixer.get_busy():  # jak nie ma if not to odtwarza kilka dźwięków jednocześnie
                     pygame.mixer.Sound.play(ENEMY_SOUND)
@@ -231,14 +232,15 @@ def fight():
         whether_exit(event)
     MOUSE = pygame.mouse.get_pos()
     CLICK = pygame.mouse.get_pressed()
-    global ENEMY_HP
+    global ENEMY_HP, ENEMY_NUM # tuuuu
     if MOUSE[0] > 800 and 700 > MOUSE[1] > 400:
         if CLICK[0] == 1:
             ENEMY_HP -= 5
             print(ENEMY_HP)
             if ENEMY_HP<=0:
-                for enemy in ENEMY_POSITIONS:
-                    enemy[2]= 0
+                ENEMU_NUM[2] = 0 # tuuu
+                #for enemy in ENEMY_POSITIONS:
+                #    enemy[2]= 0
                 FIGHT = False
 
 
