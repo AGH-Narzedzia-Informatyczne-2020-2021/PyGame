@@ -9,7 +9,7 @@ import PIL
 
 pygame.init()
 pygame.mixer.init()
-FPS = 15
+FPS = 60
 
 # szerokość i wysokość okna gry
 WINDOW_WIDTH = 1200
@@ -26,8 +26,8 @@ PBUTTON_L = os.path.join(grafiki, 'grafiki\start_L.png')
 PBUTTON_D = os.path.join(grafiki, 'grafiki\start_D.png')
 QBUTTON_L = os.path.join(grafiki, 'grafiki\quit_L.png')
 QBUTTON_D = os.path.join(grafiki, 'grafiki\quit_D.png')
-mapa_normalna = os.path.join(grafiki, 'grafiki\mapka.png')
-mapa_krawedzie = os.path.join(grafiki, 'grafiki\mapka_krawedzie.png')
+mapa_normalna = os.path.join(grafiki, 'grafiki\mapka1.png')
+mapa_krawedzie = os.path.join(grafiki, 'grafiki\mapka1_krawedzie.png')
 m_font = os.path.join(grafiki, 'grafiki\PixelEmulator-xq08.ttf')
 BACKGROUND = pygame.image.load(os.path.join(grafiki, 'grafiki\\backgronud1200x800.png'))
 
@@ -178,9 +178,9 @@ def set_frame(player_frame, player_stand, whether_leave_frame):
 
 # mapa
 mapa = pygame.image.load(mapa_normalna)
-mapaX = -150
+mapaX = -350
 mapaY = -300
-krawedzieX = -150
+krawedzieX = -350
 krawedzieY = -300
 mapaX_step = 0
 mapaY_step = 0
@@ -272,7 +272,7 @@ kolor_granicy = granica.convert("RGB")
 
 def granica_mapy():
     global mapaX, mapaY, mapaX_step, mapaY_step, krawedzieX, krawedzieY, WINDOW_WIDTH, WINDOW_HEIGHT, kolor_granicy
-    rgb_pixel_value = kolor_granicy.getpixel( (-mapaX + WINDOW_WIDTH/2 - mapaX_step, -mapaY + WINDOW_HEIGHT/2 - mapaY_step) ) # ma być (0, 0, 0)
+    rgb_pixel_value = kolor_granicy.getpixel( (-mapaX + WINDOW_WIDTH/2 - mapaX_step + 16, -mapaY + WINDOW_HEIGHT/2 - mapaY_step + 20) ) # ma być (0, 0, 0)
     if rgb_pixel_value == (0, 0, 0):
         mapaX_step = 0
         mapaY_step = 0
