@@ -20,9 +20,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1d96ed87-9c48-4080-9c26-1e74dfd90f41" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nasza_gra/grafiki/mapa.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nasza_gra/grafiki/mapka1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nasza_gra/grafiki/mapka1_krawedzie.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nasza_gra/game.py" beforeDir="false" afterPath="$PROJECT_DIR$/nasza_gra/game.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nasza_gra/muzyka/m_okay.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nasza_gra/grafiki/mapka_krawedzie.png" beforeDir="false" afterPath="$PROJECT_DIR$/nasza_gra/grafiki/mapa_krawedzie.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
