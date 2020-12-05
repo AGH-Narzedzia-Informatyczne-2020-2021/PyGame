@@ -20,7 +20,8 @@ muzyka = os.path.dirname(__file__)
 MAINTHEME = os.path.join(muzyka, 'muzyka\intro.mp3')
 Fight = os.path.join(muzyka, 'muzyka\Guardian Song.mp3')
 BMUSIC = os.path.join(muzyka, 'muzyka\\background.mp3')
-ENEMY_SOUND = pygame.mixer.Sound('muzyka\\m_okay.mp3')
+FMUSIC= os.path.join(muzyka, 'muzyka\\Guardian Song.mp3')
+ENEMY_SOUND = pygame.mixer.Sound('muzyka\\orc_sound.mp3')
 ENEMY_ICON_png = os.path.join(grafiki, 'grafiki\orc.png')
 PBUTTON_L = os.path.join(grafiki, 'grafiki\start_L.png')
 PBUTTON_D = os.path.join(grafiki, 'grafiki\start_D.png')
@@ -53,10 +54,10 @@ def text_objects(text, font, color):
     return textSurface, textSurface.get_rect()
 
 
-def message_display(text):  # wyświetlanie wiadomości w grze
+def message_display(text, x ,y):  # wyświetlanie wiadomości w grze
     largeText = pygame.font.SysFont(text, 115)
     TextSurf, TextRect = text_objects(text, largeText, BLACK)
-    TextRect.center = ((WINDOW_WIDTH / 2), (WINDOW_HEIGHT / 2))
+    TextRect.center = ((x), (y))
     SCREEN.blit(TextSurf, TextRect)
     pygame.display.update()
 
@@ -208,10 +209,10 @@ def enemy():
             SCREEN.blit(ENEMY_ICON, (enemy[0], enemy[1]))
             ENEMY_SOUND.set_volume(0.1)
 
-            if enemy[0] + 150 >= playerX >= enemy[0] - 30 and enemy[1] + 250 >= playerY >= enemy[1] - 50:
+            if enemy[0] + 150 >= playerX >= enemy[0] - 30 and enemy[1] + 150 >= playerY >= enemy[1] - 50:
                 global ENEMY_NUM
                 ENEMY_NUM = enemy
-                button(300, 700, FBUTTON_D, FBUTTON_L, 'fight')
+                button(400, 650, FBUTTON_D, FBUTTON_L, 'fight')
                 if not pygame.mixer.get_busy():  # jak nie ma if not to odtwarza kilka dźwięków jednocześnie
                     pygame.mixer.Sound.play(ENEMY_SOUND)
 
@@ -225,7 +226,7 @@ def fight():
     SCREEN.blit(BACKGROUND, (0, 0))
     SCREEN.blit(player_icon, (100, 500))
     SCREEN.blit(ENEMY_ICON, (900, 400))
-    message_display("Click on enemy!")
+    message_display("Click on enemy!", 600, 300)
 
     #random.seed(10)
 
