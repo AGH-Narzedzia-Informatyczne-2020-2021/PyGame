@@ -4,12 +4,11 @@ from pygame.locals import *
 from enum import Enum
 import os
 from PIL import Image
-from PIL import *
-import PIL
+from random import *
 
 pygame.init()
 pygame.mixer.init()
-FPS = 60
+FPS = 30
 
 # szerokość i wysokość okna gry
 WINDOW_WIDTH = 1200
@@ -19,18 +18,21 @@ WINDOW_HEIGHT = 800
 grafiki = os.path.dirname(__file__)
 muzyka = os.path.dirname(__file__)
 MAINTHEME = os.path.join(muzyka, 'muzyka\intro.mp3')
+Fight = os.path.join(muzyka, 'muzyka\Guardian Song.mp3')
 BMUSIC = os.path.join(muzyka, 'muzyka\\background.mp3')
-ENEMY_SOUND = pygame.mixer.Sound('muzyka\\m_okay.mp3')
+FMUSIC = os.path.join(muzyka, 'muzyka\\Guardian Song.mp3')
+ENEMY_SOUND = pygame.mixer.Sound('muzyka\\orc_sound.mp3')
 ENEMY_ICON_png = os.path.join(grafiki, 'grafiki\orc.png')
 PBUTTON_L = os.path.join(grafiki, 'grafiki\start_L.png')
 PBUTTON_D = os.path.join(grafiki, 'grafiki\start_D.png')
 QBUTTON_L = os.path.join(grafiki, 'grafiki\quit_L.png')
 QBUTTON_D = os.path.join(grafiki, 'grafiki\quit_D.png')
+FBUTTON_L = os.path.join(grafiki, 'grafiki\\fight_L.png')
+FBUTTON_D = os.path.join(grafiki, 'grafiki\\fight_D.png')
 mapa_normalna = os.path.join(grafiki, 'grafiki\mapka1.png')
 mapa_krawedzie = os.path.join(grafiki, 'grafiki\mapka1_krawedzie.png')
 m_font = os.path.join(grafiki, 'grafiki\PixelEmulator-xq08.ttf')
 BACKGROUND = pygame.image.load(os.path.join(grafiki, 'grafiki\\backgronud1200x800.png'))
-
 
 # OKNO GRY
 SCREEN = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
@@ -52,10 +54,10 @@ def text_objects(text, font, color):
     return textSurface, textSurface.get_rect()
 
 
-def message_display(text):  # wyświetlanie wiadomości w grze
+def message_display(text, x, y):  # wyświetlanie wiadomości w grze
     largeText = pygame.font.SysFont(text, 115)
     TextSurf, TextRect = text_objects(text, largeText, BLACK)
-    TextRect.center = ((WINDOW_WIDTH / 2), (WINDOW_HEIGHT / 2))
+    TextRect.center = ((x), (y))
     SCREEN.blit(TextSurf, TextRect)
     pygame.display.update()
 
@@ -94,7 +96,8 @@ def button(x, y, icolor, acolor, action=None):
                 quit()
             elif action == 'fight':
                 global FIGHT
-                FIGHT=True
+                FIGHT = True
+
     else:
         SCREEN.blit(pygame.image.load(icolor), [x, y])
 
@@ -193,32 +196,53 @@ def mapa_wyswietl():
 
 # przeciwnik
 ENEMY_ICON = pygame.image.load(ENEMY_ICON_png)
+ENEMY_POSITIONS = [[700, 700, 100], [1500, 260, 100]]
+global ENEMY_NUM
 
-
-ENEMY_POSITIONS = [[1000, 700], [200, 200]]
 
 def enemy():
     for enemy in ENEMY_POSITIONS:
-        enemy[0]+=mapaX_step
-        enemy[1] += mapaY_step
-        SCREEN.blit(ENEMY_ICON, (enemy[0], enemy[1]))
-        ENEMY_SOUND.set_volume(0.1)
-        if enemy[0] + 250 >= playerX >= enemy[0] - 30 and enemy[1] + 300 >= playerY >= enemy[1] - 50:
-            button(300, 700, QBUTTON_D, QBUTTON_L, 'fight')
-            if not pygame.mixer.get_busy():  # jak nie ma if not to odtwarza kilka dźwięków jednocześnie
-                pygame.mixer.Sound.play(ENEMY_SOUND)
+        if enemy[2] == 0:
+            continue
+        else:
+            enemy[0] += mapaX_step
+            enemy[1] += mapaY_step
+            SCREEN.blit(ENEMY_ICON, (enemy[0], enemy[1]))
+            ENEMY_SOUND.set_volume(0.1)
 
-time=0
+            if enemy[0] + 150 >= playerX >= enemy[0] - 30 and enemy[1] + 150 >= playerY >= enemy[1] - 50:
+                global ENEMY_NUM
+                ENEMY_NUM = enemy
+                button(400, 650, FBUTTON_D, FBUTTON_L, 'fight')
+                if not pygame.mixer.get_busy():  # jak nie ma if not to odtwarza kilka dźwięków jednocześnie
+                    pygame.mixer.Sound.play(ENEMY_SOUND)
+
+
+global ENEMY_HP
+
+
 def fight():
-    #while True:
-      #  global time
-       # time+=1
-       # print("COS",time)
+    global FIGHT
 
-        pygame.mixer.music.pause()
-        SCREEN.blit(BACKGROUND, (0, 0))
-        SCREEN.blit(player_icon, (100, 500))
-        SCREEN.blit(ENEMY_ICON, (1000, 600))
+    SCREEN.blit(BACKGROUND, (0, 0))
+    SCREEN.blit(player_icon, (100, 500))
+    SCREEN.blit(ENEMY_ICON, (900, 400))
+    message_display("Click on enemy!", 600, 300)
+
+    # random.seed(10)
+
+    for event in pygame.event.get():
+        whether_exit(event)
+    MOUSE = pygame.mouse.get_pos()
+    CLICK = pygame.mouse.get_pressed()
+    global ENEMY_NUM
+    if MOUSE[0] > 800 and 700 > MOUSE[1] > 400:
+        if CLICK[0] == 1:
+            ENEMY_NUM[2] -= 5
+            print(ENEMY_NUM[2])
+            if ENEMY_NUM[2] <= 0:
+                FIGHT = False
+            music_play(BMUSIC, -1)
 
 
 # poruszanie "sie"
@@ -267,12 +291,17 @@ def ruch_mapy():
         whether_exit(event)
     player_frame, whether_leave_frame = set_frame(player_frame, player_stand, whether_leave_frame)
 
+
 granica = Image.open(mapa_krawedzie)
 kolor_granicy = granica.convert("RGB")
 
+
 def granica_mapy():
     global mapaX, mapaY, mapaX_step, mapaY_step, krawedzieX, krawedzieY, WINDOW_WIDTH, WINDOW_HEIGHT, kolor_granicy
-    rgb_pixel_value = kolor_granicy.getpixel( (-mapaX + WINDOW_WIDTH/2 - mapaX_step + 16, -mapaY + WINDOW_HEIGHT/2 - mapaY_step + 20) ) # ma być (0, 0, 0)
+
+    rgb_pixel_value = kolor_granicy.getpixel(
+        (-mapaX + WINDOW_WIDTH / 2 - mapaX_step + 16, -mapaY + WINDOW_HEIGHT / 2 - mapaY_step + 20))  # ma być (0, 0, 0)
+
     if rgb_pixel_value == (0, 0, 0):
         mapaX_step = 0
         mapaY_step = 0
@@ -283,9 +312,10 @@ def granica_mapy():
         krawedzieY += mapaY_step
 
 
-
-FIGHT = False
 # PĘTLA GŁówna PROGRAMU
+FIGHT = False
+
+
 def game_loop():
     music_stop()
     music_play(BMUSIC, -1)
@@ -298,9 +328,10 @@ def game_loop():
             gracz_wyswietl()
             enemy()
             ruch_mapy()
-            granica_mapy()  
+            granica_mapy()
             # WALKA
         else:
+            music_stop()
             fight()
 
         pygame.display.update()  # aktualizuje wszystkie parametry ekranu na bieżąco
@@ -308,4 +339,3 @@ def game_loop():
 
 m_menu()
 game_loop()
-
