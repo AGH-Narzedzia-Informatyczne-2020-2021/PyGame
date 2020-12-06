@@ -4,7 +4,7 @@ from pygame.locals import *
 from enum import Enum
 import os
 from PIL import Image
-from random import *
+
 
 pygame.init()
 pygame.mixer.init()
@@ -196,7 +196,7 @@ def mapa_wyswietl():
 
 # przeciwnik
 ENEMY_ICON = pygame.image.load(ENEMY_ICON_png)
-ENEMY_POSITIONS = [[700, 700, 100], [1500, 260, 100]]
+ENEMY_POSITIONS = [[670, 900, 100], [1650, 260, 100], [2200, 960,100]]
 global ENEMY_NUM
 
 
@@ -330,6 +330,7 @@ def game_loop():
             ruch_mapy()
             granica_mapy()
             # WALKA
+            print(mapaX, mapaY)
         else:
             music_stop()
             fight()
