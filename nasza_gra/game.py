@@ -25,7 +25,6 @@ FIGHT_MUSIC = os.path.join(muzyka, 'muzyka\\Dragon_Castle.mp3')
 ENEMY_SOUND = pygame.mixer.Sound('muzyka\\orc_sound.mp3')
 FIGHT_SOUND = pygame.mixer.Sound('muzyka\\cios.wav')
 ENEMY_ICON_png = os.path.join(grafiki, 'grafiki\orc.png')
-ENEMY2_ICON_png= os.path.join(grafiki, 'grafiki\slime1.png')
 PBUTTON_L = os.path.join(grafiki, 'grafiki\start_L.png')
 PBUTTON_D = os.path.join(grafiki, 'grafiki\start_D.png')
 QBUTTON_L = os.path.join(grafiki, 'grafiki\quit_L.png')
@@ -60,7 +59,7 @@ def text_objects(text, font, color):
 def message_display(text, x, y):  # wyświetlanie wiadomości w grze
     largeText = pygame.font.SysFont(text, 115)
     TextSurf, TextRect = text_objects(text, largeText, BLACK)
-    TextRect.center = (x, y)
+    TextRect.center = ((x), (y))
     SCREEN.blit(TextSurf, TextRect)
     pygame.display.update()
 
@@ -221,28 +220,7 @@ def enemy():
                     pygame.mixer.Sound.play(ENEMY_SOUND)
 
 
-ENEMY_POSITIONS2 = [[800, 400, 100], [1200, 260, 100]]
-ENEMY2_ICON= pygame.image.load(ENEMY2_ICON_png)
-global ENEMY2_NUM
-
-def enemy2():
-    for enemy in ENEMY_POSITIONS2:
-        if enemy[2] == 0:
-            continue
-        else:
-            enemy[0] += mapaX_step
-            enemy[1] += mapaY_step
-            SCREEN.blit(ENEMY2_ICON, (enemy[0], enemy[1]))
-            #ENEMY_SOUND.set_volume(0.1)
-
-            if enemy[0] + 150 >= playerX >= enemy[0] - 30 and enemy[1] + 150 >= playerY >= enemy[1] - 50:
-                global ENEMY_NUM
-                ENEMY_NUM = enemy
-                button(400, 650, FBUTTON_D, FBUTTON_L, 'fight')
-             #   if not pygame.mixer.get_busy():  # jak nie ma if not to odtwarza kilka dźwięków jednocześnie
-                  #  pygame.mixer.Sound.play(ENEMY_SOUND)
-
-
+global ENEMY_HP
 
 
 def fight():
@@ -259,11 +237,10 @@ def fight():
         whether_exit(event)
     MOUSE = pygame.mouse.get_pos()
     CLICK = pygame.mouse.get_pressed()
-    global ENEMY_NUM, ENEMY2_NUM
+    global ENEMY_NUM
     if MOUSE[0] > 800 and 700 > MOUSE[1] > 400:
         if CLICK[0] == 1:
             ENEMY_NUM[2] -= 5
-            ENEMY2_NUM[2] -= 5
             print(ENEMY_NUM[2])
             if not pygame.mixer.get_busy():
                 pygame.mixer.Sound.play(FIGHT_SOUND)
@@ -354,11 +331,10 @@ def game_loop():
             mapa_wyswietl()
             gracz_wyswietl()
             enemy()
-            enemy2()
             ruch_mapy()
             granica_mapy()
             # WALKA
-            #print(mapaX, mapaY)
+            print(mapaX, mapaY)
         else:
             music_stop()
             fight()
