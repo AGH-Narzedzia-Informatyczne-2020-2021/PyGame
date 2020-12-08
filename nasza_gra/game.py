@@ -21,7 +21,9 @@ MAINTHEME = os.path.join(muzyka, 'muzyka\intro.mp3')
 Fight = os.path.join(muzyka, 'muzyka\Guardian Song.mp3')
 BMUSIC = os.path.join(muzyka, 'muzyka\\background.mp3')
 FMUSIC = os.path.join(muzyka, 'muzyka\\Guardian Song.mp3')
+FIGHT_MUSIC = os.path.join(muzyka, 'muzyka\\Dragon_Castle.mp3')
 ENEMY_SOUND = pygame.mixer.Sound('muzyka\\orc_sound.mp3')
+FIGHT_SOUND = pygame.mixer.Sound('muzyka\\cios.wav')
 ENEMY_ICON_png = os.path.join(grafiki, 'grafiki\orc.png')
 ENEMY2_ICON_png= os.path.join(grafiki, 'grafiki\slime1.png')
 PBUTTON_L = os.path.join(grafiki, 'grafiki\start_L.png')
@@ -263,6 +265,8 @@ def fight():
             ENEMY_NUM[2] -= 5
             ENEMY2_NUM[2] -= 5
             print(ENEMY_NUM[2])
+            if not pygame.mixer.get_busy():
+                pygame.mixer.Sound.play(FIGHT_SOUND)
             if ENEMY_NUM[2] <= 0:
                 FIGHT = False
             music_play(BMUSIC, -1)
