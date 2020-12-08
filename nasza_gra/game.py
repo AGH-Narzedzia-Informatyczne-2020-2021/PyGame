@@ -8,13 +8,13 @@ from random import *
 
 pygame.init()
 pygame.mixer.init()
-FPS = 30
+FPS = 15
 
 # szerokość i wysokość okna gry
 WINDOW_WIDTH = 1200
 WINDOW_HEIGHT = 800
 
-# robienie sciezek wzglednych
+# robienie sciezek wzglednych i czasami ladowanie
 grafiki = os.path.dirname(__file__)
 muzyka = os.path.dirname(__file__)
 MAINTHEME = os.path.join(muzyka, 'muzyka\intro.mp3')
@@ -31,10 +31,11 @@ QBUTTON_L = os.path.join(grafiki, 'grafiki\quit_L.png')
 QBUTTON_D = os.path.join(grafiki, 'grafiki\quit_D.png')
 FBUTTON_L = os.path.join(grafiki, 'grafiki\\fight_L.png')
 FBUTTON_D = os.path.join(grafiki, 'grafiki\\fight_D.png')
-mapa_normalna = os.path.join(grafiki, 'grafiki\mapka1.png')
-mapa_krawedzie = os.path.join(grafiki, 'grafiki\mapka1_krawedzie.png')
-m_font = os.path.join(grafiki, 'grafiki\PixelEmulator-xq08.ttf')
+MAPA_NORMALNA = os.path.join(grafiki, 'grafiki\mapka1.png')
+MAPA_KRAWEDZIE = os.path.join(grafiki, 'grafiki\mapka1_krawedzie.png')
+M_FONT = os.path.join(grafiki, 'grafiki\PixelEmulator-xq08.ttf')
 BACKGROUND = pygame.image.load(os.path.join(grafiki, 'grafiki\\backgronud1200x800.png'))
+RAMKA_DIALOGU =  pygame.image.load(os.path.join(grafiki, 'grafiki\\ramka_dialogu.png'))
 
 # OKNO GRY
 SCREEN = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
@@ -56,8 +57,8 @@ def text_objects(text, font, color):
     return textSurface, textSurface.get_rect()
 
 
-def message_display(text, x, y):  # wyświetlanie wiadomości w grze
-    largeText = pygame.font.SysFont(text, 115)
+def message_display(text, x, y, rozmiar = 115):  # wyświetlanie wiadomości w grze
+    largeText = pygame.font.SysFont(text, rozmiar)
     TextSurf, TextRect = text_objects(text, largeText, BLACK)
     TextRect.center = ((x), (y))
     SCREEN.blit(TextSurf, TextRect)
@@ -99,7 +100,9 @@ def button(x, y, icolor, acolor, action=None):
             elif action == 'fight':
                 global FIGHT
                 FIGHT = True
-
+            elif action == 'dialog':
+                global NPC
+                NPC = True
     else:
         SCREEN.blit(pygame.image.load(icolor), [x, y])
 
@@ -113,7 +116,7 @@ def m_menu():
             whether_exit(event)
 
         SCREEN.blit(BACKGROUND, [0, 0])  # kolor okna gry
-        largeText = pygame.font.Font(m_font, 80)
+        largeText = pygame.font.Font(M_FONT, 80)
         TextSurf, TextRect = text_objects("Medieval Adventure", largeText, BLACK)  # zmienić nazwę jak już wymyślimy
         TextRect.center = ((WINDOW_WIDTH / 2), (WINDOW_HEIGHT - 550))
         SCREEN.blit(TextSurf, TextRect)
@@ -182,7 +185,7 @@ def set_frame(player_frame, player_stand, whether_leave_frame):
 
 
 # mapa
-mapa = pygame.image.load(mapa_normalna)
+mapa = pygame.image.load(MAPA_NORMALNA)
 mapaX = -350
 mapaY = -300
 krawedzieX = -350
@@ -198,7 +201,7 @@ def mapa_wyswietl():
 
 # przeciwnik
 ENEMY_ICON = pygame.image.load(ENEMY_ICON_png)
-ENEMY_POSITIONS = [[700, 700, 100], [1500, 260, 100]]
+ENEMY_POSITIONS = [[900, 700, 100], [1700, 300, 100]] # x,y,hp
 global ENEMY_NUM
 
 
@@ -248,6 +251,45 @@ def fight():
                 FIGHT = False
             music_play(BMUSIC, -1)
 
+NPC_1_DIALOG = [
+'czesc, ty jestes ten nowy?',
+'wiem, nie jestesmy w szkole,\
+ ale niby co mialem  powiedziec?']
+
+ # 0 = x, 1 = y, 2 = ikonka, 3 = ktory dialog, 4 = lista tekstow
+NPC_POSITIONS = [   [650, 350, pygame.image.load(os.path.join(grafiki, 'grafiki\slime1.png')), int(0), NPC_1_DIALOG],
+                    [1600, 500, pygame.image.load(os.path.join(grafiki, 'grafiki\slime1.png')), int(0), NPC_1_DIALOG]   ] 
+
+NPC_NUM = 0
+def npc():
+    global NPC_NUM
+    for npc in NPC_POSITIONS:
+        npc[0] += mapaX_step
+        npc[1] += mapaY_step
+        SCREEN.blit(npc[2], (npc[0], npc[1]))
+
+        if npc[0] + 50 >= playerX >= npc[0] - 50 and npc[1] + 50 >= playerY >= npc[1] - 50:
+            NPC_NUM = npc
+            button(400, 650, FBUTTON_D, FBUTTON_L, 'dialog')
+
+def dialog():
+    global NPC_NUM
+    SCREEN.blit(RAMKA_DIALOGU, (0, 0))
+    #SCREEN.blit( player_icon, (300, 500))
+    #SCREEN.blit(NPC_NUM[2], (900, 400))
+    message_display(NPC_NUM[4][NPC_NUM[3]], 600, 200, 50)
+    
+    MOUSE = pygame.mouse.get_pos()
+    CLICK = pygame.mouse.get_pressed()
+    for event in pygame.event.get():
+        whether_exit(event)
+    if 700 > MOUSE[0] > 500 and 500 > MOUSE[1] > 300: # wspolrzedne niewidzialnego przycisku do przewijania tekstu
+        if CLICK[0] == 1:
+            NPC_NUM[3] += 1
+            print("nacisnales na przycisk?")
+            '''if NPC[3] <= 0:
+                print("jakis warunek")
+                NPC = False'''
 
 # poruszanie "sie"
 def ruch_mapy():
@@ -296,7 +338,7 @@ def ruch_mapy():
     player_frame, whether_leave_frame = set_frame(player_frame, player_stand, whether_leave_frame)
 
 
-granica = Image.open(mapa_krawedzie)
+granica = Image.open(MAPA_KRAWEDZIE)
 kolor_granicy = granica.convert("RGB")
 
 
@@ -318,22 +360,24 @@ def granica_mapy():
 
 # PĘTLA GŁówna PROGRAMU
 FIGHT = False
-
+NPC = False
 
 def game_loop():
     music_stop()
     music_play(BMUSIC, -1)
     while True:
-        global mapaX, mapaY, mapaX_step, mapaY_step, FIGHT, krawedzieX, krawedzieY
+        global mapaX, mapaY, mapaX_step, mapaY_step, FIGHT, krawedzieX, krawedzieY, NPC
         CLOCK.tick(FPS)
         if not FIGHT:
             SCREEN.fill(WHITE)
             mapa_wyswietl()
             gracz_wyswietl()
             enemy()
+            npc()
             ruch_mapy()
             granica_mapy()
-            # WALKA
+            if NPC:
+                dialog()
         else:
             music_stop()
             fight()
