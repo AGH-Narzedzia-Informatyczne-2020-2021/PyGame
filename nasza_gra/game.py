@@ -50,6 +50,10 @@ BLACK = (0, 0, 0)
 BRIGHT_BLACK = (138, 138, 138)
 WHITE = (255, 255, 255)
 
+# JAKIES ZMIENNE DO IFOW
+FIGHT = False
+NPC = False
+FLAG_MOUSE = True
 
 # FUNCKJE
 
@@ -108,6 +112,7 @@ def button(x, y, icolor, acolor, action=None):
                 global NPC_NUM, FLAG_MOUSE
                 if FLAG_MOUSE:
                     NPC_NUM[3] += 1
+                    FLAG_MOUSE = False
     else:
         SCREEN.blit(pygame.image.load(icolor), [x, y])
 
@@ -212,7 +217,7 @@ ENEMY_NUM = 0
 
 def enemy():
     for enemy in ENEMY_POSITIONS:
-        if enemy[2] == 0:
+        if enemy[2] < 0:    # jesli hp mniejsze od 0
             continue
         else:
             enemy[0] += mapaX_step
@@ -227,13 +232,9 @@ def enemy():
                 if not pygame.mixer.get_busy():  # jak nie ma if not to odtwarza kilka dźwięków jednocześnie
                     pygame.mixer.Sound.play(ENEMY_SOUND)
 
-
-global ENEMY_HP
-
-
 def fight():
-    global FIGHT, ENEMY_NUM
-    while ENEMY_NUM[2] > 0:
+    global FIGHT, ENEMY_NUM, FLAG_MOUSE
+    while FIGHT:
         SCREEN.blit(BACKGROUND, (0, 0))
         SCREEN.blit(player_icon, (100, 500))
         SCREEN.blit(ENEMY_ICON, (900, 400))
@@ -246,6 +247,16 @@ def fight():
             whether_exit(event)
         MOUSE = pygame.mouse.get_pos()
         CLICK = pygame.mouse.get_pressed()
+        if CLICK[0] == 1 and FLAG_MOUSE == True:
+            CLICK = (1, 0, 0)
+            FLAG_MOUSE = False
+        
+        elif CLICK[0] == 1 and FLAG_MOUSE == False:
+            CLICK = (0, 0, 0)
+
+        elif CLICK[0] == 0:
+            FLAG_MOUSE = True
+
         if MOUSE[0] > 800 and 700 > MOUSE[1] > 400:
             if CLICK[0] == 1:
                 dmg = randint(6, 17)
@@ -254,7 +265,7 @@ def fight():
                 message_display(wiadomosc, 100, 150, 40)
                 if not pygame.mixer.get_busy():
                     pygame.mixer.Sound.play(FIGHT_SOUND)
-                if ENEMY_NUM[2] <= 0:   # jesli hp < 0
+                if ENEMY_NUM[2] <= 0:   # jesli hp <= 0
                     FIGHT = False
                 music_play(BMUSIC, -1)
 
@@ -285,9 +296,6 @@ def npc():
         if npc[0] + 50 >= playerX >= npc[0] - 50 and npc[1] + 50 >= playerY >= npc[1] - 50:
             NPC_NUM = npc
             button(400, 650, FBUTTON_D, FBUTTON_L, 'dialog')
-
-FLAG_MOUSE = True
-
 
 def dialog():
     global NPC, NPC_NUM, FLAG_MOUSE
@@ -373,9 +381,6 @@ def granica_mapy():
 
 
 # PĘTLA GŁówna PROGRAMU
-FIGHT = False
-NPC = False
-
 def game_loop():
     music_stop()
     music_play(BMUSIC, -1)
