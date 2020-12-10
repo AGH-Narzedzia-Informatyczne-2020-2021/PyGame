@@ -282,8 +282,8 @@ NPC_1_DIALOG = [
  ]
 
  # 0 = x, 1 = y, 2 = ikonka, 3 = ktory dialog, 4 = lista tekstow
-NPC_POSITIONS = [   [1000, 350, pygame.image.load(os.path.join(grafiki, 'grafiki\slime1.png')), int(0), NPC_1_DIALOG],
-                    [1600, 500, pygame.image.load(os.path.join(grafiki, 'grafiki\slime1.png')), int(0), NPC_1_DIALOG]   ] 
+NPC_POSITIONS = [   [1000, 350, pygame.image.load(os.path.join(grafiki, 'grafiki\\npc1.png')), int(0), NPC_1_DIALOG],
+                    [1600, 500, pygame.image.load(os.path.join(grafiki, 'grafiki\\npc2.png')), int(0), NPC_1_DIALOG]   ] 
 
 NPC_NUM = 0
 def npc():
@@ -320,39 +320,39 @@ def ruch_mapy():
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
             player_stand = False
-            if event.key == pygame.K_UP:
+            if event.key == pygame.K_UP or event.key == pygame.K_w:
                 mapaY_step = 10
                 player_direction = directions.up
-            if event.key == pygame.K_DOWN:
+            if event.key == pygame.K_DOWN or event.key == pygame.K_s:
                 mapaY_step = -10
                 player_direction = directions.down
-            if event.key == pygame.K_LEFT:
+            if event.key == pygame.K_LEFT or event.key == pygame.K_a:
                 mapaX_step = 10
                 player_direction = directions.left
-            if event.key == pygame.K_RIGHT:
+            if event.key == pygame.K_RIGHT or event.key == pygame.K_d:
                 mapaX_step = -10
                 player_direction = directions.right
         if event.type == pygame.KEYUP:
             player_stand = True
-            if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
+            if event.key == pygame.K_LEFT or event.key == pygame.K_a or event.key == pygame.K_RIGHT or event.key == pygame.K_d:
                 mapaX_step = 0
-            if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
+            if event.key == pygame.K_UP or event.key == pygame.K_w or event.key == pygame.K_DOWN or event.key == pygame.K_s:
                 mapaY_step = 0
 
         keys = pygame.key.get_pressed()
-        if keys[K_UP]:
+        if keys[K_UP] or keys[K_w]:
             player_stand = False
             player_direction = directions.up
             mapaY_step = 10
-        if keys[K_DOWN]:
+        if keys[K_DOWN] or keys[K_s]:
             player_stand = False
             player_direction = directions.down
             mapaY_step = -10
-        if keys[K_LEFT]:
+        if keys[K_LEFT] or keys[K_a]:
             player_stand = False
             player_direction = directions.left
             mapaX_step = 10
-        if keys[K_RIGHT]:
+        if keys[K_RIGHT] or keys[K_d]:
             player_stand = False
             player_direction = directions.right
             mapaX_step = -10
