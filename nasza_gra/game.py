@@ -36,6 +36,7 @@ MAPA_KRAWEDZIE = os.path.join(grafiki, 'grafiki\mapka1_krawedzie.png')
 M_FONT = os.path.join(grafiki, 'grafiki\PixelEmulator-xq08.ttf')
 BACKGROUND = pygame.image.load(os.path.join(grafiki, 'grafiki\\backgronud1200x800.png'))
 RAMKA_DIALOGU =  pygame.image.load(os.path.join(grafiki, 'grafiki\\ramka_dialogu.png'))
+PRZYCISK_DIALOGU = pygame.image.load(os.path.join(grafiki, 'grafiki\start_D.png'))
 
 # OKNO GRY
 SCREEN = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
@@ -103,6 +104,10 @@ def button(x, y, icolor, acolor, action=None):
             elif action == 'dialog':
                 global NPC
                 NPC = True
+            elif action == 'next':
+                global NPC_NUM, FLAG_MOUSE
+                if FLAG_MOUSE:
+                    NPC_NUM[3] += 1
     else:
         SCREEN.blit(pygame.image.load(icolor), [x, y])
 
@@ -272,24 +277,37 @@ def npc():
             NPC_NUM = npc
             button(400, 650, FBUTTON_D, FBUTTON_L, 'dialog')
 
+FLAG_MOUSE = True
+
+
 def dialog():
-    global NPC_NUM
+    #while
+    global NPC_NUM, FLAG_MOUSE
+
     SCREEN.blit(RAMKA_DIALOGU, (0, 0))
-    #SCREEN.blit( player_icon, (300, 500))
-    #SCREEN.blit(NPC_NUM[2], (900, 400))
     message_display(NPC_NUM[4][NPC_NUM[3]], 600, 200, 50)
+    button(700, 525, PBUTTON_D, PBUTTON_L, 'next')
     
-    MOUSE = pygame.mouse.get_pos()
     CLICK = pygame.mouse.get_pressed()
+    '''
+    if CLICK[0] == 1:
+        FLAG_MOUSE = False'''
+    
+    '''
+    if CLICK[0] == 1:
+        FLAG_MOUSE = False
+    if CLICK[0] == 1 and FLAG_MOUSE == False:
+        CLICK[0] == 0
+    if CLICK[0] == 0 and FLAG_MOUSE == False:
+        FLAG_MOUSE = True'''
+
+
     for event in pygame.event.get():
         whether_exit(event)
-    if 700 > MOUSE[0] > 500 and 500 > MOUSE[1] > 300: # wspolrzedne niewidzialnego przycisku do przewijania tekstu
+    '''if 700 < MOUSE[0] < 1000 and 525 < MOUSE[1] < 645: # wspolrzedne niewidzialnego przycisku do przewijania tekstu
         if CLICK[0] == 1:
             NPC_NUM[3] += 1
-            print("nacisnales na przycisk?")
-            '''if NPC[3] <= 0:
-                print("jakis warunek")
-                NPC = False'''
+            print("nacisnales na przycisk?")'''
 
 # poruszanie "sie"
 def ruch_mapy():
