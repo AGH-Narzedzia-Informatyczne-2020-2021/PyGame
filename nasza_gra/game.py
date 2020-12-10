@@ -234,14 +234,13 @@ def enemy():
 
 def fight():
     global FIGHT, ENEMY_NUM, FLAG_MOUSE
+    wiadomosc = "No dalej, uderz go!"
     while FIGHT:
         SCREEN.blit(BACKGROUND, (0, 0))
         SCREEN.blit(player_icon, (100, 500))
         SCREEN.blit(ENEMY_ICON, (900, 400))
         SCREEN.blit(RAMKA_DIALOGU, (0, 0))
         message_display("Click on enemy!", 600, 50, 80)
-        
-        # random.seed(10)
 
         for event in pygame.event.get():
             whether_exit(event)
@@ -256,13 +255,13 @@ def fight():
 
         elif CLICK[0] == 0:
             FLAG_MOUSE = True
-
+        
+        message_display(wiadomosc, 600, 150, 40)
         if MOUSE[0] > 800 and 700 > MOUSE[1] > 400:
             if CLICK[0] == 1:
                 dmg = randint(6, 17)
                 ENEMY_NUM[2] -= dmg
-                wiadomosc = ("Zadałeś przeciwnikowi" + str(dmg) + "obrazen")
-                message_display(wiadomosc, 100, 150, 40)
+                wiadomosc = ("Zadałeś przeciwnikowi " + str(dmg) + " obrazen")
                 if not pygame.mixer.get_busy():
                     pygame.mixer.Sound.play(FIGHT_SOUND)
                 if ENEMY_NUM[2] <= 0:   # jesli hp <= 0
