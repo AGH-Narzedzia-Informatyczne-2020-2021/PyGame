@@ -31,12 +31,13 @@ QBUTTON_L = os.path.join(grafiki, 'grafiki\quit_L.png')
 QBUTTON_D = os.path.join(grafiki, 'grafiki\quit_D.png')
 FBUTTON_L = os.path.join(grafiki, 'grafiki\\fight_L.png')
 FBUTTON_D = os.path.join(grafiki, 'grafiki\\fight_D.png')
+EBUTTON_L = os.path.join(grafiki, 'grafiki\\empty_L.png')
+EBUTTON_D = os.path.join(grafiki, 'grafiki\\empty_D.png')
 MAPA_NORMALNA = os.path.join(grafiki, 'grafiki\mapka1.png')
 MAPA_KRAWEDZIE = os.path.join(grafiki, 'grafiki\mapka1_krawedzie.png')
 M_FONT = os.path.join(grafiki, 'grafiki\PixelEmulator-xq08.ttf')
 BACKGROUND = pygame.image.load(os.path.join(grafiki, 'grafiki\\backgronud1200x800.png'))
 RAMKA_DIALOGU =  pygame.image.load(os.path.join(grafiki, 'grafiki\\ramka_dialogu.png'))
-PRZYCISK_DIALOGU = pygame.image.load(os.path.join(grafiki, 'grafiki\start_D.png'))
 
 # OKNO GRY
 SCREEN = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
@@ -281,12 +282,13 @@ NPC_1_DIALOG = [
  ]
 
  # 0 = x, 1 = y, 2 = ikonka, 3 = ktory dialog, 4 = lista tekstow
-NPC_POSITIONS = [   [650, 350, pygame.image.load(os.path.join(grafiki, 'grafiki\slime1.png')), int(0), NPC_1_DIALOG],
+NPC_POSITIONS = [   [1000, 350, pygame.image.load(os.path.join(grafiki, 'grafiki\slime1.png')), int(0), NPC_1_DIALOG],
                     [1600, 500, pygame.image.load(os.path.join(grafiki, 'grafiki\slime1.png')), int(0), NPC_1_DIALOG]   ] 
 
 NPC_NUM = 0
 def npc():
-    global NPC_NUM
+    global NPC_NUM, NPC
+    NPC = False
     for npc in NPC_POSITIONS:
         npc[0] += mapaX_step
         npc[1] += mapaY_step
@@ -301,7 +303,7 @@ def dialog():
     while NPC:
         SCREEN.blit(RAMKA_DIALOGU, (0, 0))
         message_display(NPC_NUM[4][NPC_NUM[3]], 600, 200, 50)
-        button(700, 525, PBUTTON_D, PBUTTON_L, 'next')
+        button(700, 525, EBUTTON_D, EBUTTON_L, 'next')
         
         CLICK = pygame.mouse.get_pressed()  # zeby przytrzymanie przycisku wszystkiego nie psulo
         if CLICK[0] == 1:
@@ -394,7 +396,11 @@ def game_loop():
             npc()
             ruch_mapy()
             granica_mapy()
-            dialog()
+            if NPC:
+                mapa_wyswietl()
+                gracz_wyswietl()
+                enemy()
+                dialog()
         else:
             music_stop()
             fight()
