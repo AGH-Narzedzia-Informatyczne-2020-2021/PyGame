@@ -232,34 +232,43 @@ global ENEMY_HP
 
 
 def fight():
-    global FIGHT
+    global FIGHT, ENEMY_NUM
+    while ENEMY_NUM[2] > 0:
+        SCREEN.blit(BACKGROUND, (0, 0))
+        SCREEN.blit(player_icon, (100, 500))
+        SCREEN.blit(ENEMY_ICON, (900, 400))
+        SCREEN.blit(RAMKA_DIALOGU, (0, 0))
+        message_display("Click on enemy!", 600, 50, 80)
+        
+        # random.seed(10)
 
-    SCREEN.blit(BACKGROUND, (0, 0))
-    SCREEN.blit(player_icon, (100, 500))
-    SCREEN.blit(ENEMY_ICON, (900, 400))
-    message_display("Click on enemy!", 600, 300)
-
-    # random.seed(10)
-
-    for event in pygame.event.get():
-        whether_exit(event)
-    MOUSE = pygame.mouse.get_pos()
-    CLICK = pygame.mouse.get_pressed()
-    global ENEMY_NUM
-    if MOUSE[0] > 800 and 700 > MOUSE[1] > 400:
-        if CLICK[0] == 1:
-            ENEMY_NUM[2] -= 5
-            print(ENEMY_NUM[2])
-            if not pygame.mixer.get_busy():
-                pygame.mixer.Sound.play(FIGHT_SOUND)
-            if ENEMY_NUM[2] <= 0:
-                FIGHT = False
-            music_play(BMUSIC, -1)
+        for event in pygame.event.get():
+            whether_exit(event)
+        MOUSE = pygame.mouse.get_pos()
+        CLICK = pygame.mouse.get_pressed()
+        if MOUSE[0] > 800 and 700 > MOUSE[1] > 400:
+            if CLICK[0] == 1:
+                dmg = randint(6, 17)
+                ENEMY_NUM[2] -= dmg
+                wiadomosc = ("Zadałeś przeciwnikowi" + str(dmg) + "obrazen")
+                message_display(wiadomosc, 100, 150, 40)
+                if not pygame.mixer.get_busy():
+                    pygame.mixer.Sound.play(FIGHT_SOUND)
+                if ENEMY_NUM[2] <= 0:   # jesli hp < 0
+                    FIGHT = False
+                music_play(BMUSIC, -1)
 
 NPC_1_DIALOG = [
 'czesc, ty jestes ten nowy?',
+
 'wiem, nie jestesmy w szkole,\
- ale niby co mialem  powiedziec?']
+ ale niby co mialem  powiedziec?',
+
+'jakis tekst do testu',
+
+'i znowu'
+ 
+ ]
 
  # 0 = x, 1 = y, 2 = ikonka, 3 = ktory dialog, 4 = lista tekstow
 NPC_POSITIONS = [   [650, 350, pygame.image.load(os.path.join(grafiki, 'grafiki\slime1.png')), int(0), NPC_1_DIALOG],
@@ -281,33 +290,20 @@ FLAG_MOUSE = True
 
 
 def dialog():
-    #while
-    global NPC_NUM, FLAG_MOUSE
-
-    SCREEN.blit(RAMKA_DIALOGU, (0, 0))
-    message_display(NPC_NUM[4][NPC_NUM[3]], 600, 200, 50)
-    button(700, 525, PBUTTON_D, PBUTTON_L, 'next')
-    
-    CLICK = pygame.mouse.get_pressed()
-    '''
-    if CLICK[0] == 1:
-        FLAG_MOUSE = False'''
-    
-    '''
-    if CLICK[0] == 1:
-        FLAG_MOUSE = False
-    if CLICK[0] == 1 and FLAG_MOUSE == False:
-        CLICK[0] == 0
-    if CLICK[0] == 0 and FLAG_MOUSE == False:
-        FLAG_MOUSE = True'''
-
-
-    for event in pygame.event.get():
-        whether_exit(event)
-    '''if 700 < MOUSE[0] < 1000 and 525 < MOUSE[1] < 645: # wspolrzedne niewidzialnego przycisku do przewijania tekstu
+    global NPC, NPC_NUM, FLAG_MOUSE
+    while NPC:
+        SCREEN.blit(RAMKA_DIALOGU, (0, 0))
+        message_display(NPC_NUM[4][NPC_NUM[3]], 600, 200, 50)
+        button(700, 525, PBUTTON_D, PBUTTON_L, 'next')
+        
+        CLICK = pygame.mouse.get_pressed()  # zeby przytrzymanie przycisku wszystkiego nie psulo
         if CLICK[0] == 1:
-            NPC_NUM[3] += 1
-            print("nacisnales na przycisk?")'''
+            FLAG_MOUSE = False
+        if CLICK[0] == 0 and FLAG_MOUSE == False:
+            FLAG_MOUSE = True
+  
+        for event in pygame.event.get():
+            whether_exit(event)
 
 # poruszanie "sie"
 def ruch_mapy():
@@ -394,8 +390,7 @@ def game_loop():
             npc()
             ruch_mapy()
             granica_mapy()
-            if NPC:
-                dialog()
+            dialog()
         else:
             music_stop()
             fight()
