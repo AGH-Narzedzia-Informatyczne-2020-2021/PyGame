@@ -24,7 +24,8 @@ FMUSIC = os.path.join(muzyka, 'muzyka\\Guardian Song.mp3')
 FIGHT_MUSIC = os.path.join(muzyka, 'muzyka\\Dragon_Castle.mp3')
 ENEMY_SOUND = pygame.mixer.Sound('muzyka\\orc_sound.mp3')
 FIGHT_SOUND = pygame.mixer.Sound('muzyka\\cios.wav')
-ENEMY_ICON_png = os.path.join(grafiki, 'grafiki\orc.png')
+ENEMY_ICON_1 = os.path.join(grafiki, 'grafiki\orc.png')
+ENEMY_ICON_2 = os.path.join(grafiki, 'grafiki\slime1.png')
 PBUTTON_L = os.path.join(grafiki, 'grafiki\start_L.png')
 PBUTTON_D = os.path.join(grafiki, 'grafiki\start_D.png')
 QBUTTON_L = os.path.join(grafiki, 'grafiki\quit_L.png')
@@ -211,8 +212,10 @@ def mapa_wyswietl():
 
 
 # przeciwnik
-ENEMY_ICON = pygame.image.load(ENEMY_ICON_png)
-ENEMY_POSITIONS = [[900, 700, 100], [1700, 300, 100]] # x,y,hp
+ENEMY_ICON_1 = pygame.image.load(ENEMY_ICON_1)
+ENEMY_ICON_2 = pygame.image.load(ENEMY_ICON_2)
+ENEMY_POSITIONS = [[900, 700, 100, ENEMY_ICON_1], [1700, 300, 100, ENEMY_ICON_1],
+[1800, 300, 50, ENEMY_ICON_2], [1900, 300, 50, ENEMY_ICON_2]] # x,y,hp, ikonka
 ENEMY_NUM = 0
 
 
@@ -223,7 +226,7 @@ def enemy():
         else:
             enemy[0] += mapaX_step
             enemy[1] += mapaY_step
-            SCREEN.blit(ENEMY_ICON, (enemy[0], enemy[1]))
+            SCREEN.blit(enemy[3], (enemy[0], enemy[1]))
             ENEMY_SOUND.set_volume(0.1)
 
             if enemy[0] + 150 >= playerX >= enemy[0] - 30 and enemy[1] + 150 >= playerY >= enemy[1] - 50:
@@ -239,7 +242,7 @@ def fight():
     while FIGHT:
         SCREEN.blit(BACKGROUND, (0, 0))
         SCREEN.blit(player_icon, (100, 500))
-        SCREEN.blit(ENEMY_ICON, (900, 400))
+        SCREEN.blit(ENEMY_NUM[3], (900, 400))
         SCREEN.blit(RAMKA_DIALOGU, (0, 0))
         message_display("Click on enemy!", 600, 50, 80)
 
@@ -258,7 +261,7 @@ def fight():
             FLAG_MOUSE = True
         
         message_display(wiadomosc, 600, 150, 40)
-        if MOUSE[0] > 800 and 700 > MOUSE[1] > 400:
+        if 900 < MOUSE[0] < 1050 and 400 < MOUSE[1] < 541:
             if CLICK[0] == 1:
                 dmg = randint(6, 17)
                 ENEMY_NUM[2] -= dmg
