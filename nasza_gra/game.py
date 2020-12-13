@@ -44,8 +44,8 @@ RAMKA_DIALOGU = pygame.image.load(os.path.join(grafiki, 'grafiki\\ramka_dialogu.
 SCREEN = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 pygame.display.set_caption('Nasza gra')  # nazwa okna
 CLOCK = pygame.time.Clock()
-# icon = pygame.image.load('nazwa')  # zmiana ikonki
-# pygame.display.set_icon(icon)
+icon = pygame.image.load(os.path.join(grafiki, 'grafiki\player\player3.png'))
+pygame.display.set_icon(icon)
 
 # KOLORY
 BLACK = (0, 0, 0)
