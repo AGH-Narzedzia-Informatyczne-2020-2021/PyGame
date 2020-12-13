@@ -214,12 +214,11 @@ def mapa_wyswietl():
 
 # przeciwnik
 global ENEMY_NUM
-
+ENEMY_NUM = 0
 ENEMY_ICON_1 = pygame.image.load(ENEMY_ICON_1)
 ENEMY_ICON_2 = pygame.image.load(ENEMY_ICON_2)
 ENEMY_POSITIONS = [[670, 900, 100, ENEMY_ICON_1], [1650, 260, 100, ENEMY_ICON_1], [2200, 960, 100, ENEMY_ICON_1],
                    [1800, 300, 50, ENEMY_ICON_2], [1900, 300, 50, ENEMY_ICON_2]]  # x,y,hp, ikonka
-ENEMY_NUM = 0
 
 
 def enemy():
