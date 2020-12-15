@@ -62,7 +62,8 @@ FLAG_MOUSE = True
 FABULA = os.path.join(tekst, 'tekst\\fabula.txt')
 with open(FABULA, 'r', encoding="UTF-8") as file:
     a = file.read()
-STORY_BEGINNING = [a]
+STORY_BEGINNING = [a, a, "hejj ma zostac tylko a"]
+
 with open(os.path.join(tekst, 'tekst\\npc1_10.txt'), 'r', encoding="UTF-8") as file:
     a = file.read()
 NPC_1_DIALOG = [a]
@@ -342,9 +343,10 @@ def dialog():
     global NPC, NPC_NUM, FLAG_MOUSE, NPC_1_DIALOG
     while NPC:
         SCREEN.blit(RAMKA_DIALOGU, (0, 0))
-        print(NPC_1_DIALOG[0])
-        czcionka = pygame.font.SysFont('Arial', 30)
-        blit_text(SCREEN, NPC_1_DIALOG[0], (600,0), czcionka)
+        #message_display(NPC_1_DIALOG[NPC_NUM[3]], 600, 150, 60)
+        #print(NPC_1_DIALOG[0])
+        czcionka = pygame.font.SysFont('Arial', 40)
+        blit_text(SCREEN,  NPC_1_DIALOG[NPC_NUM[3]], (400, 50), czcionka)
         button(700, 525, EBUTTON_D, EBUTTON_L, 'next')
         
         CLICK = pygame.mouse.get_pressed()  # zeby przytrzymanie przycisku wszystkiego nie psulo
@@ -355,6 +357,7 @@ def dialog():
   
         for event in pygame.event.get():
             whether_exit(event)
+        pygame.display.update()
 
 # poruszanie "sie"
 def ruch_mapy():
