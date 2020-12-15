@@ -41,8 +41,6 @@ M_FONT = os.path.join(grafiki, 'grafiki\PixelEmulator-xq08.ttf')
 BACKGROUND = pygame.image.load(os.path.join(grafiki, 'grafiki\\backgronud1200x800.png'))
 RAMKA_DIALOGU =  pygame.image.load(os.path.join(grafiki, 'grafiki\\ramka_dialogu.png'))
 
-FABULA = os.path.join(tekst, 'tekst\\fabula.txt')
-
 # OKNO GRY
 SCREEN = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), pygame.RESIZABLE)
 pygame.display.set_caption('Nasza gra')  # nazwa okna
@@ -61,8 +59,20 @@ NPC = False
 FLAG_MOUSE = True
 
 # TEKST
+FABULA = os.path.join(tekst, 'tekst\\fabula.txt')
 with open(FABULA, 'r', encoding="UTF-8") as file:
-    STORY_BEGINNING = file.read().replace('', '')
+    a = file.read()
+STORY_BEGINNING = [a]
+with open(os.path.join(tekst, 'tekst\\npc1_10.txt'), 'r', encoding="UTF-8") as file:
+    a = file.read()
+NPC_1_DIALOG = [a]
+
+#NPC_1_DIALOG = [ open(os.path.join(tekst, 'tekst\\npc1_10.txt'), 'r', encoding="UTF-8") ]
+
+NPC_2_DIALOG = [    open(os.path.join(tekst, 'tekst\\npc2_10.txt'), 'r', encoding="UTF-8"),
+                    open(os.path.join(tekst, 'tekst\\npc2_15.txt'), 'r', encoding="UTF-8"),
+                    open(os.path.join(tekst, 'tekst\\npc2_20.txt'), 'r', encoding="UTF-8"),
+                    open(os.path.join(tekst, 'tekst\\npc2_25.txt'), 'r', encoding="UTF-8")  ]
 
 # FUNCKJE
 def text_objects(text, font, color):
@@ -126,7 +136,7 @@ def button(x, y, icolor, acolor, action=None):
                 while(warunek):
                     SCREEN.blit(BACKGROUND, [0, 0])
                     czcionka = pygame.font.SysFont('Arial', 50)
-                    blit_text(SCREEN, STORY_BEGINNING, (0, 0), czcionka)
+                    blit_text(SCREEN, STORY_BEGINNING[0], (0, 0), czcionka)
                     for event in pygame.event.get():
                         whether_exit(event)
                     SCREEN.blit(pygame.image.load(PBUTTON_D), (800,650))
@@ -252,8 +262,9 @@ def mapa_wyswietl():
 # przeciwnik
 ENEMY_ICON_1 = pygame.image.load(ENEMY_ICON_1)
 ENEMY_ICON_2 = pygame.image.load(ENEMY_ICON_2)
-ENEMY_POSITIONS = [[900, 700, 100, ENEMY_ICON_1], [1700, 300, 100, ENEMY_ICON_1],
-[1800, 300, 50, ENEMY_ICON_2], [1900, 300, 50, ENEMY_ICON_2]] # x,y,hp, ikonka
+# 0=x, 1=y, 2=hp, 3=ikonka
+ENEMY_POSITIONS = [     [900, 700, 100, ENEMY_ICON_1], [1700, 300, 100, ENEMY_ICON_1],
+                        [1800, 300, 50, ENEMY_ICON_2], [1900, 300, 50, ENEMY_ICON_2]] 
 ENEMY_NUM = 0
 
 
@@ -310,21 +321,9 @@ def fight():
                     FIGHT = False
                 music_play(BMUSIC, -1)
 
-NPC_1_DIALOG = [
-'czesc, ty jestes ten nowy?',
-
-'wiem, nie jestesmy w szkole,\
- ale niby co mialem  powiedziec?',
-
-'jakis tekst do testu',
-
-'i znowu'
- 
- ]
-
  # 0 = x, 1 = y, 2 = ikonka, 3 = ktory dialog, 4 = lista tekstow
 NPC_POSITIONS = [   [1000, 350, pygame.image.load(os.path.join(grafiki, 'grafiki\\npc1.png')), int(0), NPC_1_DIALOG],
-                    [1600, 500, pygame.image.load(os.path.join(grafiki, 'grafiki\\npc2.png')), int(0), NPC_1_DIALOG]   ] 
+                    [1600, 500, pygame.image.load(os.path.join(grafiki, 'grafiki\\npc2.png')), int(0), NPC_2_DIALOG]   ] 
 
 NPC_NUM = 0
 def npc():
@@ -340,10 +339,12 @@ def npc():
             button(400, 650, FBUTTON_D, FBUTTON_L, 'dialog')
 
 def dialog():
-    global NPC, NPC_NUM, FLAG_MOUSE
+    global NPC, NPC_NUM, FLAG_MOUSE, NPC_1_DIALOG
     while NPC:
         SCREEN.blit(RAMKA_DIALOGU, (0, 0))
-        message_display(NPC_NUM[4][NPC_NUM[3]], 600, 200, 50)
+        print(NPC_1_DIALOG[0])
+        czcionka = pygame.font.SysFont('Arial', 30)
+        blit_text(SCREEN, NPC_1_DIALOG[0], (600,0), czcionka)
         button(700, 525, EBUTTON_D, EBUTTON_L, 'next')
         
         CLICK = pygame.mouse.get_pressed()  # zeby przytrzymanie przycisku wszystkiego nie psulo
