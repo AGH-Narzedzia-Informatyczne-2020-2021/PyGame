@@ -4,7 +4,7 @@ from pygame.locals import *
 from enum import Enum
 import os
 from PIL import Image
-from random import *
+from random import randint
 
 pygame.init()
 pygame.mixer.init()
@@ -92,7 +92,7 @@ def text_objects(text, font, color):
     return textSurface, textSurface.get_rect()
 
 
-def message_display(text, x, y, rozmiar = 115):  # wyświetlanie wiadomości w grze
+def message_display(text, x, y, rozmiar=115):  # wyświetlanie wiadomości w grze
     largeText = pygame.font.SysFont(text, rozmiar)
     TextSurf, TextRect = text_objects(text, largeText, BLACK)
     TextRect.center = ((x), (y))
@@ -280,7 +280,7 @@ ENEMY_NUM = 0
 
 def enemy():
     for enemy in ENEMY_POSITIONS:
-        if enemy[2] < 0:    # jesli hp mniejsze od 0
+        if enemy[2] < 0:  # jesli hp mniejsze od 0
             continue
         else:
             enemy[0] += mapaX_step
@@ -294,6 +294,7 @@ def enemy():
                 button(450, 650, FBUTTON_D, FBUTTON_L, 'fight')
                 if not pygame.mixer.get_busy():  # jak nie ma if not to odtwarza kilka dźwięków jednocześnie
                     pygame.mixer.Sound.play(ENEMY_SOUND)
+
 
 def fight():
     global FIGHT, ENEMY_NUM, FLAG_MOUSE
@@ -312,13 +313,13 @@ def fight():
         if CLICK[0] == 1 and FLAG_MOUSE == True:
             CLICK = (1, 0, 0)
             FLAG_MOUSE = False
-        
+
         elif CLICK[0] == 1 and FLAG_MOUSE == False:
             CLICK = (0, 0, 0)
 
         elif CLICK[0] == 0:
             FLAG_MOUSE = True
-        
+
         message_display(wiadomosc, 600, 150, 40)
         if 900 < MOUSE[0] < 1050 and 400 < MOUSE[1] < 541:
             if CLICK[0] == 1:
@@ -327,7 +328,7 @@ def fight():
                 wiadomosc = ("Zadałeś przeciwnikowi " + str(dmg) + " obrazen")
                 if not pygame.mixer.get_busy():
                     pygame.mixer.Sound.play(FIGHT_SOUND)
-                if ENEMY_NUM[2] <= 0:   # jesli hp <= 0
+                if ENEMY_NUM[2] <= 0:  # jesli hp <= 0
                     FIGHT = False
                 music_play(BMUSIC, -1)
 
@@ -336,6 +337,8 @@ NPC_POSITIONS = [   [1000, 350, pygame.image.load(os.path.join(grafiki, 'grafiki
                     [1600, 500, pygame.image.load(os.path.join(grafiki, 'grafiki\\npc2.png')), int(0), NPC_2_DIALOG]   ] 
 
 NPC_NUM = 0
+
+
 def npc():
     global NPC_NUM, NPC
     NPC = False
@@ -347,6 +350,7 @@ def npc():
         if npc[0] + 50 >= playerX >= npc[0] - 50 and npc[1] + 50 >= playerY >= npc[1] - 50:
             NPC_NUM = npc
             button(450, 650, TBUTTON_D, TBUTTON_L, 'dialog')
+
 
 def dialog():
     global NPC, NPC_NUM, FLAG_MOUSE, NPC_1_DIALOG
@@ -363,10 +367,11 @@ def dialog():
             FLAG_MOUSE = False
         if CLICK[0] == 0 and FLAG_MOUSE == False:
             FLAG_MOUSE = True
-  
+
         for event in pygame.event.get():
             whether_exit(event)
         pygame.display.update()
+
 
 # poruszanie "sie"
 def ruch_mapy():
@@ -450,11 +455,15 @@ def game_loop():
             npc()
             ruch_mapy()
             granica_mapy()
+            # WALKA
+            print(mapaX, mapaY)
+
             if NPC:
                 mapa_wyswietl()
                 gracz_wyswietl()
                 enemy()
                 dialog()
+
         else:
             music_stop()
             fight()
