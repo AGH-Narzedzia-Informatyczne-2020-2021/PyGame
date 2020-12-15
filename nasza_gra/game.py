@@ -41,7 +41,7 @@ BACKGROUND = pygame.image.load(os.path.join(grafiki, 'grafiki\\backgronud1200x80
 RAMKA_DIALOGU =  pygame.image.load(os.path.join(grafiki, 'grafiki\\ramka_dialogu.png'))
 
 # OKNO GRY
-SCREEN = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+SCREEN = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), pygame.RESIZABLE)
 pygame.display.set_caption('Nasza gra')  # nazwa okna
 CLOCK = pygame.time.Clock()
 icon = pygame.image.load(os.path.join(grafiki, 'grafiki\player\player3.png'))
@@ -57,8 +57,9 @@ FIGHT = False
 NPC = False
 FLAG_MOUSE = True
 
-# FUNCKJE
 
+
+# FUNCKJE
 def text_objects(text, font, color):
     textSurface = font.render(text, True, color)
     return textSurface, textSurface.get_rect()
