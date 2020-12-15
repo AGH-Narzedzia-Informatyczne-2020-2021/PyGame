@@ -355,9 +355,7 @@ def npc():
 def dialog():
     global NPC, NPC_NUM, FLAG_MOUSE, NPC_1_DIALOG
     while NPC:
-        SCREEN.blit(RAMKA_DIALOGU, (24, 0))
-        #message_display(NPC_1_DIALOG[NPC_NUM[3]], 600, 150, 60)
-        #print(NPC_1_DIALOG[0])
+        SCREEN.blit(RAMKA_DIALOGU, (0, 0))
         czcionka = pygame.font.SysFont('Arial', 40)
         blit_text(SCREEN,  NPC_1_DIALOG[NPC_NUM[3]], (0, 50), czcionka)
         button(450, 650, NBUTTON_D, NBUTTON_L, 'next')
@@ -456,7 +454,6 @@ def game_loop():
             ruch_mapy()
             granica_mapy()
             # WALKA
-            print(mapaX, mapaY)
 
             if NPC:
                 mapa_wyswietl()
