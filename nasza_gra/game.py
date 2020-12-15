@@ -35,11 +35,15 @@ FBUTTON_L = os.path.join(grafiki, 'grafiki\\fight_L.png')
 FBUTTON_D = os.path.join(grafiki, 'grafiki\\fight_D.png')
 EBUTTON_L = os.path.join(grafiki, 'grafiki\\empty_L.png')
 EBUTTON_D = os.path.join(grafiki, 'grafiki\\empty_D.png')
+NBUTTON_L = os.path.join(grafiki, 'grafiki\\next_L.png')
+NBUTTON_D = os.path.join(grafiki, 'grafiki\\next_D.png')
+TBUTTON_L = os.path.join(grafiki, 'grafiki\\talk_L.png')
+TBUTTON_D = os.path.join(grafiki, 'grafiki\\talk_D.png')
 MAPA_NORMALNA = os.path.join(grafiki, 'grafiki\mapka1.png')
 MAPA_KRAWEDZIE = os.path.join(grafiki, 'grafiki\mapka1_krawedzie.png')
 M_FONT = os.path.join(grafiki, 'grafiki\PixelEmulator-xq08.ttf')
 BACKGROUND = pygame.image.load(os.path.join(grafiki, 'grafiki\\backgronud1200x800.png'))
-RAMKA_DIALOGU =  pygame.image.load(os.path.join(grafiki, 'grafiki\\ramka_dialogu.png'))
+RAMKA_DIALOGU =  pygame.image.load(os.path.join(grafiki, 'grafiki\\ramka.png'))
 
 # OKNO GRY
 SCREEN = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), pygame.RESIZABLE)
@@ -68,13 +72,20 @@ with open(os.path.join(tekst, 'tekst\\npc1_10.txt'), 'r', encoding="UTF-8") as f
     a = file.read()
 NPC_1_DIALOG = [a]
 
-#NPC_1_DIALOG = [ open(os.path.join(tekst, 'tekst\\npc1_10.txt'), 'r', encoding="UTF-8") ]
-
-NPC_2_DIALOG = [    open(os.path.join(tekst, 'tekst\\npc2_10.txt'), 'r', encoding="UTF-8"),
+with open(os.path.join(tekst, 'tekst\\npc2_10.txt'), 'r', encoding="UTF-8") as file:
+    a = file.read()
+with open(os.path.join(tekst, 'tekst\\npc2_15.txt'), 'r', encoding="UTF-8") as file:
+    b = file.read()
+with open(os.path.join(tekst, 'tekst\\npc2_20.txt'), 'r', encoding="UTF-8") as file:
+    c = file.read()
+with open(os.path.join(tekst, 'tekst\\npc2_25.txt'), 'r', encoding="UTF-8") as file:
+    d = file.read()
+'''NPC_2_DIALOG = [    open(os.path.join(tekst, 'tekst\\npc2_10.txt'), 'r', encoding="UTF-8"),
                     open(os.path.join(tekst, 'tekst\\npc2_15.txt'), 'r', encoding="UTF-8"),
                     open(os.path.join(tekst, 'tekst\\npc2_20.txt'), 'r', encoding="UTF-8"),
                     open(os.path.join(tekst, 'tekst\\npc2_25.txt'), 'r', encoding="UTF-8")  ]
-
+'''
+NPC_2_DIALOG = [a, b, c, d]
 # FUNCKJE
 def text_objects(text, font, color):
     textSurface = font.render(text, True, color)
@@ -140,11 +151,11 @@ def button(x, y, icolor, acolor, action=None):
                     blit_text(SCREEN, STORY_BEGINNING[0], (0, 0), czcionka)
                     for event in pygame.event.get():
                         whether_exit(event)
-                    SCREEN.blit(pygame.image.load(PBUTTON_D), (800,650))
+                    SCREEN.blit(pygame.image.load(PBUTTON_D), (450, 650))
                     MOUSE = pygame.mouse.get_pos()
                     CLICK = pygame.mouse.get_pressed()
-                    if 800 < MOUSE[0] < 1100 and 650 < MOUSE[1] < 770:
-                        SCREEN.blit(pygame.image.load(PBUTTON_L), (800,650))
+                    if 455 < MOUSE[0] < 705 and 650 < MOUSE[1] < 750:
+                        SCREEN.blit(pygame.image.load(PBUTTON_L), (450, 650))
                         if CLICK[0] == 1:
                             warunek = False
                     pygame.display.update()
@@ -260,12 +271,10 @@ def mapa_wyswietl():
     SCREEN.blit(mapa, (mapaX, mapaY))
 
 
-# przeciwnik
-ENEMY_ICON_1 = pygame.image.load(ENEMY_ICON_1)
-ENEMY_ICON_2 = pygame.image.load(ENEMY_ICON_2)
+# PRZECIWNICY
 # 0=x, 1=y, 2=hp, 3=ikonka
-ENEMY_POSITIONS = [     [900, 700, 100, ENEMY_ICON_1], [1700, 300, 100, ENEMY_ICON_1],
-                        [1800, 300, 50, ENEMY_ICON_2], [1900, 300, 50, ENEMY_ICON_2]] 
+ENEMY_POSITIONS = [     [900, 700, 100, pygame.image.load(ENEMY_ICON_1)], [1700, 300, 100, pygame.image.load(ENEMY_ICON_1)],
+                        [1800, 300, 50, pygame.image.load(ENEMY_ICON_2)], [1900, 300, 50, pygame.image.load(ENEMY_ICON_2)]] 
 ENEMY_NUM = 0
 
 
@@ -282,7 +291,7 @@ def enemy():
             if enemy[0] + 150 >= playerX >= enemy[0] - 30 and enemy[1] + 150 >= playerY >= enemy[1] - 50:
                 global ENEMY_NUM
                 ENEMY_NUM = enemy
-                button(400, 650, FBUTTON_D, FBUTTON_L, 'fight')
+                button(450, 650, FBUTTON_D, FBUTTON_L, 'fight')
                 if not pygame.mixer.get_busy():  # jak nie ma if not to odtwarza kilka dźwięków jednocześnie
                     pygame.mixer.Sound.play(ENEMY_SOUND)
 
@@ -337,17 +346,17 @@ def npc():
 
         if npc[0] + 50 >= playerX >= npc[0] - 50 and npc[1] + 50 >= playerY >= npc[1] - 50:
             NPC_NUM = npc
-            button(400, 650, FBUTTON_D, FBUTTON_L, 'dialog')
+            button(450, 650, TBUTTON_D, TBUTTON_L, 'dialog')
 
 def dialog():
     global NPC, NPC_NUM, FLAG_MOUSE, NPC_1_DIALOG
     while NPC:
-        SCREEN.blit(RAMKA_DIALOGU, (0, 0))
+        SCREEN.blit(RAMKA_DIALOGU, (24, 0))
         #message_display(NPC_1_DIALOG[NPC_NUM[3]], 600, 150, 60)
         #print(NPC_1_DIALOG[0])
         czcionka = pygame.font.SysFont('Arial', 40)
-        blit_text(SCREEN,  NPC_1_DIALOG[NPC_NUM[3]], (400, 50), czcionka)
-        button(700, 525, EBUTTON_D, EBUTTON_L, 'next')
+        blit_text(SCREEN,  NPC_1_DIALOG[NPC_NUM[3]], (0, 50), czcionka)
+        button(450, 650, NBUTTON_D, NBUTTON_L, 'next')
         
         CLICK = pygame.mouse.get_pressed()  # zeby przytrzymanie przycisku wszystkiego nie psulo
         if CLICK[0] == 1:
