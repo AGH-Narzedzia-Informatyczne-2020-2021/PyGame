@@ -17,6 +17,7 @@ WINDOW_HEIGHT = 800
 # robienie sciezek wzglednych i czasami ladowanie
 grafiki = os.path.dirname(__file__)
 muzyka = os.path.dirname(__file__)
+tekst = os.path.dirname(__file__)
 MAINTHEME = os.path.join(muzyka, 'muzyka\intro.mp3')
 Fight = os.path.join(muzyka, 'muzyka\Guardian Song.mp3')
 BMUSIC = os.path.join(muzyka, 'muzyka\\background.mp3')
@@ -34,14 +35,18 @@ FBUTTON_L = os.path.join(grafiki, 'grafiki\\fight_L.png')
 FBUTTON_D = os.path.join(grafiki, 'grafiki\\fight_D.png')
 EBUTTON_L = os.path.join(grafiki, 'grafiki\\empty_L.png')
 EBUTTON_D = os.path.join(grafiki, 'grafiki\\empty_D.png')
+NBUTTON_L = os.path.join(grafiki, 'grafiki\\next_L.png')
+NBUTTON_D = os.path.join(grafiki, 'grafiki\\next_D.png')
+TBUTTON_L = os.path.join(grafiki, 'grafiki\\talk_L.png')
+TBUTTON_D = os.path.join(grafiki, 'grafiki\\talk_D.png')
 MAPA_NORMALNA = os.path.join(grafiki, 'grafiki\mapka1.png')
 MAPA_KRAWEDZIE = os.path.join(grafiki, 'grafiki\mapka1_krawedzie.png')
 M_FONT = os.path.join(grafiki, 'grafiki\PixelEmulator-xq08.ttf')
 BACKGROUND = pygame.image.load(os.path.join(grafiki, 'grafiki\\backgronud1200x800.png'))
-RAMKA_DIALOGU = pygame.image.load(os.path.join(grafiki, 'grafiki\\ramka_dialogu.png'))
+RAMKA_DIALOGU =  pygame.image.load(os.path.join(grafiki, 'grafiki\\ramka.png'))
 
 # OKNO GRY
-SCREEN = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+SCREEN = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), pygame.RESIZABLE)
 pygame.display.set_caption('Nasza gra')  # nazwa okna
 CLOCK = pygame.time.Clock()
 icon = pygame.image.load(os.path.join(grafiki, 'grafiki\player\player3.png'))
@@ -57,9 +62,31 @@ FIGHT = False
 NPC = False
 FLAG_MOUSE = True
 
+# TEKST
+FABULA = os.path.join(tekst, 'tekst\\fabula.txt')
+with open(FABULA, 'r', encoding="UTF-8") as file:
+    a = file.read()
+STORY_BEGINNING = [a, a, "hejj ma zostac tylko a"]
 
+with open(os.path.join(tekst, 'tekst\\npc1_10.txt'), 'r', encoding="UTF-8") as file:
+    a = file.read()
+NPC_1_DIALOG = [a]
+
+with open(os.path.join(tekst, 'tekst\\npc2_10.txt'), 'r', encoding="UTF-8") as file:
+    a = file.read()
+with open(os.path.join(tekst, 'tekst\\npc2_15.txt'), 'r', encoding="UTF-8") as file:
+    b = file.read()
+with open(os.path.join(tekst, 'tekst\\npc2_20.txt'), 'r', encoding="UTF-8") as file:
+    c = file.read()
+with open(os.path.join(tekst, 'tekst\\npc2_25.txt'), 'r', encoding="UTF-8") as file:
+    d = file.read()
+'''NPC_2_DIALOG = [    open(os.path.join(tekst, 'tekst\\npc2_10.txt'), 'r', encoding="UTF-8"),
+                    open(os.path.join(tekst, 'tekst\\npc2_15.txt'), 'r', encoding="UTF-8"),
+                    open(os.path.join(tekst, 'tekst\\npc2_20.txt'), 'r', encoding="UTF-8"),
+                    open(os.path.join(tekst, 'tekst\\npc2_25.txt'), 'r', encoding="UTF-8")  ]
+'''
+NPC_2_DIALOG = [a, b, c, d]
 # FUNCKJE
-
 def text_objects(text, font, color):
     textSurface = font.render(text, True, color)
     return textSurface, textSurface.get_rect()
@@ -72,6 +99,22 @@ def message_display(text, x, y, rozmiar=115):  # wyświetlanie wiadomości w grz
     SCREEN.blit(TextSurf, TextRect)
     pygame.display.update()
 
+def blit_text(surface, text, pos, font, color=pygame.Color('black')):
+    words = [word.split(' ') for word in text.splitlines()]  # 2D array where each row is a list of words.
+    space = font.size(' ')[0]  # The width of a space.
+    max_width, max_height = surface.get_size()
+    x, y = pos
+    for line in words:
+        for word in line:
+            word_surface = font.render(word, 0, color)
+            word_width, word_height = word_surface.get_size()
+            if x + word_width >= max_width:
+                x = pos[0]  # Reset the x.
+                y += word_height  # Start on new row.
+            surface.blit(word_surface, (x, y))
+            x += word_width + space
+        x = pos[0]  # Reset the x.
+        y += word_height  # Start on new row.
 
 def whether_exit(event):  # tu nie ma petli for, tylko warunki
     if event.type == QUIT:
@@ -101,6 +144,22 @@ def button(x, y, icolor, acolor, action=None):
         SCREEN.blit(pygame.image.load(acolor), [x, y])
         if CLICK[0] == 1 and action != None:
             if action == 'play':
+                warunek = True
+                while(warunek):
+                    SCREEN.blit(BACKGROUND, [0, 0])
+                    czcionka = pygame.font.SysFont('Arial', 50)
+                    blit_text(SCREEN, STORY_BEGINNING[0], (0, 0), czcionka)
+                    for event in pygame.event.get():
+                        whether_exit(event)
+                    SCREEN.blit(pygame.image.load(PBUTTON_D), (450, 650))
+                    MOUSE = pygame.mouse.get_pos()
+                    CLICK = pygame.mouse.get_pressed()
+                    if 455 < MOUSE[0] < 705 and 650 < MOUSE[1] < 750:
+                        SCREEN.blit(pygame.image.load(PBUTTON_L), (450, 650))
+                        if CLICK[0] == 1:
+                            warunek = False
+                    pygame.display.update()
+
                 game_loop()
             elif action == 'quit':
                 pygame.quit()
@@ -212,13 +271,11 @@ def mapa_wyswietl():
     SCREEN.blit(mapa, (mapaX, mapaY))
 
 
-# przeciwnik
-global ENEMY_NUM
+# PRZECIWNICY
+# 0=x, 1=y, 2=hp, 3=ikonka
+ENEMY_POSITIONS = [     [900, 700, 100, pygame.image.load(ENEMY_ICON_1)], [1700, 300, 100, pygame.image.load(ENEMY_ICON_1)],
+                        [1800, 300, 50, pygame.image.load(ENEMY_ICON_2)], [1900, 300, 50, pygame.image.load(ENEMY_ICON_2)]] 
 ENEMY_NUM = 0
-ENEMY_ICON_1 = pygame.image.load(ENEMY_ICON_1)
-ENEMY_ICON_2 = pygame.image.load(ENEMY_ICON_2)
-ENEMY_POSITIONS = [[670, 900, 100, ENEMY_ICON_1], [1650, 260, 100, ENEMY_ICON_1], [2200, 960, 100, ENEMY_ICON_1],
-                   [1800, 300, 50, ENEMY_ICON_2], [1900, 300, 50, ENEMY_ICON_2]]  # x,y,hp, ikonka
 
 
 def enemy():
@@ -234,7 +291,7 @@ def enemy():
             if enemy[0] + 150 >= playerX >= enemy[0] - 30 and enemy[1] + 150 >= playerY >= enemy[1] - 50:
                 global ENEMY_NUM
                 ENEMY_NUM = enemy
-                button(400, 650, FBUTTON_D, FBUTTON_L, 'fight')
+                button(450, 650, FBUTTON_D, FBUTTON_L, 'fight')
                 if not pygame.mixer.get_busy():  # jak nie ma if not to odtwarza kilka dźwięków jednocześnie
                     pygame.mixer.Sound.play(ENEMY_SOUND)
 
@@ -275,22 +332,9 @@ def fight():
                     FIGHT = False
                 music_play(BMUSIC, -1)
 
-
-NPC_1_DIALOG = [
-    'czesc, ty jestes ten nowy?',
-
-    'wiem, nie jestesmy w szkole,\
-     ale niby co mialem  powiedziec?',
-
-    'jakis tekst do testu',
-
-    'i znowu'
-
-]
-
-# 0 = x, 1 = y, 2 = ikonka, 3 = ktory dialog, 4 = lista tekstow
-NPC_POSITIONS = [[1000, 350, pygame.image.load(os.path.join(grafiki, 'grafiki\\npc1.png')), int(0), NPC_1_DIALOG],
-                 [1600, 500, pygame.image.load(os.path.join(grafiki, 'grafiki\\npc2.png')), int(0), NPC_1_DIALOG]]
+ # 0 = x, 1 = y, 2 = ikonka, 3 = ktory dialog, 4 = lista tekstow
+NPC_POSITIONS = [   [1000, 350, pygame.image.load(os.path.join(grafiki, 'grafiki\\npc1.png')), int(0), NPC_1_DIALOG],
+                    [1600, 500, pygame.image.load(os.path.join(grafiki, 'grafiki\\npc2.png')), int(0), NPC_2_DIALOG]   ] 
 
 NPC_NUM = 0
 
@@ -305,16 +349,17 @@ def npc():
 
         if npc[0] + 50 >= playerX >= npc[0] - 50 and npc[1] + 50 >= playerY >= npc[1] - 50:
             NPC_NUM = npc
-            button(400, 650, FBUTTON_D, FBUTTON_L, 'dialog')
+            button(450, 650, TBUTTON_D, TBUTTON_L, 'dialog')
 
 
 def dialog():
-    global NPC, NPC_NUM, FLAG_MOUSE
+    global NPC, NPC_NUM, FLAG_MOUSE, NPC_1_DIALOG
     while NPC:
         SCREEN.blit(RAMKA_DIALOGU, (0, 0))
-        message_display(NPC_NUM[4][NPC_NUM[3]], 600, 200, 50)
-        button(700, 525, EBUTTON_D, EBUTTON_L, 'next')
-
+        czcionka = pygame.font.SysFont('Arial', 40)
+        blit_text(SCREEN,  NPC_1_DIALOG[NPC_NUM[3]], (0, 50), czcionka)
+        button(450, 650, NBUTTON_D, NBUTTON_L, 'next')
+        
         CLICK = pygame.mouse.get_pressed()  # zeby przytrzymanie przycisku wszystkiego nie psulo
         if CLICK[0] == 1:
             FLAG_MOUSE = False
@@ -323,6 +368,7 @@ def dialog():
 
         for event in pygame.event.get():
             whether_exit(event)
+        pygame.display.update()
 
 
 # poruszanie "sie"
@@ -408,7 +454,6 @@ def game_loop():
             ruch_mapy()
             granica_mapy()
             # WALKA
-            print(mapaX, mapaY)
 
             if NPC:
                 mapa_wyswietl()
