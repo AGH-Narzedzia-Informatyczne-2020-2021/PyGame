@@ -17,6 +17,7 @@ WINDOW_HEIGHT = 800
 # robienie sciezek wzglednych i czasami ladowanie
 grafiki = os.path.dirname(__file__)
 muzyka = os.path.dirname(__file__)
+tekst = os.path.dirname(__file__)
 MAINTHEME = os.path.join(muzyka, 'muzyka\intro.mp3')
 Fight = os.path.join(muzyka, 'muzyka\Guardian Song.mp3')
 BMUSIC = os.path.join(muzyka, 'muzyka\\background.mp3')
@@ -40,8 +41,10 @@ M_FONT = os.path.join(grafiki, 'grafiki\PixelEmulator-xq08.ttf')
 BACKGROUND = pygame.image.load(os.path.join(grafiki, 'grafiki\\backgronud1200x800.png'))
 RAMKA_DIALOGU =  pygame.image.load(os.path.join(grafiki, 'grafiki\\ramka_dialogu.png'))
 
+FABULA = os.path.join(tekst, 'tekst\\fabula.txt')
+
 # OKNO GRY
-SCREEN = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+SCREEN = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), pygame.RESIZABLE)
 pygame.display.set_caption('Nasza gra')  # nazwa okna
 CLOCK = pygame.time.Clock()
 icon = pygame.image.load(os.path.join(grafiki, 'grafiki\player\player3.png'))
@@ -57,8 +60,11 @@ FIGHT = False
 NPC = False
 FLAG_MOUSE = True
 
-# FUNCKJE
+# TEKST
+with open(FABULA, 'r', encoding="UTF-8") as file:
+    STORY_BEGINNING = file.read().replace('', '')
 
+# FUNCKJE
 def text_objects(text, font, color):
     textSurface = font.render(text, True, color)
     return textSurface, textSurface.get_rect()
@@ -71,6 +77,22 @@ def message_display(text, x, y, rozmiar = 115):  # wyświetlanie wiadomości w g
     SCREEN.blit(TextSurf, TextRect)
     pygame.display.update()
 
+def blit_text(surface, text, pos, font, color=pygame.Color('black')):
+    words = [word.split(' ') for word in text.splitlines()]  # 2D array where each row is a list of words.
+    space = font.size(' ')[0]  # The width of a space.
+    max_width, max_height = surface.get_size()
+    x, y = pos
+    for line in words:
+        for word in line:
+            word_surface = font.render(word, 0, color)
+            word_width, word_height = word_surface.get_size()
+            if x + word_width >= max_width:
+                x = pos[0]  # Reset the x.
+                y += word_height  # Start on new row.
+            surface.blit(word_surface, (x, y))
+            x += word_width + space
+        x = pos[0]  # Reset the x.
+        y += word_height  # Start on new row.
 
 def whether_exit(event):  # tu nie ma petli for, tylko warunki
     if event.type == QUIT:
@@ -100,6 +122,22 @@ def button(x, y, icolor, acolor, action=None):
         SCREEN.blit(pygame.image.load(acolor), [x, y])
         if CLICK[0] == 1 and action != None:
             if action == 'play':
+                warunek = True
+                while(warunek):
+                    SCREEN.blit(BACKGROUND, [0, 0])
+                    czcionka = pygame.font.SysFont('Arial', 50)
+                    blit_text(SCREEN, STORY_BEGINNING, (0, 0), czcionka)
+                    for event in pygame.event.get():
+                        whether_exit(event)
+                    SCREEN.blit(pygame.image.load(PBUTTON_D), (800,650))
+                    MOUSE = pygame.mouse.get_pos()
+                    CLICK = pygame.mouse.get_pressed()
+                    if 800 < MOUSE[0] < 1100 and 650 < MOUSE[1] < 770:
+                        SCREEN.blit(pygame.image.load(PBUTTON_L), (800,650))
+                        if CLICK[0] == 1:
+                            warunek = False
+                    pygame.display.update()
+
                 game_loop()
             elif action == 'quit':
                 pygame.quit()
