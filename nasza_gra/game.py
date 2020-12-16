@@ -63,14 +63,18 @@ NPC = False
 FLAG_MOUSE = True
 
 # TEKST
-FABULA = os.path.join(tekst, 'tekst\\fabula.txt')
-with open(FABULA, 'r', encoding="UTF-8") as file:
+with open(os.path.join(tekst, 'tekst\\fabula1.txt'), 'r', encoding="UTF-8") as file:
     a = file.read()
-STORY_BEGINNING = [a]
+with open(os.path.join(tekst, 'tekst\\fabula2.txt'), 'r', encoding="UTF-8") as file:
+    b = file.read()
+with open(os.path.join(tekst, 'tekst\\fabula3.txt'), 'r', encoding="UTF-8") as file:
+    c = file.read()
+STORY_BEGINNING = [a, b, c]
 
 with open(os.path.join(tekst, 'tekst\\npc1_10.txt'), 'r', encoding="UTF-8") as file:
     a = file.read()
 NPC_1_DIALOG = [a]
+
 
 with open(os.path.join(tekst, 'tekst\\npc2_10.txt'), 'r', encoding="UTF-8") as file:
     a = file.read()
@@ -143,20 +147,33 @@ def button(x, y, icolor, acolor, action=None):
 
         if CLICK[0] == 1 and action != None:
             if action == 'play' and FLAG_MOUSE == True:
-                warunek = True
-                while(warunek):
+                czcionka = pygame.font.SysFont('Arial', 48)
+                i = 0   
+                while(True):
                     SCREEN.blit(BACKGROUND, [0, 0])
-                    czcionka = pygame.font.SysFont('Arial', 48)
-                    blit_text(SCREEN, STORY_BEGINNING[0], (0, 0), czcionka)
-                    for event in pygame.event.get():
-                        whether_exit(event)
-                    SCREEN.blit(pygame.image.load(PBUTTON_D), (450, 650))
+                    blit_text(SCREEN, STORY_BEGINNING[i], (0, 0), czcionka)
                     MOUSE = pygame.mouse.get_pos()
                     CLICK = pygame.mouse.get_pressed()
-                    if 455 < MOUSE[0] < 705 and 650 < MOUSE[1] < 750:
-                        SCREEN.blit(pygame.image.load(PBUTTON_L), (450, 650))
-                        if CLICK[0] == 1:
-                            warunek = False
+                    if CLICK[0] == 1:
+                        FLAG_MOUSE = False
+                    if CLICK[0] == 0 and FLAG_MOUSE == False:
+                        FLAG_MOUSE = True
+                    if i == 0 or i == 1 and FLAG_MOUSE == True:
+                        SCREEN.blit(pygame.image.load(NBUTTON_D), (450, 650))
+                        if 455 < MOUSE[0] < 705 and 650 < MOUSE[1] < 750:
+                            SCREEN.blit(pygame.image.load(NBUTTON_L), (450, 650))
+                            if CLICK[0] == 1:
+                                i += 1
+                                print("dadadadasdasd")
+                                continue
+                    elif i == 2 and FLAG_MOUSE == True:
+                        SCREEN.blit(pygame.image.load(PBUTTON_D), (450, 650))
+                        if 455 < MOUSE[0] < 705 and 650 < MOUSE[1] < 750:
+                            SCREEN.blit(pygame.image.load(PBUTTON_L), (450, 650))
+                            if CLICK[0] == 1:
+                                break
+                    for event in pygame.event.get():
+                        whether_exit(event)
                     pygame.display.update()
 
                 game_loop()
@@ -179,7 +196,6 @@ def button(x, y, icolor, acolor, action=None):
             FLAG_MOUSE = False
         if CLICK[0] == 0 and FLAG_MOUSE == False:
             FLAG_MOUSE = True
-        print(FLAG_MOUSE)
     else:
         SCREEN.blit(pygame.image.load(icolor), [x, y])
 
