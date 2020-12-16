@@ -94,7 +94,11 @@ with open(os.path.join(tekst, 'tekst\\npc2_02.txt'), 'r', encoding="UTF-8") as f
     b = file.read()
 with open(os.path.join(tekst, 'tekst\\npc2_03.txt'), 'r', encoding="UTF-8") as file:
     c = file.read()
-NPC_2_DIALOG = [a, b, c]
+with open(os.path.join(tekst, 'tekst\\npc2_04.txt'), 'r', encoding="UTF-8") as file:
+    d = file.read()
+with open(os.path.join(tekst, 'tekst\\npc2_05.txt'), 'r', encoding="UTF-8") as file:
+    e = file.read()
+NPC_2_DIALOG = [a, b, c, "przerywnik", d, e, "koniec"]
 
 # FUNCKJE
 def text_objects(text, font, color):
@@ -319,7 +323,7 @@ def enemy():
 
 def fight():
     global FIGHT, ENEMY_NUM, FLAG_MOUSE
-    x = randint(1,4)
+    x = randint(1,3)
     if x == 1:
         wiadomosc = "No dalej, uderz go!"
     elif x == 2:
@@ -361,8 +365,8 @@ def fight():
         pygame.display.update()
 
  # 0 = x, 1 = y, 2 = ikonka, 3 = ktory dialog, 4 = lista tekstow, 5 = numer
-NPC_POSITIONS = [   [950, 350, pygame.image.load(os.path.join(grafiki, 'grafiki\\npc1.png')), int(0), NPC_1_DIALOG, int(0)],
-                    [750, 500, pygame.image.load(os.path.join(grafiki, 'grafiki\\npc2.png')), int(0), NPC_2_DIALOG, int(1)]   ] 
+NPC_POSITIONS = [   [750, 200, pygame.image.load(os.path.join(grafiki, 'grafiki\\npc1.png')), int(0), NPC_1_DIALOG, int(0)],
+                    [950, 700, pygame.image.load(os.path.join(grafiki, 'grafiki\\npc2.png')), int(0), NPC_2_DIALOG, int(1)]   ] 
 
 NPC_NUM = 0
 
@@ -377,11 +381,18 @@ def npc():
         if npc[0] + 50 >= playerX >= npc[0] - 50 and npc[1] + 50 >= playerY >= npc[1] - 50:
             NPC_NUM = npc
             button(450, 650, TBUTTON_D, TBUTTON_L, 'dialog')
-
+war1 = True
 def dialog():
-    global NPC, NPC_NUM, FLAG_MOUSE, NPC_1_DIALOG
+    global NPC, NPC_NUM, FLAG_MOUSE, NPC_1_DIALOG, war1
+    if ENEMY_POSITIONS[0][2] <= 0 and ENEMY_POSITIONS[5][2] <= 0 and war1 == True:
+        NPC_POSITIONS[1][3] += 1
+        war1 = False
     while NPC:
         if NPC_NUM[5] == 0 and NPC_NUM[3] > 6:
+            break
+        if NPC_NUM[5] == 1 and NPC_NUM[3] == 3:
+            break
+        if NPC_NUM[5] == 1 and NPC_NUM[3] == 6:
             break
         SCREEN.blit(RAMKA_DIALOGU, (0, 0))
         czcionka = pygame.font.SysFont('Arial', 40)
