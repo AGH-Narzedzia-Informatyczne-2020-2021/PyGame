@@ -273,8 +273,10 @@ def mapa_wyswietl():
 
 # PRZECIWNICY
 # 0=x, 1=y, 2=hp, 3=ikonka
-ENEMY_POSITIONS = [     [900, 700, 100, pygame.image.load(ENEMY_ICON_1)], [1700, 300, 100, pygame.image.load(ENEMY_ICON_1)],
-                        [1800, 300, 50, pygame.image.load(ENEMY_ICON_2)], [1900, 300, 50, pygame.image.load(ENEMY_ICON_2)]] 
+orc = pygame.image.load(ENEMY_ICON_1)
+slime = pygame.image.load(ENEMY_ICON_2)
+ENEMY_POSITIONS = [     [650, 850, 100, orc ], [2180, 960, 100, orc], [2800, 380, 100, orc], [3050, 340, 100, orc], [3250, 380, 100, orc],
+                        [1800, 600, 50, slime],  [620, 800, 50, slime], [1900, 350, 50, slime], [2900, 700, 50, slime]]
 ENEMY_NUM = 0
 
 
@@ -292,8 +294,9 @@ def enemy():
                 global ENEMY_NUM
                 ENEMY_NUM = enemy
                 button(450, 650, FBUTTON_D, FBUTTON_L, 'fight')
-                if not pygame.mixer.get_busy():  # jak nie ma if not to odtwarza kilka dźwięków jednocześnie
-                    pygame.mixer.Sound.play(ENEMY_SOUND)
+                if enemy[3]== orc:
+                    if not pygame.mixer.get_busy():  # jak nie ma if not to odtwarza kilka dźwięków jednocześnie
+                        pygame.mixer.Sound.play(ENEMY_SOUND)
 
 
 def fight():
@@ -464,7 +467,7 @@ def game_loop():
         else:
             music_stop()
             fight()
-
+        print(mapaX, mapaY)
         pygame.display.update()  # aktualizuje wszystkie parametry ekranu na bieżąco
 
 
