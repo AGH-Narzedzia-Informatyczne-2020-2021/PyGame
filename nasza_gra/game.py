@@ -66,7 +66,7 @@ FLAG_MOUSE = True
 FABULA = os.path.join(tekst, 'tekst\\fabula.txt')
 with open(FABULA, 'r', encoding="UTF-8") as file:
     a = file.read()
-STORY_BEGINNING = [a, a, "hejj ma zostac tylko a"]
+STORY_BEGINNING = [a]
 
 with open(os.path.join(tekst, 'tekst\\npc1_10.txt'), 'r', encoding="UTF-8") as file:
     a = file.read()
