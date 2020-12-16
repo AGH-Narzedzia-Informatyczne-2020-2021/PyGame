@@ -357,8 +357,8 @@ def fight():
                 music_play(BMUSIC, -1)
 
  # 0 = x, 1 = y, 2 = ikonka, 3 = ktory dialog, 4 = lista tekstow
-NPC_POSITIONS = [   [700, 350, pygame.image.load(os.path.join(grafiki, 'grafiki\\npc1.png')), int(0), NPC_1_DIALOG],
-                    [700, 400, pygame.image.load(os.path.join(grafiki, 'grafiki\\npc2.png')), int(0), NPC_2_DIALOG]   ] 
+NPC_POSITIONS = [   [950, 350, pygame.image.load(os.path.join(grafiki, 'grafiki\\npc1.png')), int(0), NPC_1_DIALOG],
+                    [750, 500, pygame.image.load(os.path.join(grafiki, 'grafiki\\npc2.png')), int(0), NPC_2_DIALOG]   ] 
 
 NPC_NUM = 0
 
@@ -379,7 +379,8 @@ def npc():
 def dialog():
     global NPC, NPC_NUM, FLAG_MOUSE, NPC_1_DIALOG
     while NPC:
-        
+        if NPC_NUM[3] > 6:
+            break
         SCREEN.blit(RAMKA_DIALOGU, (0, 0))
         czcionka = pygame.font.SysFont('Arial', 40)
         blit_text(SCREEN,  NPC_NUM[4][NPC_NUM[3]], (0, 35), czcionka)
