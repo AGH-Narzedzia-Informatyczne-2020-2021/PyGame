@@ -429,7 +429,7 @@ def granica_mapy():
     global mapaX, mapaY, mapaX_step, mapaY_step, krawedzieX, krawedzieY, WINDOW_WIDTH, WINDOW_HEIGHT, kolor_granicy
 
     rgb_pixel_value = kolor_granicy.getpixel(
-        (-mapaX + WINDOW_WIDTH / 2 - mapaX_step + 16, -mapaY + WINDOW_HEIGHT / 2 - mapaY_step + 20))  # ma być (0, 0, 0)
+        (-mapaX + WINDOW_WIDTH / 2 - mapaX_step + 16, -mapaY + WINDOW_HEIGHT / 2 - mapaY_step + 20))
 
     if rgb_pixel_value == (0, 0, 0):
         mapaX_step = 0
@@ -467,7 +467,7 @@ def game_loop():
         else:
             music_stop()
             fight()
-        print(mapaX, mapaY)
+        print('Mapa_X: '+ str(mapaX)+ ', ' 'Mapa_Y: '+ str(mapaY))
         pygame.display.update()  # aktualizuje wszystkie parametry ekranu na bieżąco
 
 
