@@ -88,15 +88,13 @@ with open(os.path.join(tekst, 'tekst\\npc1_07.txt'), 'r', encoding="UTF-8") as f
 NPC_1_DIALOG = [a, b, c, d, e, f, g]
 
 
-with open(os.path.join(tekst, 'tekst\\npc2_10.txt'), 'r', encoding="UTF-8") as file:
+with open(os.path.join(tekst, 'tekst\\npc2_01.txt'), 'r', encoding="UTF-8") as file:
     a = file.read()
-with open(os.path.join(tekst, 'tekst\\npc2_15.txt'), 'r', encoding="UTF-8") as file:
+with open(os.path.join(tekst, 'tekst\\npc2_02.txt'), 'r', encoding="UTF-8") as file:
     b = file.read()
-with open(os.path.join(tekst, 'tekst\\npc2_20.txt'), 'r', encoding="UTF-8") as file:
+with open(os.path.join(tekst, 'tekst\\npc2_03.txt'), 'r', encoding="UTF-8") as file:
     c = file.read()
-with open(os.path.join(tekst, 'tekst\\npc2_25.txt'), 'r', encoding="UTF-8") as file:
-    d = file.read()
-NPC_2_DIALOG = [a, b, c, d]
+NPC_2_DIALOG = [a, b, c]
 
 # FUNCKJE
 def text_objects(text, font, color):
@@ -188,7 +186,6 @@ def button(x, y, icolor, acolor, action=None):
                     NPC_NUM[3] += 1
                     FLAG_MOUSE = False
             elif action == 'next_story' and FLAG_MOUSE:
-                print("dziala next_story")
                 STORY_i += 1
                 FLAG_MOUSE = False
         
@@ -293,17 +290,17 @@ def mapa_wyswietl():
 
 
 # PRZECIWNICY
-# 0=x, 1=y, 2=hp, 3=ikonka
+# 0=x, 1=y, 2=hp, 3=ikonka, 4 = numer
 orc = pygame.image.load(ENEMY_ICON_1)
 slime = pygame.image.load(ENEMY_ICON_2)
-ENEMY_POSITIONS = [     [650, 850, 100, orc ], [2180, 960, 100, orc], [2800, 380, 100, orc], [3050, 340, 100, orc], [3250, 380, 100, orc],
-                        [1800, 600, 50, slime],  [620, 800, 50, slime], [1900, 350, 50, slime], [2900, 700, 50, slime]]
+ENEMY_POSITIONS = [     [550, 850, 100, orc, 0], [2180, 960, 100, orc, 1], [2800, 380, 100, orc, 2], [3050, 340, 100, orc, 3], [3250, 380, 100, orc, 4],
+                        [850, 850, 50, slime, 5], [1800, 600, 50, slime, 6], [1900, 350, 50, slime, 7], [2900, 700, 50, slime, 8]]
 ENEMY_NUM = 0
 
 
 def enemy():
     for enemy in ENEMY_POSITIONS:
-        if enemy[2] < 0:  # jesli hp mniejsze od 0
+        if enemy[2] <= 0:  # jesli hp mniejsze od 0
             continue
         else:
             enemy[0] += mapaX_step
@@ -323,13 +320,14 @@ def enemy():
 def fight():
     global FIGHT, ENEMY_NUM, FLAG_MOUSE
     wiadomosc = "No dalej, uderz go!"
+    czcionka = pygame.font.SysFont('Arial', 80)
     while FIGHT:
         SCREEN.blit(BACKGROUND, (0, 0))
-        SCREEN.blit(player_icon, (100, 500))
+        SCREEN.blit(player_frames_stand[directions.right], (100, 500))
         SCREEN.blit(ENEMY_NUM[3], (900, 400))
         SCREEN.blit(RAMKA_DIALOGU, (0, 0))
         message_display("Click on enemy!", 600, 50, 80)
-
+        blit_text(SCREEN, "Click on enemy!", (100, 50), czcionka)
         for event in pygame.event.get():
             whether_exit(event)
         MOUSE = pygame.mouse.get_pos()
@@ -343,8 +341,8 @@ def fight():
 
         elif CLICK[0] == 0:
             FLAG_MOUSE = True
-
-        message_display(wiadomosc, 600, 150, 40)
+        blit_text(SCREEN, wiadomosc, (100, 150), czcionka) 
+        #message_display(wiadomosc, 600, 150, 40)
         if 900 < MOUSE[0] < 1050 and 400 < MOUSE[1] < 541:
             if CLICK[0] == 1:
                 dmg = randint(6, 17)
@@ -356,9 +354,9 @@ def fight():
                     FIGHT = False
                 music_play(BMUSIC, -1)
 
- # 0 = x, 1 = y, 2 = ikonka, 3 = ktory dialog, 4 = lista tekstow
-NPC_POSITIONS = [   [950, 350, pygame.image.load(os.path.join(grafiki, 'grafiki\\npc1.png')), int(0), NPC_1_DIALOG],
-                    [750, 500, pygame.image.load(os.path.join(grafiki, 'grafiki\\npc2.png')), int(0), NPC_2_DIALOG]   ] 
+ # 0 = x, 1 = y, 2 = ikonka, 3 = ktory dialog, 4 = lista tekstow, 5 = numer
+NPC_POSITIONS = [   [950, 350, pygame.image.load(os.path.join(grafiki, 'grafiki\\npc1.png')), int(0), NPC_1_DIALOG, int(0)],
+                    [750, 500, pygame.image.load(os.path.join(grafiki, 'grafiki\\npc2.png')), int(0), NPC_2_DIALOG, int(1)]   ] 
 
 NPC_NUM = 0
 
@@ -370,16 +368,14 @@ def npc():
         npc[0] += mapaX_step
         npc[1] += mapaY_step
         SCREEN.blit(npc[2], (npc[0], npc[1]))
-
         if npc[0] + 50 >= playerX >= npc[0] - 50 and npc[1] + 50 >= playerY >= npc[1] - 50:
             NPC_NUM = npc
             button(450, 650, TBUTTON_D, TBUTTON_L, 'dialog')
 
-
 def dialog():
     global NPC, NPC_NUM, FLAG_MOUSE, NPC_1_DIALOG
     while NPC:
-        if NPC_NUM[3] > 6:
+        if NPC_NUM[5] == 0 and NPC_NUM[3] > 6:
             break
         SCREEN.blit(RAMKA_DIALOGU, (0, 0))
         czcionka = pygame.font.SysFont('Arial', 40)
