@@ -66,7 +66,7 @@ FLAG_MOUSE = True
 FABULA = os.path.join(tekst, 'tekst\\fabula.txt')
 with open(FABULA, 'r', encoding="UTF-8") as file:
     a = file.read()
-STORY_BEGINNING = [a, a, "hejj ma zostac tylko a"]
+STORY_BEGINNING = [a]
 
 with open(os.path.join(tekst, 'tekst\\npc1_10.txt'), 'r', encoding="UTF-8") as file:
     a = file.read()
@@ -80,12 +80,8 @@ with open(os.path.join(tekst, 'tekst\\npc2_20.txt'), 'r', encoding="UTF-8") as f
     c = file.read()
 with open(os.path.join(tekst, 'tekst\\npc2_25.txt'), 'r', encoding="UTF-8") as file:
     d = file.read()
-'''NPC_2_DIALOG = [    open(os.path.join(tekst, 'tekst\\npc2_10.txt'), 'r', encoding="UTF-8"),
-                    open(os.path.join(tekst, 'tekst\\npc2_15.txt'), 'r', encoding="UTF-8"),
-                    open(os.path.join(tekst, 'tekst\\npc2_20.txt'), 'r', encoding="UTF-8"),
-                    open(os.path.join(tekst, 'tekst\\npc2_25.txt'), 'r', encoding="UTF-8")  ]
-'''
 NPC_2_DIALOG = [a, b, c, d]
+
 # FUNCKJE
 def text_objects(text, font, color):
     textSurface = font.render(text, True, color)
