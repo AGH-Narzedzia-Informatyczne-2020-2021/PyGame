@@ -71,9 +71,21 @@ with open(os.path.join(tekst, 'tekst\\fabula3.txt'), 'r', encoding="UTF-8") as f
     c = file.read()
 STORY_BEGINNING = [a, b, c]
 
-with open(os.path.join(tekst, 'tekst\\npc1_10.txt'), 'r', encoding="UTF-8") as file:
+with open(os.path.join(tekst, 'tekst\\npc1_01.txt'), 'r', encoding="UTF-8") as file:
     a = file.read()
-NPC_1_DIALOG = [a]
+with open(os.path.join(tekst, 'tekst\\npc1_02.txt'), 'r', encoding="UTF-8") as file:
+    b = file.read()
+with open(os.path.join(tekst, 'tekst\\npc1_03.txt'), 'r', encoding="UTF-8") as file:
+    c = file.read()
+with open(os.path.join(tekst, 'tekst\\npc1_04.txt'), 'r', encoding="UTF-8") as file:
+    d = file.read()
+with open(os.path.join(tekst, 'tekst\\npc1_05.txt'), 'r', encoding="UTF-8") as file:
+    e = file.read()
+with open(os.path.join(tekst, 'tekst\\npc1_06.txt'), 'r', encoding="UTF-8") as file:
+    f = file.read()
+with open(os.path.join(tekst, 'tekst\\npc1_07.txt'), 'r', encoding="UTF-8") as file:
+    g = file.read()
+NPC_1_DIALOG = [a, b, c, d, e, f, g]
 
 
 with open(os.path.join(tekst, 'tekst\\npc2_10.txt'), 'r', encoding="UTF-8") as file:
@@ -137,41 +149,25 @@ def music_play(music, loops):
 def music_stop():
     pygame.mixer.music.stop()
 
-
+STORY_i = 0
 def button(x, y, icolor, acolor, action=None):
-    global FIGHT, FLAG_MOUSE
+    global FIGHT, FLAG_MOUSE, STORY_i
     MOUSE = pygame.mouse.get_pos()
     CLICK = pygame.mouse.get_pressed()
     if x + 300 > MOUSE[0] > x and y + 120 > MOUSE[1] > y:
         SCREEN.blit(pygame.image.load(acolor), [x, y])
 
         if CLICK[0] == 1 and action != None:
+            czcionka = pygame.font.SysFont('Arial', 48) 
             if action == 'play' and FLAG_MOUSE == True:
-                czcionka = pygame.font.SysFont('Arial', 48)
-                i = 0   
                 while(True):
                     SCREEN.blit(BACKGROUND, [0, 0])
-                    blit_text(SCREEN, STORY_BEGINNING[i], (0, 0), czcionka)
-                    MOUSE = pygame.mouse.get_pos()
                     CLICK = pygame.mouse.get_pressed()
-                    if CLICK[0] == 1:
-                        FLAG_MOUSE = False
-                    if CLICK[0] == 0 and FLAG_MOUSE == False:
-                        FLAG_MOUSE = True
-                    if i == 0 or i == 1 and FLAG_MOUSE == True:
-                        SCREEN.blit(pygame.image.load(NBUTTON_D), (450, 650))
-                        if 455 < MOUSE[0] < 705 and 650 < MOUSE[1] < 750:
-                            SCREEN.blit(pygame.image.load(NBUTTON_L), (450, 650))
-                            if CLICK[0] == 1:
-                                i += 1
-                                print("dadadadasdasd")
-                                continue
-                    elif i == 2 and FLAG_MOUSE == True:
-                        SCREEN.blit(pygame.image.load(PBUTTON_D), (450, 650))
-                        if 455 < MOUSE[0] < 705 and 650 < MOUSE[1] < 750:
-                            SCREEN.blit(pygame.image.load(PBUTTON_L), (450, 650))
-                            if CLICK[0] == 1:
-                                break
+                    if STORY_i == 0 or STORY_i == 1 or STORY_i == 2:
+                        blit_text(SCREEN, STORY_BEGINNING[STORY_i], (0, 0), czcionka)
+                        button(450, 650, NBUTTON_D, NBUTTON_L, 'next_story')
+                    else:
+                        break
                     for event in pygame.event.get():
                         whether_exit(event)
                     pygame.display.update()
@@ -191,6 +187,10 @@ def button(x, y, icolor, acolor, action=None):
                 if FLAG_MOUSE:
                     NPC_NUM[3] += 1
                     FLAG_MOUSE = False
+            elif action == 'next_story' and FLAG_MOUSE:
+                print("dziala next_story")
+                STORY_i += 1
+                FLAG_MOUSE = False
         
         if CLICK[0] == 1:
             FLAG_MOUSE = False
@@ -357,8 +357,8 @@ def fight():
                 music_play(BMUSIC, -1)
 
  # 0 = x, 1 = y, 2 = ikonka, 3 = ktory dialog, 4 = lista tekstow
-NPC_POSITIONS = [   [1000, 350, pygame.image.load(os.path.join(grafiki, 'grafiki\\npc1.png')), int(0), NPC_1_DIALOG],
-                    [800, 400, pygame.image.load(os.path.join(grafiki, 'grafiki\\npc2.png')), int(0), NPC_2_DIALOG]   ] 
+NPC_POSITIONS = [   [700, 350, pygame.image.load(os.path.join(grafiki, 'grafiki\\npc1.png')), int(0), NPC_1_DIALOG],
+                    [700, 400, pygame.image.load(os.path.join(grafiki, 'grafiki\\npc2.png')), int(0), NPC_2_DIALOG]   ] 
 
 NPC_NUM = 0
 
@@ -379,9 +379,10 @@ def npc():
 def dialog():
     global NPC, NPC_NUM, FLAG_MOUSE, NPC_1_DIALOG
     while NPC:
+        
         SCREEN.blit(RAMKA_DIALOGU, (0, 0))
         czcionka = pygame.font.SysFont('Arial', 40)
-        blit_text(SCREEN,  NPC_NUM[4][NPC_NUM[3]], (0, 50), czcionka)
+        blit_text(SCREEN,  NPC_NUM[4][NPC_NUM[3]], (0, 35), czcionka)
         button(450, 650, NBUTTON_D, NBUTTON_L, 'next')
         
         CLICK = pygame.mouse.get_pressed()  # zeby przytrzymanie przycisku wszystkiego nie psulo
@@ -477,14 +478,7 @@ def game_loop():
             npc()
             ruch_mapy()
             granica_mapy()
-            # WALKA
-
-            if NPC:
-                mapa_wyswietl()
-                gracz_wyswietl()
-                enemy()
-                dialog()
-
+            dialog()
         else:
             music_stop()
             fight()
