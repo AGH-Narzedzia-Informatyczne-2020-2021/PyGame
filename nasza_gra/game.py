@@ -319,15 +319,21 @@ def enemy():
 
 def fight():
     global FIGHT, ENEMY_NUM, FLAG_MOUSE
-    wiadomosc = "No dalej, uderz go!"
-    czcionka = pygame.font.SysFont('Arial', 80)
+    x = randint(1,4)
+    if x == 1:
+        wiadomosc = "No dalej, uderz go!"
+    elif x == 2:
+        wiadomosc = "Zabij poczwarę!"
+    elif x == 3:
+        wiadomosc = "Skończ jego cierpienia!"
+    czcionka1 = pygame.font.SysFont('Arial', 85)
+    czcionka2 = pygame.font.SysFont('Arial', 60)
     while FIGHT:
         SCREEN.blit(BACKGROUND, (0, 0))
         SCREEN.blit(player_frames_stand[directions.right], (100, 500))
         SCREEN.blit(ENEMY_NUM[3], (900, 400))
         SCREEN.blit(RAMKA_DIALOGU, (0, 0))
-        message_display("Click on enemy!", 600, 50, 80)
-        blit_text(SCREEN, "Click on enemy!", (100, 50), czcionka)
+        blit_text(SCREEN, "Click on enemy!", (230, 50), czcionka1)
         for event in pygame.event.get():
             whether_exit(event)
         MOUSE = pygame.mouse.get_pos()
@@ -341,8 +347,7 @@ def fight():
 
         elif CLICK[0] == 0:
             FLAG_MOUSE = True
-        blit_text(SCREEN, wiadomosc, (100, 150), czcionka) 
-        #message_display(wiadomosc, 600, 150, 40)
+        blit_text(SCREEN, wiadomosc, (20, 230), czcionka2) 
         if 900 < MOUSE[0] < 1050 and 400 < MOUSE[1] < 541:
             if CLICK[0] == 1:
                 dmg = randint(6, 17)
@@ -353,6 +358,7 @@ def fight():
                 if ENEMY_NUM[2] <= 0:  # jesli hp <= 0
                     FIGHT = False
                 music_play(BMUSIC, -1)
+        pygame.display.update()
 
  # 0 = x, 1 = y, 2 = ikonka, 3 = ktory dialog, 4 = lista tekstow, 5 = numer
 NPC_POSITIONS = [   [950, 350, pygame.image.load(os.path.join(grafiki, 'grafiki\\npc1.png')), int(0), NPC_1_DIALOG, int(0)],
