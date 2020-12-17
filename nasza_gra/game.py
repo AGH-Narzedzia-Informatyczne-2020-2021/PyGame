@@ -428,8 +428,8 @@ def dialog():
                 pygame.display.update()
 
         SCREEN.blit(RAMKA_DIALOGU, (0, 0))
-        czcionka = pygame.font.SysFont('Arial', 40)
-        blit_text(SCREEN,  NPC_NUM[4][NPC_NUM[3]], (0, 35), czcionka)
+        czcionka = pygame.font.SysFont('Arial', 39)
+        blit_text(SCREEN,  NPC_NUM[4][NPC_NUM[3]], (0, 45), czcionka)
         button(450, 650, NBUTTON_D, NBUTTON_L, 'next')
         
         CLICK = pygame.mouse.get_pressed()  # zeby przytrzymanie przycisku wszystkiego nie psulo
