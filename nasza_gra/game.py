@@ -8,7 +8,7 @@ from random import randint
 
 pygame.init()
 pygame.mixer.init()
-FPS = 15
+FPS = 60
 
 # szerokość i wysokość okna gry
 WINDOW_WIDTH = 1200
@@ -83,7 +83,11 @@ with open(os.path.join(tekst, 'tekst\\npc1_06.txt'), 'r', encoding="UTF-8") as f
     f = file.read()
 with open(os.path.join(tekst, 'tekst\\npc1_07.txt'), 'r', encoding="UTF-8") as file:
     g = file.read()
-NPC_1_DIALOG = [a, b, c, d, e, f, g]
+with open(os.path.join(tekst, 'tekst\\npc1_08.txt'), 'r', encoding="UTF-8") as file:
+    h = file.read()
+with open(os.path.join(tekst, 'tekst\\npc1_09.txt'), 'r', encoding="UTF-8") as file:
+    i = file.read()
+NPC_1_DIALOG = [a, b, c, d, e, f, g, "przerywnik", h, i, ""]
 
 
 with open(os.path.join(tekst, 'tekst\\npc2_01.txt'), 'r', encoding="UTF-8") as file:
@@ -97,6 +101,12 @@ with open(os.path.join(tekst, 'tekst\\npc2_04.txt'), 'r', encoding="UTF-8") as f
 with open(os.path.join(tekst, 'tekst\\npc2_05.txt'), 'r', encoding="UTF-8") as file:
     e = file.read()
 NPC_2_DIALOG = [a, b, c, "przerywnik", d, e, "koniec"]
+
+with open(os.path.join(tekst, 'tekst\\koniec.txt'), 'r', encoding="UTF-8") as file:
+    a = file.read()
+with open(os.path.join(tekst, 'tekst\\creditsy.txt'), 'r', encoding="UTF-8") as file:
+    b = file.read()
+STORY_END = [a, b]
 
 # FUNCKJE
 def text_objects(text, font, color):
@@ -150,6 +160,7 @@ def music_stop():
     pygame.mixer.music.stop()
 
 STORY_i = 0
+STORY_END_i = 0
 def button(x, y, icolor, acolor, action=None):
     global FIGHT, FLAG_MOUSE, STORY_i
     MOUSE = pygame.mouse.get_pos()
@@ -160,7 +171,7 @@ def button(x, y, icolor, acolor, action=None):
         if CLICK[0] == 1 and action != None:
             czcionka = pygame.font.SysFont('Arial', 48) 
             if action == 'play' and FLAG_MOUSE == True:
-                while(True):
+                while True:
                     SCREEN.blit(BACKGROUND, [0, 0])
                     CLICK = pygame.mouse.get_pressed()
                     if STORY_i == 0 or STORY_i == 1 or STORY_i == 2:
@@ -190,6 +201,9 @@ def button(x, y, icolor, acolor, action=None):
             elif action == 'next_story' and FLAG_MOUSE:
                 STORY_i += 1
                 FLAG_MOUSE = False
+            elif action == 'next_end' and FLAG_MOUSE:
+                global STORY_END_i
+                STORY_END_i += 1
         
         if CLICK[0] == 1:
             FLAG_MOUSE = False
@@ -295,7 +309,7 @@ def mapa_wyswietl():
 # 0=x, 1=y, 2=hp, 3=ikonka, 4 = numer
 orc = pygame.image.load(ENEMY_ICON_1)
 slime = pygame.image.load(ENEMY_ICON_2)
-ENEMY_POSITIONS = [     [550, 850, 100, orc, 0], [2180, 960, 100, orc, 1], [2800, 380, 100, orc, 2], [3050, 340, 100, orc, 3], [3250, 380, 100, orc, 4],
+ENEMY_POSITIONS = [     [550, 850, 100, orc, 0], [2180, 960, 100, orc, 1], [2800, 380, 100, orc, 2], [3050, 340, 100, orc, 3], [3250, 480, 100, orc, 4],
                         [850, 850, 50, slime, 5], [1800, 600, 50, slime, 6], [1900, 350, 50, slime, 7], [2900, 700, 50, slime, 8]]
 ENEMY_NUM = 0
 
@@ -332,8 +346,11 @@ def fight():
     czcionka2 = pygame.font.SysFont('Arial', 60)
     while FIGHT:
         SCREEN.blit(BACKGROUND, (0, 0))
-        SCREEN.blit(player_frames_stand[directions.right], (100, 500))
-        SCREEN.blit(ENEMY_NUM[3], (900, 400))
+        SCREEN.blit(player_frames_stand[directions.right], (130, 600))
+        if ENEMY_NUM[3] == orc:
+            SCREEN.blit(ENEMY_NUM[3], (900, 500))
+        elif ENEMY_NUM[3] == slime:
+            SCREEN.blit(ENEMY_NUM[3], (950, 580))
         SCREEN.blit(RAMKA_DIALOGU, (0, 0))
         blit_text(SCREEN, "Click on enemy!", (230, 50), czcionka1)
         for event in pygame.event.get():
@@ -350,7 +367,7 @@ def fight():
         elif CLICK[0] == 0:
             FLAG_MOUSE = True
         blit_text(SCREEN, wiadomosc, (20, 230), czcionka2) 
-        if 900 < MOUSE[0] < 1050 and 400 < MOUSE[1] < 541:
+        if 900 < MOUSE[0] < 1050 and 500 < MOUSE[1] < 641:
             if CLICK[0] == 1:
                 dmg = randint(6, 17)
                 ENEMY_NUM[2] -= dmg
@@ -380,18 +397,35 @@ def npc():
             NPC_NUM = npc
             button(450, 650, TBUTTON_D, TBUTTON_L, 'dialog')
 war1 = True
+war2 = True
 def dialog():
-    global NPC, NPC_NUM, FLAG_MOUSE, NPC_1_DIALOG, war1
+    global NPC, NPC_NUM, FLAG_MOUSE, NPC_1_DIALOG, war1, war2, STORY_END_i
     if ENEMY_POSITIONS[0][2] <= 0 and ENEMY_POSITIONS[5][2] <= 0 and war1 == True:
         NPC_POSITIONS[1][3] += 1
         war1 = False
+    if ENEMY_POSITIONS[1][2] <= 0 and ENEMY_POSITIONS[2][2] <= 0 and ENEMY_POSITIONS[3][2] <= 0 and ENEMY_POSITIONS[4][2] <= 0 and war2 == True:
+        NPC_POSITIONS[0][3] += 1
+        war2 = False
     while NPC:
-        if NPC_NUM[5] == 0 and NPC_NUM[3] > 6:
+        if NPC_NUM[5] == 0 and NPC_NUM[3] == 7:
             break
         if NPC_NUM[5] == 1 and NPC_NUM[3] == 3:
             break
         if NPC_NUM[5] == 1 and NPC_NUM[3] == 6:
             break
+        if NPC_NUM[5] == 0 and NPC_NUM[3] == 10:
+            while True: # koniec gry
+                SCREEN.blit(BACKGROUND, [0, 0])
+                czcionka = pygame.font.SysFont('Arial', 50)
+                blit_text(SCREEN,  STORY_END[STORY_END_i], (0, 35), czcionka)
+                if STORY_END_i == 0:
+                    button(450, 650, NBUTTON_D, NBUTTON_L, 'next_end')
+                elif STORY_END_i == 1:
+                    button(450, 650, QBUTTON_D, QBUTTON_L, 'quit')
+                for event in pygame.event.get():
+                    whether_exit(event)
+                pygame.display.update()
+
         SCREEN.blit(RAMKA_DIALOGU, (0, 0))
         czcionka = pygame.font.SysFont('Arial', 40)
         blit_text(SCREEN,  NPC_NUM[4][NPC_NUM[3]], (0, 35), czcionka)
