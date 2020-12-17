@@ -44,7 +44,7 @@ BACKGROUND = pygame.image.load(os.path.join(grafiki, 'grafiki\\backgronud1200x80
 RAMKA_DIALOGU =  pygame.image.load(os.path.join(grafiki, 'grafiki\\ramka1.png'))
 
 # OKNO GRY
-SCREEN = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), pygame.RESIZABLE)
+SCREEN = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 pygame.display.set_caption('Medieval Adventure')  # nazwa okna
 CLOCK = pygame.time.Clock()
 icon = pygame.image.load(os.path.join(grafiki, 'grafiki\player\player3.png'))
@@ -133,12 +133,12 @@ def blit_text(surface, text, pos, font, color=pygame.Color('black')):
             word_surface = font.render(word, 0, color)
             word_width, word_height = word_surface.get_size()
             if x + word_width >= max_width - brzeg:
-                x = pos[0] + brzeg  # Reset the x.
-                y += word_height  # Start on new row.
+                x = pos[0] + brzeg  # Ustaw x na krawedz
+                y += word_height  # A y w nowej linii
             surface.blit(word_surface, (x, y))
             x += word_width + space
-        x = pos[0] + brzeg  # Reset the x.
-        y += word_height  # Start on new row.
+        x = pos[0] + brzeg  # poczatek linii jesli jest  bazowo w tekscie 
+        y += word_height  # oraz nowa linia
 
 def whether_exit(event):  # tu nie ma petli for, tylko warunki
     if event.type == QUIT:
