@@ -47,7 +47,7 @@ RAMKA_DIALOGU =  pygame.image.load(os.path.join(grafiki, 'grafiki\\ramka1.png'))
 
 # OKNO GRY
 SCREEN = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), pygame.RESIZABLE)
-pygame.display.set_caption('Nasza gra')  # nazwa okna
+pygame.display.set_caption('Medieval Adventure')  # nazwa okna
 CLOCK = pygame.time.Clock()
 icon = pygame.image.load(os.path.join(grafiki, 'grafiki\player\player3.png'))
 pygame.display.set_icon(icon)
@@ -335,9 +335,12 @@ def fight():
     while FIGHT:
         SCREEN.blit(BACKGROUND, (0, 0))
         SCREEN.blit(player_frames_stand[directions.right], (100, 500))
-        SCREEN.blit(ENEMY_NUM[3], (900, 400))
+        if ENEMY_NUM[3]== orc:
+            SCREEN.blit(orc, (900, 400))
+        elif ENEMY_NUM[3]== slime:
+            SCREEN.blit(slime, (900, 500))
         SCREEN.blit(RAMKA_DIALOGU, (0, 0))
-        blit_text(SCREEN, "Click on enemy!", (230, 50), czcionka1)
+        blit_text(SCREEN, "Naciśnij na przeciwnika!", (230, 50), czcionka1)
         for event in pygame.event.get():
             whether_exit(event)
         MOUSE = pygame.mouse.get_pos()
