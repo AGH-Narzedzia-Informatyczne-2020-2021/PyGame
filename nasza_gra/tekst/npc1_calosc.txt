@@ -1,7 +1,0 @@
-       Morrison: Witaj na naszej wyspie. Skoro się tu znalazłeś to pewnie jesteś kolejnym śmiałkiem, który myśli, że zdoła oczyścić ją z potworów i przywrócić jej dawną świetność. No cóż, spróbować nie zaszkodzi, prawda? No chyba, że zje cię jakiś ogr albo umrzesz od trucizny pałętających się po okolicy Slime'ów.
-       Morrison: Ha Ha
-       Hmm...
-       Morrison: Wybacz, rzadko miewamy tu gości, a większość z nich to nadęci "rycerze", którzy myślą, że uda im się to, czemu nie podołała nasza gildia przez kilka ostatnich lat. Głupcy. Widzę jednak, że ty taki nie jesteś. Jakby nie było, rozmawiamy już chwilę, a jeszcze nie zasugerowałeś, że ja i moi kompani jesteśmy bandą niekompetentnych tchórzy czekających na wybawcę.
-       Jestem jedynie synem ubogiego kowala panie, jednak nawet moim niedoświadczonym okiem widzę, że radzicie tu sobie niezgorzej. Na ulicach nie ma trupów, więc domniemywam, że udaje wam się odpierać ataki potworów, a to wydaje się być osiągnięciem samym w sobie.
-       Morrison: To prawda, lata ciężkiego życia na tej wyspie nauczyły nas jak radzić sobie z przeciwnościami. Dla twojego dobra mam nadzieję, że potrafisz wybornie władać mieczem, inaczej skonczysz jak te przechwalające się namiastki wojowników. Jeśli nie brak ci odwagi udaj się na południe. Pełni tam wartę Pitterson, dowódca naszej straży. On powie Ci, gdzie powinieneś się udać. Powodzenia.
-       Tak zrobię, żegnaj.
