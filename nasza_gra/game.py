@@ -123,8 +123,8 @@ def message_display(text, x, y, rozmiar=115):  # wyświetlanie wiadomości w grz
 
 def blit_text(surface, text, pos, font, color=pygame.Color('black')):
     brzeg = 55
-    words = [word.split(' ') for word in text.splitlines()]  # 2D array where each row is a list of words.
-    space = font.size(' ')[0]  # The width of a space.
+    words = [word.split(' ') for word in text.splitlines()]
+    space = font.size(' ')[0]
     max_width, max_height = surface.get_size()
     x, y = pos
     x += brzeg
@@ -342,7 +342,7 @@ def fight():
         wiadomosc = "Zabij poczwarę!"
     elif x == 3:
         wiadomosc = "Skończ jego cierpienia!"
-    czcionka1 = pygame.font.SysFont('Arial', 85)
+    czcionka1 = pygame.font.SysFont('Arial', 75)
     czcionka2 = pygame.font.SysFont('Arial', 60)
     while FIGHT:
         SCREEN.blit(BACKGROUND, (0, 0))
@@ -353,7 +353,7 @@ def fight():
             SCREEN.blit(ENEMY_NUM[3], (950, 580))
 
         SCREEN.blit(RAMKA_DIALOGU, (0, 0))
-        blit_text(SCREEN, "Naciśnij na przeciwnika!", (230, 50), czcionka1)
+        blit_text(SCREEN, "Naciskaj na przeciwnika!", (140, 50), czcionka1)
         for event in pygame.event.get():
             whether_exit(event)
         MOUSE = pygame.mouse.get_pos()
@@ -367,7 +367,7 @@ def fight():
 
         elif CLICK[0] == 0:
             FLAG_MOUSE = True
-        blit_text(SCREEN, wiadomosc, (20, 230), czcionka2) 
+        blit_text(SCREEN, wiadomosc, (20, 210), czcionka2) 
         if 900 < MOUSE[0] < 1050 and 500 < MOUSE[1] < 641:
             if CLICK[0] == 1:
                 dmg = randint(6, 17)
@@ -534,4 +534,3 @@ def game_loop():
 
 
 m_menu()
-game_loop()
