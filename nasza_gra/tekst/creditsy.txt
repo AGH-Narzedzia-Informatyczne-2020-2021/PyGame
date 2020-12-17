@@ -1,9 +1,7 @@
       Dzięki za poświęcenie czasu na sprawdzenie naszej gry! Mamy nadzieję, że był to czas mile spędzony ;)
 Za powstanie tej gry odpowiadają:
-aaa - bbb
-aaa - bbb
-aaa - bbb
-aaa - bbb
-aaa - bbb
-aaa - bbb
-aaa - bbb
+kod - Julian Góski, Tomasz Lisowicz
+grafika - Bartosz Chochół
+dźwięk - Katarzyna Wilk
+fabuła - Kamil Sermak
+interface - Marcin Retajczyk
