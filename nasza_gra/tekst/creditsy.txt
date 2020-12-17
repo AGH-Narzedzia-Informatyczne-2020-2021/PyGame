@@ -1,8 +1,16 @@
       Dzięki za poświęcenie czasu na sprawdzenie naszej gry! Mamy nadzieję, że był to czas mile spędzony ;)
 Za powstanie tej gry odpowiadają:
+<<<<<<< HEAD
+kod - Julian Góski, Tomasz Lisowicz
+grafika - Bartosz Chochół
+dźwięk - Katarzyna Wilk
+fabuła - Kamil Sermak
+interface - Marcin Retajczyk
+=======
 Julian Górski
 Tomasz Lisowicz
 Bartosz Chochół
 Katarzyna Wilk
 Kamil Sermak
 Marcin Retajczyk
+>>>>>>> a840e9b76bb5c04af7c2026d4c7735fb9ad3b143

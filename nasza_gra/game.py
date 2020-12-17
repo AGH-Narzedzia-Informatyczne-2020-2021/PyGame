@@ -41,7 +41,7 @@ MAPA_NORMALNA = os.path.join(grafiki, 'grafiki\mapka1.png')
 MAPA_KRAWEDZIE = os.path.join(grafiki, 'grafiki\mapka1_krawedzie.png')
 M_FONT = os.path.join(grafiki, 'grafiki\PixelEmulator-xq08.ttf')
 BACKGROUND = pygame.image.load(os.path.join(grafiki, 'grafiki\\backgronud1200x800.png'))
-RAMKA_DIALOGU =  pygame.image.load(os.path.join(grafiki, 'grafiki\\ramka1.png'))
+RAMKA_DIALOGU =  pygame.image.load(os.path.join(grafiki, 'grafiki\\ramka2.png'))
 
 # OKNO GRY
 SCREEN = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
