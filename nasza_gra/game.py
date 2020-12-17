@@ -8,7 +8,7 @@ from random import randint
 
 pygame.init()
 pygame.mixer.init()
-FPS = 60
+FPS = 15
 
 # szerokość i wysokość okna gry
 WINDOW_WIDTH = 1200
