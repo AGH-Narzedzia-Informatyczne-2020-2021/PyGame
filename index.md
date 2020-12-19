@@ -6,7 +6,7 @@
 
 ### Grafika
 
-  Wszystkie grafiki w naszej grze zostały wykonane ręcznie, specjalnie na jej rzecz. Inspirację stanowiły stare produkcje z konsoli takich jak Nintendo czy GameBoy Advance. W grze znajduje się w sumie około 50 klimatycznych grafik, stworzonych z myślą o średniowiecznym klimacie w tym fantastycznym świecie.
+  Wszystkie grafiki w naszej grze zostały wykonane ręcznie, specjalnie na jej rzecz. Inspirację stanowiły stare produkcje z konsoli takich jak Nintendo czy GameBoy Advance. W grze znajduje się w sumie około 50 klimatycznych grafik w klimacie średniowiecznego fantasy.
   ![orc](https://user-images.githubusercontent.com/72696235/102687011-18da9e80-41ec-11eb-8e01-c1f5427badc2.png)
 ### Muzyka
   Wykorzystywane przez nas utwory zostały pobrane z legalnych źródeł na licencjach pozwalających na użycie ich w produkcjach niekomercyjnych. Biblioteka Pygame posiada oczywiście funkcje odpowiedzialne za odtwarzanie dźwięków, dzięki czemu mogliśmy prosto i efektywnie umieścić je w odpowiednich momentach gry.
