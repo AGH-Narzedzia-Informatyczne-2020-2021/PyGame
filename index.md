@@ -1,6 +1,8 @@
 ## Witamy na stronie projektu PyGame!
 
-Głównym elementem naszego projektu jest tworzona przez nas gra Medieval Adventure, RPG 2D z pixelartową grafiką i klimatyczną fabułą. Program napisany jest przy pomocy języka Python oraz biblioteki Pygame znacznie ułatwiającej cały proces. 
+Głównym elementem naszego projektu jest tworzona przez nas gra Medieval Adventure, RPG 2D z pixelartową grafiką i klimatyczną fabułą. Program napisany jest przy pomocy języka Python oraz biblioteki Pygame znacznie ułatwiającej cały proces.
+
+https://user-images.githubusercontent.com/72696235/102686917-4115cd80-41eb-11eb-905a-494e742b978e.png
 
 ### Grafika
 
