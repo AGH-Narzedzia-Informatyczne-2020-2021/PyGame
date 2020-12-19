@@ -1,37 +1,20 @@
-## Welcome to GitHub Pages
+## Witamy na stronie projektu PyGame!
 
-You can use the [editor on GitHub](https://github.com/AGH-Narzedzia-Informatyczne/PyGame/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+Głównym elementem naszego projektu jest tworzona przez nas gra Medieval Adventure, RPG 2D z pixelartową grafiką i klimatyczną fabułą. Program napisany jest przy pomocy języka Python oraz biblioteki Pygame znacznie ułatwiającej cały proces. 
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### Grafika
 
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+Wszystkie grafiki w naszej grze zostały wykonane ręcznie, specjalnie na jej rzecz. Inspirację stanowiły stare produkcje z konsoli takich jak Nintendo czy GameBoy Advance.  
+Wykorzystywane programy to:
 
 ```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+- GIMP oraz PaintTool SAI Ver.2
+- PaintTool SAI Ver.2
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+### Muzyka
+Wykorzystywane przez nas utwory zostały pobrane z legalnych źródeł na licencjach pozwalających na użycie ich w produkcjach niekomercyjnych. Biblioteka Pygame posiada oczywiście funkcje odpowiedzialne za odtwarzanie dźwięków, dzięki czemu mogliśmy prosto i efektywnie umieścić je w odpowiednich momentach gry.
 
-### Jekyll Themes
+### Fabuła
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/AGH-Narzedzia-Informatyczne/PyGame/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+Historia zaczyna się lata przed faktycznymi wydarzeniami z gry, przybliżając okoliczności w których doszło do inwazji potworów na wyspę będącą miejscem akcji naszej produkcji. Sledząć uważnie jego dialogi z zamieszkującymi wyspę postaciami możemy zdobyć informację na temat przeszłości głównego bohatera a także jego motywacji do ryzykowania życia w walce ze złymi siłami.
